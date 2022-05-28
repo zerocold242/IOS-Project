@@ -13,10 +13,50 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+   
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        //let feedViewController = FeedViewController()
+        //let profileViewController = ProfileViewController()
+        //let feedNavigationViewController = UINavigationController(rootViewController: feedViewController)
+        //let profileNavigationViewController = UINavigationController(rootViewController: profileViewController)
+        
+        //let tabBarController = createTabBarController()
+        //tabBarController.viewControllers = [createFeedViewController(), createProfileViewController()]
+                
+        func createFeedViewController() -> UINavigationController {
+            
+            let feedViewController = FeedViewController()
+            feedViewController.title = "Feed"
+            feedViewController.tabBarItem = UITabBarItem(title: "Feed",
+                                                         image: UIImage(systemName: "doc.richtext"),
+                                                         tag: 0)
+            return UINavigationController(rootViewController: feedViewController)
+        }
+        
+        func createProfileViewController() -> UINavigationController {
+            
+            let profileViewController = ProfileViewController()
+            profileViewController.title = "Profile"
+            profileViewController.tabBarItem = UITabBarItem(title: "Profile",
+                                                            image: UIImage(systemName: "person.circle"),
+                                                            tag: 1)
+            return UINavigationController(rootViewController: profileViewController)
+        }
+        
+        func createTabBarController() -> UITabBarController {
+            
+            let tabBarController = UITabBarController()
+            UITabBar.appearance().backgroundColor = .tertiarySystemBackground
+            tabBarController.viewControllers = [createFeedViewController(), createProfileViewController()]
+            return tabBarController
+        }
+        
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window?.windowScene = windowScene
+        window?.rootViewController = createTabBarController()
+        window?.makeKeyAndVisible()
+    }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -48,5 +88,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
 
-}
+
 
