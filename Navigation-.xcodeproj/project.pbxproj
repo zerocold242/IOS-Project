@@ -11,6 +11,11 @@
 		5C101D9E2841078300F5FE5D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C101D9D2841078300F5FE5D /* SceneDelegate.swift */; };
 		5C101DA52841078500F5FE5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C101DA42841078500F5FE5D /* Assets.xcassets */; };
 		5C101DA82841078500F5FE5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C101DA62841078500F5FE5D /* LaunchScreen.storyboard */; };
+		5C101DB228410A2200F5FE5D /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C101DB128410A2200F5FE5D /* FeedViewController.swift */; };
+		5C101DB428410A3F00F5FE5D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C101DB328410A3F00F5FE5D /* ProfileViewController.swift */; };
+		5C101DB628410A4D00F5FE5D /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C101DB528410A4D00F5FE5D /* PostViewController.swift */; };
+		5C101DB828410A5D00F5FE5D /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C101DB728410A5D00F5FE5D /* InfoViewController.swift */; };
+		5C101DBA28410A9200F5FE5D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C101DB928410A9200F5FE5D /* Post.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +25,11 @@
 		5C101DA42841078500F5FE5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C101DA72841078500F5FE5D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C101DA92841078500F5FE5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C101DB128410A2200F5FE5D /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		5C101DB328410A3F00F5FE5D /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		5C101DB528410A4D00F5FE5D /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		5C101DB728410A5D00F5FE5D /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		5C101DB928410A9200F5FE5D /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +62,8 @@
 		5C101D9A2841078300F5FE5D /* Navigation- */ = {
 			isa = PBXGroup;
 			children = (
+				5C101DB0284109EA00F5FE5D /* Controllers */,
+				5C101DAF284109DD00F5FE5D /* Data */,
 				5C101D9B2841078300F5FE5D /* AppDelegate.swift */,
 				5C101D9D2841078300F5FE5D /* SceneDelegate.swift */,
 				5C101DA42841078500F5FE5D /* Assets.xcassets */,
@@ -59,6 +71,25 @@
 				5C101DA92841078500F5FE5D /* Info.plist */,
 			);
 			path = "Navigation-";
+			sourceTree = "<group>";
+		};
+		5C101DAF284109DD00F5FE5D /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				5C101DB928410A9200F5FE5D /* Post.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		5C101DB0284109EA00F5FE5D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5C101DB128410A2200F5FE5D /* FeedViewController.swift */,
+				5C101DB328410A3F00F5FE5D /* ProfileViewController.swift */,
+				5C101DB528410A4D00F5FE5D /* PostViewController.swift */,
+				5C101DB728410A5D00F5FE5D /* InfoViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,7 +163,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C101D9C2841078300F5FE5D /* AppDelegate.swift in Sources */,
+				5C101DB228410A2200F5FE5D /* FeedViewController.swift in Sources */,
+				5C101DB428410A3F00F5FE5D /* ProfileViewController.swift in Sources */,
 				5C101D9E2841078300F5FE5D /* SceneDelegate.swift in Sources */,
+				5C101DB828410A5D00F5FE5D /* InfoViewController.swift in Sources */,
+				5C101DBA28410A9200F5FE5D /* Post.swift in Sources */,
+				5C101DB628410A4D00F5FE5D /* PostViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
