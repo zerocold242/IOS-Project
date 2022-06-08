@@ -9,15 +9,6 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    var post: Post = .init(title: "My first Post")
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.backgroundColor = .systemGray4
-        setButton()
-    }
-    
     private lazy var button: UIButton = {
         
         let button = UIButton(frame: CGRect(x: self.view.bounds.width / 2 - 100,
@@ -34,6 +25,8 @@ class FeedViewController: UIViewController {
         return button
     } ()
     
+    var post: Post = .init(title: "My first Post")
+    
     private func setButton() {
         
         self.view.addSubview(self.button)
@@ -44,5 +37,12 @@ class FeedViewController: UIViewController {
         let postViewController = PostViewController()
         self.navigationController?.pushViewController(postViewController, animated: true)
         postViewController.titlePost = post.title
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = .systemGray4
+        setButton()
     }
 }

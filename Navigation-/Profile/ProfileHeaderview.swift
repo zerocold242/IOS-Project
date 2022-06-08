@@ -36,7 +36,6 @@ class ProfileHeaderView: UIView {
         label.text = "Zero Cold"
         
         return label
-        
     }()
     
     private lazy var statusLabel: UILabel = {
@@ -49,7 +48,6 @@ class ProfileHeaderView: UIView {
         label.text = "Waiting for something..."
         
         return label
-        
     }()
     
     private lazy var statusTextField: UITextField = {
@@ -63,6 +61,8 @@ class ProfileHeaderView: UIView {
         statusTextField.layer.borderColor = UIColor.black.cgColor
         statusTextField.backgroundColor = .white
         
+        statusTextField.delegate = self
+        
         statusTextField.placeholder = "Enter your status..."
         
         statusTextField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
@@ -72,7 +72,7 @@ class ProfileHeaderView: UIView {
         statusTextField.autocorrectionType = UITextAutocorrectionType.no
         statusTextField.keyboardType = UIKeyboardType.default
         statusTextField.returnKeyType = UIReturnKeyType.done
-        statusTextField.clearButtonMode = UITextField.ViewMode.whileEditing
+        statusTextField.clearButtonMode = UITextField.ViewMode.always
         statusTextField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         
         statusTextField.isEnabled = true
@@ -81,8 +81,6 @@ class ProfileHeaderView: UIView {
         statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         
         return statusTextField
-        
-        
     }()
     
     private lazy var setStatusButton: UIButton = {
@@ -100,7 +98,6 @@ class ProfileHeaderView: UIView {
         button.addTarget(self, action:  #selector(buttonPressed), for: .touchUpInside)
         
         return button
-        
     }()
 }
 
@@ -127,7 +124,7 @@ extension ProfileHeaderView {
             fullNameLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             
             statusLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
-            statusLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 40),
+            statusLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 20),
             statusLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             
             statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 10),
@@ -142,15 +139,32 @@ extension ProfileHeaderView {
         ])
     }
     
-    @objc private func statusTextChanged() {
-        statusText = statusTextField.text ?? ""
+    @objc func statusTextChanged(_ textField: UITextField) -> String {
         
-        // Проверка значения пункта 4 в доп. задании
-        print("statusText: \(statusText)")
+        if let newStatus = textField.text {
+            statusText = newStatus
+        }
+        return statusText
     }
     
-    @objc private func buttonPressed() {
-        statusLabel.text = statusTextField.text
+    @objc func buttonPressed(sender: UIButton!) {
         
+        print(statusTextField.text ?? "")
+        guard statusTextField.text?.isEmpty == false else {return}
+        statusLabel.text = statusTextChanged(statusTextField)
+        self.statusTextField.text = ""
     }
 }
+
+extension ProfileHeaderView: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        
+        self.endEditing(true)
+        
+        return true
+    }
+}
+
+

@@ -9,17 +9,10 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.view.backgroundColor = .systemBackground
-        setupProfileView()
-    }
-    
     private let profileHeaderView = ProfileHeaderView()
     
     private func setupProfileView() {
-        
+    
         self.view.addSubview(self.profileHeaderView)
         self.profileHeaderView.frame = self.view.frame
         self.profileHeaderView.configureView()
@@ -37,7 +30,29 @@ class ProfileViewController: UIViewController {
             profileHeaderView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
+    // убираем клавиатуру кликом по вью:
+    private func gesture() {
+        
+        let gesture = UITapGestureRecognizer()
+        gesture.addTarget(self, action: #selector(self.gestureAction))
+        self.view.addGestureRecognizer(gesture)
+    }
+    
+    @objc private func gestureAction() {
+        self.view.endEditing(true)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.view.backgroundColor = .systemBackground
+        setupProfileView()
+        gesture()
+    }
 }
+
+
+
 
 
 
