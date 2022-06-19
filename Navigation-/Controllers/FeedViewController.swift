@@ -9,7 +9,7 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    var post: Post = .init(title: "My first Post")
+    //var post: Post = .init(title: "My first Post")
     
     let stackView: UIStackView
     

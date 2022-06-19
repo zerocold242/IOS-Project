@@ -40,6 +40,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         logTextfield.keyboardType = UIKeyboardType.default
         logTextfield.returnKeyType = UIReturnKeyType.done
         logTextfield.autocorrectionType = .no
+        logTextfield.autocapitalizationType = .none
         logTextfield.backgroundColor = .systemGray6
         logTextfield.layer.borderWidth = 0.5
         logTextfield.layer.borderColor = UIColor.lightGray.cgColor
@@ -62,6 +63,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         password.returnKeyType = UIReturnKeyType.done
         password.backgroundColor = .systemGray6
         password.autocorrectionType = .no
+        password.autocapitalizationType = .none
         password.isSecureTextEntry = true
         password.textColor = .black
         password.placeholder = "Password"
