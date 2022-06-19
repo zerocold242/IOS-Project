@@ -20,6 +20,30 @@ class ProfileViewController: UIViewController {
         view.layoutIfNeeded()
     }
     
+    private func addButton() {
+        let button: UIButton = {
+            
+            let button = UIButton()
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.backgroundColor = .systemBlue
+            button.layer.cornerRadius = 4
+            button.setTitleColor(.lightGray, for: .highlighted)
+            button.setTitle("New Button", for: .normal)
+            
+            return button
+        }()
+        
+        
+        view.addSubview(button)
+        
+        NSLayoutConstraint.activate([
+            button.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            button.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            button.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            button.heightAnchor.constraint(equalToConstant: 48)
+        ])
+    }
+    
     override func viewWillLayoutSubviews() {
         
         profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
@@ -27,7 +51,8 @@ class ProfileViewController: UIViewController {
             profileHeaderView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
             profileHeaderView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
             profileHeaderView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            profileHeaderView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+            //profileHeaderView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            profileHeaderView.heightAnchor.constraint(equalToConstant: 220)
         ])
     }
     // убираем клавиатуру кликом по вью:
@@ -48,6 +73,7 @@ class ProfileViewController: UIViewController {
         self.view.backgroundColor = .systemBackground
         setupProfileView()
         gesture()
+        addButton()
     }
 }
 

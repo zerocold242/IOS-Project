@@ -150,7 +150,10 @@ extension ProfileHeaderView {
     @objc func buttonPressed(sender: UIButton!) {
         
         print(statusTextField.text ?? "")
-        guard statusTextField.text?.isEmpty == false else {return}
+        guard statusTextField.text?.isEmpty == false else {
+            statusLabel.text = "Waiting fo somthing"
+            return
+        }
         statusLabel.text = statusTextChanged(statusTextField)
         self.statusTextField.text = ""
     }
@@ -159,8 +162,6 @@ extension ProfileHeaderView {
 extension ProfileHeaderView: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        
         self.endEditing(true)
         
         return true
