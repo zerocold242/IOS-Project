@@ -8,9 +8,6 @@
 import UIKit
 
 class PostTableViewCell: UITableViewCell {
-
-    
- //Вариант применения значений ячейки через didSet
     
     var post: PostStruct? {
         didSet {
@@ -19,59 +16,67 @@ class PostTableViewCell: UITableViewCell {
             imageImageView.image = UIImage(named: post?.image ?? "logo.png")
             likesLablel.text = "Likes: \(post?.likes ?? 0)"
             viewsLablel.text = "Views: \(post?.views ?? 0)"
-
         }
     }
     
-    let authorLablel: UILabel = {
-        var authLabel = UILabel()
+    var  authorLablel: UILabel = {
+        
+        let authLabel = UILabel()
         authLabel.textColor = .black
         authLabel.font = UIFont.systemFont(ofSize: 21, weight: .bold)
         authLabel.numberOfLines = 2
         authLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         return authLabel
     }()
     
-    let descriptionLablel: UILabel = {
-        var descLabel = UILabel()
+    var  descriptionLablel: UILabel = {
+        
+        let descLabel = UILabel()
         descLabel.textColor = .systemGray
         descLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         descLabel.numberOfLines = 0
         descLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         return descLabel
     }()
     
-    let imageImageView: UIImageView = {
+    var imageImageView: UIImageView = {
+        
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
         image.backgroundColor = .black
         image.translatesAutoresizingMaskIntoConstraints = false
+        
         return image
     }()
     
-    let likesLablel: UILabel = {
-        var likeLabel = UILabel()
+    var likesLablel: UILabel = {
+        
+        let likeLabel = UILabel()
         likeLabel.textColor = .black
         likeLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         likeLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         return likeLabel
     }()
     
-    let viewsLablel: UILabel = {
-        var viewLabel = UILabel()
+    var viewsLablel: UILabel = {
+        
+        let viewLabel = UILabel()
         viewLabel.textColor = .black
         viewLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         viewLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         return viewLabel
     }()
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super .init(style: style, reuseIdentifier: reuseIdentifier)
         setupPostTableViewCell()
-        
     }
     
-    func setupPostTableViewCell() {
+    private func setupPostTableViewCell() {
         contentView.addSubview(authorLablel)
         contentView.addSubview(descriptionLablel)
         contentView.addSubview(imageImageView)
@@ -104,12 +109,10 @@ class PostTableViewCell: UITableViewCell {
             
             viewsLablel.rightAnchor.constraint(equalTo: authorLablel.rightAnchor),
             viewsLablel.topAnchor.constraint(equalTo: descriptionLablel.bottomAnchor, constant: 16),
-            
         ])
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }
