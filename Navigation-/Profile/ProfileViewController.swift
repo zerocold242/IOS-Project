@@ -18,7 +18,7 @@ let tableView = UITableView.init(frame: .zero, style: .grouped)
   override func viewDidLoad() {
       super.viewDidLoad()
       
-      view.backgroundColor = .lightGray
+      view.backgroundColor = .systemGray6
       view.addSubview(tableView)
       
       postsData = posts
