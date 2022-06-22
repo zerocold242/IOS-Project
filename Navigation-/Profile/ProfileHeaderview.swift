@@ -15,7 +15,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         
         let image = UIImageView()
         image.layer.borderWidth = 3
-        image.layer.cornerRadius = 50
+        image.layer.cornerRadius = 110/2
         image.layer.borderColor = UIColor.white.cgColor
         image.image = UIImage(named: "IMG_1566")
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -79,6 +79,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         
         let statusButton = UIButton()
         statusButton.setTitle("Set status", for: .normal)
+        statusButton.setTitleColor(.lightGray, for: .highlighted)
         statusButton.backgroundColor = .systemBlue
         statusButton.layer.cornerRadius = 4
         statusButton.layer.shadowOffset = CGSize(width: 4, height: 4)
@@ -96,15 +97,15 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         setupProfileHeaderView()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        avatarImageView.layer.cornerRadius = 110/2
-        avatarImageView.clipsToBounds = true
-    }
+   // override func layoutSubviews() {
+   //     super.layoutSubviews()
+   //     avatarImageView.layer.cornerRadius = 110/2
+   //     avatarImageView.clipsToBounds = true
+   // }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+   required init?(coder: NSCoder) {
+       fatalError("init(coder:) has not been implemented")
+   }
     
     private func setupProfileHeaderView() {
         contentView.addSubview(avatarImageView)

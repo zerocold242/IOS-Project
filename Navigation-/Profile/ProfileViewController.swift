@@ -61,15 +61,15 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
-        let pos = posts[indexPath.row]
+        //let pos = posts[indexPath.row]
         
         cell.post = postsData[indexPath.row]
         
-        cell.authorLablel.text = pos.author
-        cell.descriptionLablel.text = pos.description
-        cell.imageImageView.image = UIImage(named: pos.image)
-        cell.likesLablel.text = "Likes: \(pos.likes)"
-        cell.viewsLablel.text = "Views: \(pos.views)"
+        // cell.authorLablel.text = pos.author
+        // cell.descriptionLablel.text = pos.description
+        // cell.imageImageView.image = UIImage(named: pos.image)
+        // cell.likesLablel.text = "Likes: \(pos.likes)"
+        //         cell.viewsLablel.text = "Views: \(pos.views)"
         
         return cell
     }

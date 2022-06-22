@@ -19,7 +19,7 @@ class PostTableViewCell: UITableViewCell {
         }
     }
     
-    var  authorLablel: UILabel = {
+    lazy var  authorLablel: UILabel = {
         
         let authLabel = UILabel()
         authLabel.textColor = .black
@@ -30,7 +30,7 @@ class PostTableViewCell: UITableViewCell {
         return authLabel
     }()
     
-    var  descriptionLablel: UILabel = {
+    lazy var  descriptionLablel: UILabel = {
         
         let descLabel = UILabel()
         descLabel.textColor = .systemGray
@@ -41,7 +41,7 @@ class PostTableViewCell: UITableViewCell {
         return descLabel
     }()
     
-    var imageImageView: UIImageView = {
+    lazy var imageImageView: UIImageView = {
         
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
@@ -51,7 +51,7 @@ class PostTableViewCell: UITableViewCell {
         return image
     }()
     
-    var likesLablel: UILabel = {
+    lazy var likesLablel: UILabel = {
         
         let likeLabel = UILabel()
         likeLabel.textColor = .black
@@ -61,7 +61,7 @@ class PostTableViewCell: UITableViewCell {
         return likeLabel
     }()
     
-    var viewsLablel: UILabel = {
+    lazy var viewsLablel: UILabel = {
         
         let viewLabel = UILabel()
         viewLabel.textColor = .black
@@ -76,6 +76,10 @@ class PostTableViewCell: UITableViewCell {
         setupPostTableViewCell()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private func setupPostTableViewCell() {
         contentView.addSubview(authorLablel)
         contentView.addSubview(descriptionLablel)
@@ -83,36 +87,33 @@ class PostTableViewCell: UITableViewCell {
         contentView.addSubview(likesLablel)
         contentView.addSubview(viewsLablel)
         
-        authorLablel.setContentHuggingPriority(.required, for: .vertical)
-        descriptionLablel.setContentHuggingPriority(.required, for: .vertical)
-        likesLablel.setContentHuggingPriority(.required, for: .vertical)
-        viewsLablel.setContentHuggingPriority(.required, for: .vertical)
+        // authorLablel.setContentHuggingPriority(.required, for: .vertical)
+        // descriptionLablel.setContentHuggingPriority(.required, for: .vertical)
+        // likesLablel.setContentHuggingPriority(.required, for: .vertical)
+        // viewsLablel.setContentHuggingPriority(.required, for: .vertical)
         
-        NSLayoutConstraint.activate([
-            authorLablel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
+        [
             authorLablel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            authorLablel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),
+            authorLablel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            authorLablel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            authorLablel.heightAnchor.constraint(equalToConstant: 16),
             
-            imageImageView.topAnchor.constraint(equalTo: authorLablel.bottomAnchor, constant: 16),
-            imageImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imageImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             imageImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-            imageImageView.heightAnchor.constraint(equalTo:  imageImageView.widthAnchor),
+            imageImageView.heightAnchor.constraint(equalTo: contentView.widthAnchor),
+            imageImageView.topAnchor.constraint(equalTo: authorLablel.bottomAnchor, constant: 16),
             
             descriptionLablel.topAnchor.constraint(equalTo: imageImageView.bottomAnchor, constant: 16),
-            descriptionLablel.leadingAnchor.constraint(equalTo: authorLablel.leadingAnchor),
-            descriptionLablel.trailingAnchor.constraint(equalTo: authorLablel.trailingAnchor),
+            descriptionLablel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -48),
+            descriptionLablel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            descriptionLablel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
-            likesLablel.leftAnchor.constraint(equalTo: authorLablel.leftAnchor),
             likesLablel.topAnchor.constraint(equalTo: descriptionLablel.bottomAnchor, constant: 16),
-            likesLablel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+            likesLablel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            likesLablel.heightAnchor.constraint(equalToConstant: 16),
             
-            viewsLablel.rightAnchor.constraint(equalTo: authorLablel.rightAnchor),
             viewsLablel.topAnchor.constraint(equalTo: descriptionLablel.bottomAnchor, constant: 16),
-        ])
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+            viewsLablel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            viewsLablel.heightAnchor.constraint(equalToConstant: 16)
+        ] .forEach { $0.isActive = true }
     }
 }
