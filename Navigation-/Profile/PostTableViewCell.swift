@@ -87,33 +87,44 @@ class PostTableViewCell: UITableViewCell {
         contentView.addSubview(likesLablel)
         contentView.addSubview(viewsLablel)
         
-        // authorLablel.setContentHuggingPriority(.required, for: .vertical)
-        // descriptionLablel.setContentHuggingPriority(.required, for: .vertical)
-        // likesLablel.setContentHuggingPriority(.required, for: .vertical)
-        // viewsLablel.setContentHuggingPriority(.required, for: .vertical)
+         authorLablel.setContentHuggingPriority(.required, for: .vertical)
+         descriptionLablel.setContentHuggingPriority(.required, for: .vertical)
+         likesLablel.setContentHuggingPriority(.required, for: .vertical)
+         viewsLablel.setContentHuggingPriority(.required, for: .vertical)
         
         [
-            authorLablel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            authorLablel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            authorLablel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            authorLablel.heightAnchor.constraint(equalToConstant: 16),
-            
-            imageImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-            imageImageView.heightAnchor.constraint(equalTo: contentView.widthAnchor),
-            imageImageView.topAnchor.constraint(equalTo: authorLablel.bottomAnchor, constant: 16),
-            
-            descriptionLablel.topAnchor.constraint(equalTo: imageImageView.bottomAnchor, constant: 16),
-            descriptionLablel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -48),
-            descriptionLablel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            descriptionLablel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            
-            likesLablel.topAnchor.constraint(equalTo: descriptionLablel.bottomAnchor, constant: 16),
-            likesLablel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            likesLablel.heightAnchor.constraint(equalToConstant: 16),
-            
-            viewsLablel.topAnchor.constraint(equalTo: descriptionLablel.bottomAnchor, constant: 16),
-            viewsLablel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            viewsLablel.heightAnchor.constraint(equalToConstant: 16)
+          authorLablel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+          authorLablel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+          authorLablel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+          authorLablel.heightAnchor.constraint(equalToConstant: 16),
+          
+          imageImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+          imageImageView.heightAnchor.constraint(equalTo: contentView.widthAnchor),
+          imageImageView.topAnchor.constraint(equalTo: authorLablel.bottomAnchor, constant: 16),
+          
+          imageImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+                      imageImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+          
+          descriptionLablel.topAnchor.constraint(equalTo: imageImageView.bottomAnchor, constant: 16),
+         // descriptionLablel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -48),
+         // descriptionLablel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+          //descriptionLablel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+          
+          descriptionLablel.leadingAnchor.constraint(equalTo: authorLablel.leadingAnchor),
+                      descriptionLablel.trailingAnchor.constraint(equalTo: authorLablel.trailingAnchor),
+          
+          likesLablel.topAnchor.constraint(equalTo: descriptionLablel.bottomAnchor, constant: 16),
+          //likesLablel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+          //likesLablel.heightAnchor.constraint(equalToConstant: 16),
+          
+          likesLablel.leftAnchor.constraint(equalTo: authorLablel.leftAnchor),
+          likesLablel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+          
+          viewsLablel.topAnchor.constraint(equalTo: descriptionLablel.bottomAnchor, constant: 16),
+          //viewsLablel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+          //viewsLablel.heightAnchor.constraint(equalToConstant: 16)
+          
+          viewsLablel.rightAnchor.constraint(equalTo: authorLablel.rightAnchor),
         ] .forEach { $0.isActive = true }
     }
 }
