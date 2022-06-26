@@ -23,12 +23,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         //let tabBarController = createTabBarController()
         //tabBarController.viewControllers = [createFeedViewController(), createProfileViewController()]
+        let photosViewController = PhotosViewController()
+        photosViewController.title = "Photo Gallery"
         
         let loginViewController = LoginViewController()
         let _ = UINavigationController(rootViewController: loginViewController)
         loginViewController.tabBarItem = UITabBarItem(title: "Profile",
-                                                        image: UIImage(systemName: "person.circle"),
-                                                       tag: 1)
+                                                      image: UIImage(systemName: "person.circle"),
+                                                      tag: 1)
         
         func createFeedViewController() -> UINavigationController {
             

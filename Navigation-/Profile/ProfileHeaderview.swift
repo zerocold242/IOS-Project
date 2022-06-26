@@ -151,7 +151,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         
         print(statusTextField.text ?? "")
         guard statusTextField.text?.isEmpty == false else {
-            statusLabel.text = "Waiting fo somthing"
+            statusLabel.text = "Waiting fo somthing..."
             
             return
         }
