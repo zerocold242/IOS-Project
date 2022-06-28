@@ -9,53 +9,44 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    private let profileHeaderView = ProfileHeaderView()
+    private lazy var tableView = UITableView.init(frame: .zero, style: .grouped)
     
-    private func setupProfileView() {
+    private lazy var profileHeaderView = ProfileHeaderView()
     
-        self.view.addSubview(self.profileHeaderView)
-        self.profileHeaderView.frame = self.view.frame
-        self.profileHeaderView.configureView()
-        profileHeaderView.layoutIfNeeded()
-        view.layoutIfNeeded()
+    private lazy var postsData: [PostStruct] = []
+    
+    private func setupTableView() {
+        
+        tableView.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: "ProfileHeaderView")
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostTableViewCell")
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
+        tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     
-    private func addButton() {
-        let button: UIButton = {
-            
-            let button = UIButton()
-            button.translatesAutoresizingMaskIntoConstraints = false
-            button.backgroundColor = .systemBlue
-            button.layer.cornerRadius = 4
-            button.setTitleColor(.lightGray, for: .highlighted)
-            button.setTitle("New Button", for: .normal)
-            
-            return button
-        }()
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
+        view.backgroundColor = .systemGray6
+        view.addSubview(tableView)
         
-        view.addSubview(button)
-        
-        NSLayoutConstraint.activate([
-            button.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            button.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            button.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            button.heightAnchor.constraint(equalToConstant: 48)
-        ])
+        postsData = posts
+        gesture()
+        setupTableView()
+    }
+}
+
+extension ProfileViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return postsData.count
     }
     
-    override func viewWillLayoutSubviews() {
-        
-        profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            profileHeaderView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-            profileHeaderView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
-            profileHeaderView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            //profileHeaderView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            profileHeaderView.heightAnchor.constraint(equalToConstant: 220)
-        ])
-    }
-    // убираем клавиатуру кликом по вью:
     private func gesture() {
         
         let gesture = UITapGestureRecognizer()
@@ -67,20 +58,29 @@ class ProfileViewController: UIViewController {
         self.view.endEditing(true)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        self.view.backgroundColor = .systemBackground
-        setupProfileView()
-        gesture()
-        addButton()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
+        //let pos = posts[indexPath.row]
+        
+        cell.post = postsData[indexPath.row]
+        
+        // cell.authorLablel.text = pos.author
+        // cell.descriptionLablel.text = pos.description
+        // cell.imageImageView.image = UIImage(named: pos.image)
+        // cell.likesLablel.text = "Likes: \(pos.likes)"
+        //         cell.viewsLablel.text = "Views: \(pos.views)"
+        
+        return cell
     }
 }
 
+extension ProfileViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "ProfileHeaderView") as! ProfileHeaderView
+        
+        return view
+    }
+}
 
-
-
-
-
-
- 

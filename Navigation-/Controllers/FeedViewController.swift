@@ -9,8 +9,6 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    var post: Post = .init(title: "My first Post")
-    
     let stackView: UIStackView
     
     init (){
@@ -22,15 +20,7 @@ class FeedViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func showPost(){
-        let postVc = PostViewController()
-        navigationController?.pushViewController(postVc, animated: true)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.backgroundColor = .systemGray4
+    private func setUpSteckView() {
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -64,11 +54,23 @@ class FeedViewController: UIViewController {
         secondButton.addTarget(self, action: #selector(showPost), for: .touchUpInside)
         stackView.addArrangedSubview(secondButton)
         
-        view.addSubview(stackView)
+        [stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+         stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+         stackView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -10),
+         stackView.heightAnchor.constraint(equalToConstant: view.bounds.height / 5)]
+            .forEach({$0.isActive = true})
+    }
+    
+    @objc func showPost(){
+        let postVc = PostViewController()
+        navigationController?.pushViewController(postVc, animated: true)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        stackView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -10).isActive = true
-        stackView.heightAnchor.constraint(equalToConstant: view.bounds.height / 5).isActive = true
+        view.backgroundColor = .systemGray4
+        view.addSubview(stackView)
+        setUpSteckView()
     }
 }

@@ -78,17 +78,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     private lazy var loginButton: UIButton = {
         
         let logButton = UIButton()
-        let imageOne = UIImage(named: "blue_pixel")!.alpha(1)
-        let imageTwo = UIImage(named: "blue_pixel")!.alpha(0.8)
         logButton.translatesAutoresizingMaskIntoConstraints = false
-        logButton.clipsToBounds = true
-        logButton.layer.cornerRadius = 10
-        logButton.setTitleColor(.white, for: .normal)
         logButton.setTitle("Log In", for: .normal)
-        logButton.setBackgroundImage(imageOne, for: .normal)
-        logButton.setBackgroundImage(imageTwo, for: .selected)
-        logButton.setBackgroundImage(imageTwo, for: .highlighted)
-        logButton.setBackgroundImage(imageTwo, for: .disabled)
+        logButton.setTitleColor(.lightGray, for: .highlighted)
+        logButton.titleLabel?.textColor = UIColor.white
+        logButton.layer.cornerRadius = 10
+        logButton.clipsToBounds = true
+        logButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         logButton.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
         
         return logButton
@@ -103,7 +99,54 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         return scrollView
     }()
     
-    private lazy var contentView = UIView()
+    private lazy var contentView: UIView = {
+        
+        let contentView = UIView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return contentView
+        
+    }()
+    
+    private func setupLoginScrollView() {
+        
+        loginScrollView.addSubview(contentView)
+        loginScrollView.keyboardDismissMode = .onDrag
+        contentView.addSubview(loginButton)
+        contentView.addSubview(loginStackView)
+        contentView.addSubview(vkLogotype)
+        loginStackView.addArrangedSubview(loginTextfield)
+        loginStackView.addArrangedSubview(passTexfield)
+        loginScrollView.addSubview(contentView)
+        
+        [ loginScrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+          loginScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+          loginScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+          loginScrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+          
+          contentView.leadingAnchor.constraint(equalTo: loginScrollView.leadingAnchor),
+          contentView.topAnchor.constraint(equalTo: loginScrollView.topAnchor),
+          contentView.bottomAnchor.constraint(equalTo: loginScrollView.bottomAnchor),
+          contentView.trailingAnchor.constraint(equalTo: loginScrollView.trailingAnchor),
+          contentView.widthAnchor.constraint(equalTo: loginScrollView.widthAnchor),
+          
+          vkLogotype.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 120),
+          vkLogotype.widthAnchor.constraint(equalToConstant: 100),
+          vkLogotype.heightAnchor.constraint(equalToConstant: 100),
+          vkLogotype.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+          
+          loginStackView.topAnchor.constraint(equalTo: vkLogotype.bottomAnchor, constant: 120),
+          loginStackView.heightAnchor.constraint(equalToConstant: 100),
+          loginStackView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+          loginStackView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+          
+          loginButton.topAnchor.constraint(equalTo: loginStackView.bottomAnchor, constant: 16),
+          loginButton.heightAnchor.constraint(equalToConstant: 50),
+          loginButton.leadingAnchor.constraint(equalTo: loginStackView.leadingAnchor),
+          loginButton.trailingAnchor.constraint(equalTo: loginStackView.trailingAnchor),
+          loginButton.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor)]
+            .forEach({$0.isActive = true})
+    }
     
     private func gesture() {
         
@@ -139,7 +182,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHiden), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
@@ -157,57 +199,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.navigationController?.navigationBar.isHidden = true
         gesture()
         view.addSubview(loginScrollView)
-        loginScrollView.addSubview(contentView)
-        loginScrollView.keyboardDismissMode = .onDrag
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(loginButton)
-        contentView.addSubview(loginStackView)
-        contentView.addSubview(vkLogotype)
-        loginStackView.addArrangedSubview(loginTextfield)
-        loginStackView.addArrangedSubview(passTexfield)
-        loginScrollView.addSubview(contentView)
-        
-        
-        NSLayoutConstraint.activate([
-            loginScrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            loginScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            loginScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            loginScrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            
-            contentView.leadingAnchor.constraint(equalTo: loginScrollView.leadingAnchor),
-            contentView.topAnchor.constraint(equalTo: loginScrollView.topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: loginScrollView.bottomAnchor),
-            contentView.trailingAnchor.constraint(equalTo: loginScrollView.trailingAnchor),
-            contentView.widthAnchor.constraint(equalTo: loginScrollView.widthAnchor),
-            
-            vkLogotype.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 120),
-            vkLogotype.widthAnchor.constraint(equalToConstant: 100),
-            vkLogotype.heightAnchor.constraint(equalToConstant: 100),
-            vkLogotype.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            
-            loginStackView.topAnchor.constraint(equalTo: vkLogotype.bottomAnchor, constant: 120),
-            loginStackView.heightAnchor.constraint(equalToConstant: 100),
-            loginStackView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            loginStackView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            
-            loginButton.topAnchor.constraint(equalTo: loginStackView.bottomAnchor, constant: 16),
-            loginButton.heightAnchor.constraint(equalToConstant: 50),
-            loginButton.leadingAnchor.constraint(equalTo: loginStackView.leadingAnchor),
-            loginButton.trailingAnchor.constraint(equalTo: loginStackView.trailingAnchor),
-            loginButton.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor)
-        ])
+        setupLoginScrollView()
     }
 }
 
-extension  UIImage {
-    
-    func alpha(_ value: CGFloat) -> UIImage {
-        
-        UIGraphicsBeginImageContextWithOptions(size, false, scale)
-        draw(at: CGPoint.zero, blendMode:  .normal, alpha: value)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image!
-    }
-}
+//extension  UIImage {
+//
+//    func alpha(_ value: CGFloat) -> UIImage {
+//
+//        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+//        draw(at: CGPoint.zero, blendMode:  .normal, alpha: value)
+//        let image = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//        return image!
+//    }
+//}
 
