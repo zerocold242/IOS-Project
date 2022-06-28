@@ -10,21 +10,25 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     private lazy var  tableView = UITableView.init(frame: .zero, style: .grouped)
+    
     private lazy var profileHeaderView = ProfileHeaderView()
     
     var postsData: [PostStruct] = []
     
     override func viewWillAppear(_ animated: Bool) {
+        
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     func setupTableView() {
+        
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostTableViewCell")
         tableView.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: "ProfileHeaderView")
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosTableViewCell")
@@ -90,6 +94,7 @@ extension ProfileViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
             
             cell.post = postsData[indexPath.row]
+            
             return cell
         }
         
