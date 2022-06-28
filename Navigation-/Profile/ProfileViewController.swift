@@ -15,6 +15,27 @@ class ProfileViewController: UIViewController {
     
     var postsData: [PostStruct] = []
     
+    private var backgroundView: UIView = {
+        
+        let view = UIView()
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private var closeButton: UIButton = {
+        
+        let close = UIButton()
+        let img1 = UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
+        close.setImage(img1, for: .normal)
+        close.tintColor = .white
+        close.translatesAutoresizingMaskIntoConstraints = false
+        close.alpha = 0
+        close.addTarget(self, action: #selector(closeAvatar), for: .touchUpInside)
+        
+        return close
+    }()
+    
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
@@ -25,6 +46,21 @@ class ProfileViewController: UIViewController {
         
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    private func setupBackgroundView() {
+        
+        view.addSubview(backgroundView)
+        backgroundView.addSubview(profileHeaderView.avatarImageView)
+        backgroundView.addSubview(closeButton)
+        
+        [backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
+         backgroundView.leftAnchor.constraint(equalTo: view.leftAnchor),
+         backgroundView.rightAnchor.constraint(equalTo: view.rightAnchor),
+         backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+         closeButton.topAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.topAnchor, constant: 15),
+         closeButton.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15)]
+            .forEach({$0.isActive = true})
     }
     
     func setupTableView() {
@@ -53,6 +89,58 @@ class ProfileViewController: UIViewController {
     
     @objc private func gestureAction() {
         self.view.endEditing(true)
+    }
+    
+    @objc private func tapProcess() {
+        let avatar = profileHeaderView.avatarImageView
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut) {
+            self.setupBackgroundView()
+            if UIDevice.current.orientation.isPortrait{
+                NSLayoutConstraint.activate([
+                    avatar.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+                    avatar.heightAnchor.constraint(equalTo: self.view.widthAnchor),
+                    avatar.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+                    avatar.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+                ])
+            }
+            else {
+                NSLayoutConstraint.activate([
+                    avatar.widthAnchor.constraint(equalTo: self.view.heightAnchor),
+                    avatar.heightAnchor.constraint(equalTo: self.view.heightAnchor),
+                    avatar.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+                    avatar.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+                ])
+            }
+            self.view.layoutIfNeeded()
+        } completion: { finished in
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
+                self.closeButton.alpha = 1
+                self.profileHeaderView.avatarImageView.layer.cornerRadius = 0
+            }
+        }
+    }
+    
+    @objc private func closeAvatar() {
+        
+        print("closed")
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
+            self.closeButton.alpha = 0
+            self.profileHeaderView.avatarImageView.layer.cornerRadius = 110/2
+            self.view.layoutIfNeeded()
+        } completion: { finished in
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut) {
+                self.profileHeaderView.addSubview(self.profileHeaderView.avatarImageView)
+                
+                self.profileHeaderView.avatarImageView.leftAnchor.constraint(equalTo: self.profileHeaderView.leftAnchor, constant: 16).isActive = true
+                self.profileHeaderView.avatarImageView.topAnchor.constraint(equalTo: self.profileHeaderView.topAnchor, constant: 16).isActive = true
+                self.profileHeaderView.avatarImageView.widthAnchor.constraint(equalToConstant: 110).isActive = true
+                self.profileHeaderView.avatarImageView.heightAnchor.constraint(equalToConstant: 110).isActive = true
+                self.backgroundView.removeFromSuperview()
+                
+                self.view.layoutIfNeeded()
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -115,9 +203,12 @@ extension ProfileViewController: UITableViewDataSource {
 
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "ProfileHeaderView") as! ProfileHeaderView
+        //let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "ProfileHeaderView") as! ProfileHeaderView
         if section == 0 {
-            return view
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapProcess))
+            self.profileHeaderView.avatarImageView.addGestureRecognizer(tapGesture)
+            
+            return profileHeaderView
         }
         else {
             return nil
