@@ -10,6 +10,7 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     private lazy var  tableView = UITableView.init(frame: .zero, style: .grouped)
+    
     private lazy var profileHeaderView = ProfileHeaderView()
     
     var postsData: [PostStruct] = []
@@ -25,6 +26,7 @@ class ProfileViewController: UIViewController {
     }
     
     func setupTableView() {
+        
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostTableViewCell")
         tableView.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: "ProfileHeaderView")
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosTableViewCell")
@@ -40,16 +42,16 @@ class ProfileViewController: UIViewController {
         tableView.delegate = self
     }
     
-    func gesture() {
-        
-        let gesture = UITapGestureRecognizer()
-        gesture.addTarget(self, action: #selector(self.gestureAction))
-        self.view.addGestureRecognizer(gesture)
-    }
-    
-    @objc private func gestureAction() {
-        self.view.endEditing(true)
-    }
+  private func gesture() {
+ 
+       let gesture = UITapGestureRecognizer()
+       gesture.addTarget(self, action: #selector(self.gestureAction))
+       self.view.addGestureRecognizer(gesture)
+   }
+ 
+   @objc private func gestureAction() {
+       self.view.endEditing(true)
+   }
     
     override func viewDidLoad() {
         super.viewDidLoad()

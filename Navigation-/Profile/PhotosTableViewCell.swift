@@ -16,6 +16,7 @@ class PhotosTableViewCell: UITableViewCell {
         label.text = "Photos"
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
+        
         return label
     }()
     
@@ -79,12 +80,14 @@ class PhotosTableViewCell: UITableViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.alignment = .fill
         stackView.spacing = 8
+        
         return stackView
     }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super .init(style: style, reuseIdentifier: reuseIdentifier)
-        setupPhotosTableViewCell()
         
+        setupPhotosTableViewCell()
     }
     
     private func setupPhotosTableViewCell() {
@@ -116,7 +119,8 @@ class PhotosTableViewCell: UITableViewCell {
          arrowIcon.centerYAnchor.constraint(equalTo: photosLabel.centerYAnchor),
          arrowIcon.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
          arrowIcon.heightAnchor.constraint(equalTo: photosLabel.heightAnchor),
-         arrowIcon.widthAnchor.constraint(equalTo: arrowIcon.heightAnchor)]
+         arrowIcon.widthAnchor.constraint(equalTo: arrowIcon.heightAnchor)
+         ]
             .forEach({$0.isActive = true})
     }
     

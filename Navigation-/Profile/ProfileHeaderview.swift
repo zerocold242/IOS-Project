@@ -108,6 +108,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
    }
     
     private func setupProfileHeaderView() {
+        
         contentView.addSubview(avatarImageView)
         contentView.addSubview(fullNameLabel)
         contentView.addSubview(statusLabel)
