@@ -83,6 +83,7 @@ class ProfileViewController: UIViewController {
     func gesture() {
         
         let gesture = UITapGestureRecognizer()
+        gesture.cancelsTouchesInView = false
         gesture.addTarget(self, action: #selector(self.gestureAction))
         self.view.addGestureRecognizer(gesture)
     }
@@ -92,9 +93,12 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func tapProcess() {
+        
         let avatar = profileHeaderView.avatarImageView
+        
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut) {
             self.setupBackgroundView()
+            
             if UIDevice.current.orientation.isPortrait{
                 NSLayoutConstraint.activate([
                     avatar.widthAnchor.constraint(equalTo: self.view.widthAnchor),
@@ -103,15 +107,19 @@ class ProfileViewController: UIViewController {
                     avatar.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
                 ])
             }
-            else {
+            else
+            {
                 NSLayoutConstraint.activate([
                     avatar.widthAnchor.constraint(equalTo: self.view.heightAnchor),
                     avatar.heightAnchor.constraint(equalTo: self.view.heightAnchor),
                     avatar.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
                     avatar.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+                    avatar.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
                 ])
             }
+            
             self.view.layoutIfNeeded()
+            
         } completion: { finished in
             UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
                 self.closeButton.alpha = 1
@@ -148,7 +156,7 @@ class ProfileViewController: UIViewController {
         
         view.backgroundColor = .systemGray6
         view.addSubview(tableView)
-        //gesture()
+        gesture()
         postsData = posts
         setupTableView()
     }
@@ -193,6 +201,9 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         if indexPath.section == 1 {
             let photoViewController = PhotosViewController()
             photoViewController.title = "Photo Gallery"
