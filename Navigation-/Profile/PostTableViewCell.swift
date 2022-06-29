@@ -19,7 +19,7 @@ class PostTableViewCell: UITableViewCell {
         }
     }
     
-    lazy var  authorLablel: UILabel = {
+    private lazy var  authorLablel: UILabel = {
         
         let authLabel = UILabel()
         authLabel.textColor = .black
@@ -30,7 +30,7 @@ class PostTableViewCell: UITableViewCell {
         return authLabel
     }()
     
-    lazy var  descriptionLablel: UILabel = {
+    private lazy var  descriptionLablel: UILabel = {
         
         let descLabel = UILabel()
         descLabel.textColor = .systemGray
@@ -41,7 +41,7 @@ class PostTableViewCell: UITableViewCell {
         return descLabel
     }()
     
-    lazy var imageImageView: UIImageView = {
+    private lazy var imageImageView: UIImageView = {
         
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
@@ -51,7 +51,7 @@ class PostTableViewCell: UITableViewCell {
         return image
     }()
     
-    lazy var likesLablel: UILabel = {
+    private lazy var likesLablel: UILabel = {
         
         let likeLabel = UILabel()
         likeLabel.textColor = .black
@@ -61,7 +61,7 @@ class PostTableViewCell: UITableViewCell {
         return likeLabel
     }()
     
-    lazy var viewsLablel: UILabel = {
+    private lazy var viewsLablel: UILabel = {
         
         let viewLabel = UILabel()
         viewLabel.textColor = .black
@@ -81,6 +81,7 @@ class PostTableViewCell: UITableViewCell {
     }
     
     private func setupPostTableViewCell() {
+        
         contentView.addSubview(authorLablel)
         contentView.addSubview(descriptionLablel)
         contentView.addSubview(imageImageView)
@@ -92,8 +93,8 @@ class PostTableViewCell: UITableViewCell {
         likesLablel.setContentHuggingPriority(.required, for: .vertical)
         viewsLablel.setContentHuggingPriority(.required, for: .vertical)
         
-        [
-            authorLablel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+        
+            [authorLablel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             authorLablel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             authorLablel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             authorLablel.heightAnchor.constraint(equalToConstant: 16),
