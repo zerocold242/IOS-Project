@@ -203,15 +203,4 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
 }
 
-//extension  UIImage {
-//
-//    func alpha(_ value: CGFloat) -> UIImage {
-//
-//        UIGraphicsBeginImageContextWithOptions(size, false, scale)
-//        draw(at: CGPoint.zero, blendMode:  .normal, alpha: value)
-//        let image = UIGraphicsGetImageFromCurrentImageContext()
-//        UIGraphicsEndImageContext()
-//        return image!
-//    }
-//}
 
