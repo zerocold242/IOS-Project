@@ -40,6 +40,7 @@ class ProfileViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
+        //25
     }
     
   private func gesture() {
