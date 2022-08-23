@@ -11,7 +11,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     
     private lazy var statusText: String = ""
     
-    private lazy var avatarImageView: UIImageView = {
+    lazy var avatarImageView: UIImageView = {
         
         let image = UIImageView()
         image.layer.borderWidth = 3
