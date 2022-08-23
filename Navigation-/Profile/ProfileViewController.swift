@@ -90,8 +90,8 @@ class ProfileViewController: UIViewController {
     
     @objc private func gestureAction() {
         self.view.endEditing(true)
+    }
     
-  private func gesture() {
     @objc private func tapProcess() {
         
         let avatar = profileHeaderView.avatarImageView
@@ -225,4 +225,5 @@ extension ProfileViewController: UITableViewDelegate {
         }
     }
 }
+
 
