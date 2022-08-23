@@ -18,6 +18,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         image.layer.cornerRadius = 110/2
         image.layer.borderColor = UIColor.white.cgColor
         image.image = UIImage(named: "IMG_1566")
+        image.isUserInteractionEnabled = true
         image.translatesAutoresizingMaskIntoConstraints = false
         image.layer.masksToBounds = false
         image.clipsToBounds = true
@@ -97,12 +98,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         setupProfileHeaderView()
     }
     
-   // override func layoutSubviews() {
-   //     super.layoutSubviews()
-   //     avatarImageView.layer.cornerRadius = 110/2
-   //     avatarImageView.clipsToBounds = true
-   // }
-    
    required init?(coder: NSCoder) {
        fatalError("init(coder:) has not been implemented")
    }
@@ -170,5 +165,3 @@ extension ProfileHeaderView: UITextFieldDelegate {
         return true
     }
 }
-
-
