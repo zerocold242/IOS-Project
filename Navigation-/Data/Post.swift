@@ -4,19 +4,17 @@
 //
 //  Created by Aleksey Lexx on 27.05.2022.
 //
-
 import Foundation
 
-struct PostStruct {
-    
-    var author: String
-    var description: String
-    var image: String
-    var likes: Int
-    var views: Int
+public struct PostStruct {
+    public var author: String
+    public var description: String
+    public var image: String
+    public var likes: Int
+    public var views: Int
 }
 
-let posts = [
+public let posts = [
     PostStruct(author: "Zero Cold",
                description: "Zero Cold - The Spell of the North [2022] EP. \nLabel: Betrieb records (DE). \nGenre: Industrial techno/Experimental. \nRelease date: 03.01.2022",
                image: "zerocoldPost1",

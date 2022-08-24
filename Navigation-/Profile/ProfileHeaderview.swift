@@ -22,35 +22,29 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         image.translatesAutoresizingMaskIntoConstraints = false
         image.layer.masksToBounds = false
         image.clipsToBounds = true
-        
         return image
     }()
     
     private lazy var fullNameLabel: UILabel = {
-        
         let nameLabel = UILabel()
         nameLabel.text = "Zero Cold"
         nameLabel.textColor = .black
         nameLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         nameLabel.textAlignment = NSTextAlignment.center
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         return nameLabel
     }()
     
     private lazy var statusLabel: UILabel = {
-        
         let statusLabel = UILabel()
         statusLabel.text = "Waiting for something..."
         statusLabel.textColor = .gray
         statusLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         return statusLabel
     }()
     
     private lazy var statusTextField: UITextField = {
-        
         let statusTextField = UITextField()
         statusTextField.translatesAutoresizingMaskIntoConstraints = false
         statusTextField.layer.cornerRadius = 12
@@ -67,17 +61,13 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         statusTextField.returnKeyType = UIReturnKeyType.done
         statusTextField.clearButtonMode = UITextField.ViewMode.whileEditing
         statusTextField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
-        
         statusTextField.isEnabled = true
         statusTextField.isUserInteractionEnabled = true
-        
         statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
-        
         return statusTextField
     }()
     
     private lazy var setStatusButton: UIButton = {
-        
         let statusButton = UIButton()
         statusButton.setTitle("Set status", for: .normal)
         statusButton.setTitleColor(.lightGray, for: .highlighted)
@@ -89,7 +79,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         statusButton.layer.shadowOpacity = 0.7
         statusButton.translatesAutoresizingMaskIntoConstraints = false
         statusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        
         return statusButton
     }()
     
@@ -98,12 +87,11 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         setupProfileHeaderView()
     }
     
-   required init?(coder: NSCoder) {
-       fatalError("init(coder:) has not been implemented")
-   }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private func setupProfileHeaderView() {
-        
         contentView.addSubview(avatarImageView)
         contentView.addSubview(fullNameLabel)
         contentView.addSubview(statusLabel)
@@ -136,7 +124,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     }
     
     @objc private func statusTextChanged(_ textField: UITextField) -> String {
-        
         if let newStatus = textField.text {
             statusText = newStatus
         }
@@ -144,11 +131,9 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     }
     
     @objc private func buttonPressed(sender: UIButton!) {
-        
         print(statusTextField.text ?? "")
         guard statusTextField.text?.isEmpty == false else {
             statusLabel.text = "Waiting fo somthing..."
-            
             return
         }
         
@@ -161,9 +146,6 @@ extension ProfileHeaderView: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.endEditing(true)
-        
         return true
     }
 }
-
-

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StorageService
 
 class PostTableViewCell: UITableViewCell {
     
@@ -26,7 +27,6 @@ class PostTableViewCell: UITableViewCell {
         authLabel.font = UIFont.systemFont(ofSize: 21, weight: .bold)
         authLabel.numberOfLines = 2
         authLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         return authLabel
     }()
     
@@ -37,7 +37,6 @@ class PostTableViewCell: UITableViewCell {
         descLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         descLabel.numberOfLines = 0
         descLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         return descLabel
     }()
     
@@ -47,7 +46,6 @@ class PostTableViewCell: UITableViewCell {
         image.contentMode = .scaleAspectFit
         image.backgroundColor = .black
         image.translatesAutoresizingMaskIntoConstraints = false
-        
         return image
     }()
     
@@ -57,7 +55,6 @@ class PostTableViewCell: UITableViewCell {
         likeLabel.textColor = .black
         likeLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         likeLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         return likeLabel
     }()
     
@@ -67,7 +64,6 @@ class PostTableViewCell: UITableViewCell {
         viewLabel.textColor = .black
         viewLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         viewLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         return viewLabel
     }()
     
@@ -80,8 +76,7 @@ class PostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupPostTableViewCell() {
-        
+    func setupPostTableViewCell() {
         contentView.addSubview(authorLablel)
         contentView.addSubview(descriptionLablel)
         contentView.addSubview(imageImageView)
@@ -101,7 +96,7 @@ class PostTableViewCell: UITableViewCell {
             
             imageImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
             imageImageView.heightAnchor.constraint(equalTo: contentView.widthAnchor),
-            imageImageView.topAnchor.constraint(equalTo: authorLablel.bottomAnchor, constant: 16),  //48
+            imageImageView.topAnchor.constraint(equalTo: authorLablel.bottomAnchor, constant: 16),
             
             imageImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),

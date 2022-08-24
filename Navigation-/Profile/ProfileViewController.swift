@@ -4,7 +4,7 @@
 //
 //  Created by Aleksey Lexx on 27.05.2022.
 //
-
+import StorageService
 import UIKit
 
 class ProfileViewController: UIViewController {
@@ -65,6 +65,16 @@ class ProfileViewController: UIViewController {
     
     func setupTableView() {
         
+        [backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
+         backgroundView.leftAnchor.constraint(equalTo: view.leftAnchor),
+         backgroundView.rightAnchor.constraint(equalTo: view.rightAnchor),
+         backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+         closeButton.topAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.topAnchor, constant: 15),
+         closeButton.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15)]
+            .forEach({$0.isActive = true})
+    }
+    
+    private  func setupTableView() {
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostTableViewCell")
         tableView.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: "ProfileHeaderView")
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosTableViewCell")
@@ -80,8 +90,7 @@ class ProfileViewController: UIViewController {
         tableView.delegate = self
     }
     
-    func gesture() {
-        
+    private func gesture() {
         let gesture = UITapGestureRecognizer()
         gesture.cancelsTouchesInView = false
         gesture.addTarget(self, action: #selector(self.gestureAction))
@@ -106,9 +115,9 @@ class ProfileViewController: UIViewController {
                     avatar.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
                     avatar.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
                 ])
-            }
-            else
-            {
+                
+            } else {
+                
                 NSLayoutConstraint.activate([
                     avatar.widthAnchor.constraint(equalTo: self.view.heightAnchor),
                     avatar.heightAnchor.constraint(equalTo: self.view.heightAnchor),
@@ -150,10 +159,14 @@ class ProfileViewController: UIViewController {
             }
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+#if DEBUG
         view.backgroundColor = .systemGray6
+#else
+        view.backgroundColor = .red
+#endif
         view.addSubview(tableView)
         gesture()
         postsData = posts
@@ -161,14 +174,13 @@ class ProfileViewController: UIViewController {
     }
 }
 
-extension ProfileViewController: UITableViewDataSource {
+extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         switch section {
         case 0:
             return 0
@@ -209,18 +221,17 @@ extension ProfileViewController: UITableViewDataSource {
             navigationController?.pushViewController(photoViewController, animated: true)
         }
     }
-}
-
-extension ProfileViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        //let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "ProfileHeaderView") as! ProfileHeaderView
+        guard (tableView.dequeueReusableHeaderFooterView(withIdentifier: "ProfileHeaderView") as? ProfileHeaderView) != nil
+        else {return UIView()}
         if section == 0 {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapProcess))
             self.profileHeaderView.avatarImageView.addGestureRecognizer(tapGesture)
             
             return profileHeaderView
-        }
-        else {
+            
+        } else {
             return nil
         }
     }
