@@ -4,7 +4,7 @@
 //
 //  Created by Aleksey Lexx on 27.05.2022.
 //
-
+import StorageService
 import UIKit
 
 class ProfileViewController: UIViewController {
@@ -63,7 +63,7 @@ class ProfileViewController: UIViewController {
             .forEach({$0.isActive = true})
     }
     
-    func setupTableView() {
+  private  func setupTableView() {
         
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostTableViewCell")
         tableView.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: "ProfileHeaderView")
@@ -80,7 +80,7 @@ class ProfileViewController: UIViewController {
         tableView.delegate = self
     }
     
-    func gesture() {
+   private func gesture() {
         
         let gesture = UITapGestureRecognizer()
         gesture.cancelsTouchesInView = false
@@ -155,7 +155,7 @@ class ProfileViewController: UIViewController {
         
         view.backgroundColor = .systemGray6
         view.addSubview(tableView)
-        //gesture()
+        gesture()
         postsData = posts
         setupTableView()
     }
@@ -213,7 +213,8 @@ extension ProfileViewController: UITableViewDataSource {
 
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        //let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "ProfileHeaderView") as! ProfileHeaderView
+        guard (tableView.dequeueReusableHeaderFooterView(withIdentifier: "ProfileHeaderView") as? ProfileHeaderView) != nil
+        else {return UIView()}
         if section == 0 {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapProcess))
             self.profileHeaderView.avatarImageView.addGestureRecognizer(tapGesture)

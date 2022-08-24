@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StorageService
 
 class PostTableViewCell: UITableViewCell {
     
@@ -80,7 +81,7 @@ class PostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupPostTableViewCell() {
+    func setupPostTableViewCell() {
         
         contentView.addSubview(authorLablel)
         contentView.addSubview(descriptionLablel)
