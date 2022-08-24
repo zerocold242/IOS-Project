@@ -10,7 +10,6 @@ import UIKit
 class InfoViewController: UIViewController {
     
     private func setupButton() {
-        
         let alertButton = UIButton(frame: CGRect(x: self.view.bounds.width / 2 - 100,
                                                  y: self.view.bounds.height / 2 - 25,
                                                  width: 200,
@@ -24,8 +23,7 @@ class InfoViewController: UIViewController {
         self.view.addSubview(alertButton)
     }
     
-    @objc func setupAlert() {
-        
+    @objc private func setupAlert() {
         let title = "Warning!"
         let message = "Была нажата кнопка Alert в InfoViewController"
         let alert = UIAlertController(title: title,

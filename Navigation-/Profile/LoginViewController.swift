@@ -9,16 +9,13 @@ import UIKit
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
     private lazy var vkLogotype: UIImageView = {
-        
         let logo = UIImageView()
         logo.translatesAutoresizingMaskIntoConstraints = false
         logo.image = UIImage(named: "logo.png")
-        
         return logo
     }()
     
     private lazy var loginStackView: UIStackView = {
-        
         let signing = UIStackView()
         signing.translatesAutoresizingMaskIntoConstraints = false
         signing.layer.borderColor = UIColor.lightGray.cgColor
@@ -28,12 +25,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         signing.axis = .vertical
         signing.distribution = .fillEqually
         signing.clipsToBounds = true
-        
         return signing
     }()
     
     private lazy var loginTextfield: UITextField = {
-        
         let logTextfield = UITextField()
         logTextfield.translatesAutoresizingMaskIntoConstraints = false
         logTextfield.tag = 0
@@ -50,12 +45,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         logTextfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: logTextfield.frame.height))
         logTextfield.leftViewMode = .always
         logTextfield.delegate = self
-        
         return logTextfield
     }()
     
     private lazy var passTexfield: UITextField = {
-        
         let password = UITextField()
         password.translatesAutoresizingMaskIntoConstraints = false
         password.tag = 1
@@ -71,12 +64,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         password.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: password.frame.height))
         password.leftViewMode = .always
         password.delegate = self
-        
         return password
     }()
     
     private lazy var loginButton: UIButton = {
-        
         let logButton = UIButton()
         logButton.translatesAutoresizingMaskIntoConstraints = false
         logButton.setTitle("Log In", for: .normal)
@@ -86,12 +77,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         logButton.clipsToBounds = true
         logButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         logButton.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
-        
         return logButton
     }()
     
     private lazy var loginScrollView: UIScrollView = {
-        
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = .white
@@ -100,10 +89,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }()
     
     private lazy var contentView: UIView = {
-        
         let contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        
         return contentView
         
     }()
@@ -149,14 +136,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func gesture() {
-        
         let gesture = UITapGestureRecognizer()
         gesture.addTarget(self, action: #selector(self.gestureAction))
         self.view.addGestureRecognizer(gesture)
     }
     
     @objc func tapButton() {
-        
         let profileViewController = ProfileViewController()
         navigationController?.pushViewController(profileViewController, animated: true)
     }
@@ -166,7 +151,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func keyboardShow(notification: NSNotification) {
-        
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             loginScrollView.contentInset.bottom = keyboardSize.height + 32
             loginScrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
@@ -174,7 +158,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func keyboardHiden(notification: NSNotification) {
-        
         loginScrollView.contentInset = .zero
         loginScrollView.verticalScrollIndicatorInsets = .zero
     }

@@ -20,55 +20,45 @@ class PostTableViewCell: UITableViewCell {
         }
     }
     
-   private lazy var  authorLablel: UILabel = {
-        
+    private lazy var  authorLablel: UILabel = {
         let authLabel = UILabel()
         authLabel.textColor = .black
         authLabel.font = UIFont.systemFont(ofSize: 21, weight: .bold)
         authLabel.numberOfLines = 2
         authLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         return authLabel
     }()
     
-   private lazy var  descriptionLablel: UILabel = {
-        
+    private lazy var  descriptionLablel: UILabel = {
         let descLabel = UILabel()
         descLabel.textColor = .systemGray
         descLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         descLabel.numberOfLines = 0
         descLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         return descLabel
     }()
     
-   private lazy var imageImageView: UIImageView = {
-        
+    private lazy var imageImageView: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
         image.backgroundColor = .black
         image.translatesAutoresizingMaskIntoConstraints = false
-        
         return image
     }()
     
-   private lazy var likesLablel: UILabel = {
-        
+    private lazy var likesLablel: UILabel = {
         let likeLabel = UILabel()
         likeLabel.textColor = .black
         likeLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         likeLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         return likeLabel
     }()
     
-   private lazy var viewsLablel: UILabel = {
-        
+    private lazy var viewsLablel: UILabel = {
         let viewLabel = UILabel()
         viewLabel.textColor = .black
         viewLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         viewLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         return viewLabel
     }()
     
@@ -82,7 +72,6 @@ class PostTableViewCell: UITableViewCell {
     }
     
     func setupPostTableViewCell() {
-        
         contentView.addSubview(authorLablel)
         contentView.addSubview(descriptionLablel)
         contentView.addSubview(imageImageView)
@@ -102,7 +91,7 @@ class PostTableViewCell: UITableViewCell {
             
             imageImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
             imageImageView.heightAnchor.constraint(equalTo: contentView.widthAnchor),
-            imageImageView.topAnchor.constraint(equalTo: authorLablel.bottomAnchor, constant: 16),  //48
+            imageImageView.topAnchor.constraint(equalTo: authorLablel.bottomAnchor, constant: 16),
             
             imageImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
