@@ -54,7 +54,7 @@ class PostTableViewCell: UITableViewCell {
         return likeLabel
     }()
     
-    private lazy var viewsLablel: UILabel = {
+    private lazy var viewsLablel: UILabel = {p
         let viewLabel = UILabel()
         viewLabel.textColor = .black
         viewLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
@@ -70,8 +70,8 @@ class PostTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func setupPostTableViewCell() {
+
+    private func setupPostTableViewCell() {
         contentView.addSubview(authorLablel)
         contentView.addSubview(descriptionLablel)
         contentView.addSubview(imageImageView)
@@ -83,8 +83,8 @@ class PostTableViewCell: UITableViewCell {
         likesLablel.setContentHuggingPriority(.required, for: .vertical)
         viewsLablel.setContentHuggingPriority(.required, for: .vertical)
         
-        [
-            authorLablel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+        
+            [authorLablel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             authorLablel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             authorLablel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             authorLablel.heightAnchor.constraint(equalToConstant: 16),

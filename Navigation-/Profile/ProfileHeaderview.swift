@@ -89,8 +89,9 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func setupProfileHeaderView() {
+        
         contentView.addSubview(avatarImageView)
         contentView.addSubview(fullNameLabel)
         contentView.addSubview(statusLabel)
