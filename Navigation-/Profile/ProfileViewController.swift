@@ -152,8 +152,11 @@ class ProfileViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        #if DEBUG
         view.backgroundColor = .systemGray6
+        #else
+        view.backgroundColor = .red
+        #endif
         view.addSubview(tableView)
         gesture()
         postsData = posts
