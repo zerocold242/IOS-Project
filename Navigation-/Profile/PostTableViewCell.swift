@@ -7,16 +7,27 @@
 
 import UIKit
 import StorageService
+import iOSIntPackage
 
 class PostTableViewCell: UITableViewCell {
     
+    private lazy var imageProcessor = ImageProcessor()
+    
     var post: PostStruct? {
         didSet {
-            authorLablel.text = post?.author
-            descriptionLablel.text = post?.description
-            imageImageView.image = UIImage(named: post?.image ?? "logo.png")
-            likesLablel.text = "Likes: \(post?.likes ?? 0)"
-            viewsLablel.text = "Views: \(post?.views ?? 0)"
+            if let post = post {
+            authorLablel.text = post.author
+            descriptionLablel.text = post.description
+            imageImageView.image = UIImage(named: post.image )
+            likesLablel.text = "Likes: \(post.likes )"
+            viewsLablel.text = "Views: \(post.views )"
+            
+            if let image = UIImage(named: post.image) {
+                imageProcessor.processImage(sourceImage: image, filter: post.filter) {
+                    image in imageImageView.image = image
+                }
+            }
+            }
         }
     }
     
