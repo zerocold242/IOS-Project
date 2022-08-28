@@ -6,13 +6,13 @@
 //
 
 import UIKit
+import SnapKit
 
 class ProfileHeaderView: UITableViewHeaderFooterView {
     
     private lazy var statusText: String = ""
     
     lazy var avatarImageView: UIImageView = {
-        
         let image = UIImageView()
         image.layer.borderWidth = 3
         image.layer.cornerRadius = 110/2
@@ -98,29 +98,41 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         contentView.addSubview(statusTextField)
         contentView.addSubview(setStatusButton)
         
-        NSLayoutConstraint.activate([
-            avatarImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
-            avatarImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            avatarImageView.widthAnchor.constraint(equalToConstant: 110),
-            avatarImageView.heightAnchor.constraint(equalToConstant: 110),
-            
-            fullNameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            fullNameLabel.centerYAnchor.constraint(equalTo: contentView.topAnchor, constant: 27),
-            
-            setStatusButton.topAnchor .constraint(equalTo: avatarImageView.bottomAnchor, constant: 32),
-            setStatusButton.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
-            setStatusButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),
-            setStatusButton.heightAnchor.constraint(equalToConstant: 50),
-            setStatusButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
-            
-            statusLabel.topAnchor.constraint(equalTo: fullNameLabel.topAnchor, constant: 34),
-            statusLabel.leftAnchor.constraint(equalTo: fullNameLabel.leftAnchor),
-            
-            statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 16),
-            statusTextField.heightAnchor.constraint(equalToConstant: 40),
-            statusTextField.leftAnchor.constraint(equalTo: fullNameLabel.leftAnchor),
-            statusTextField.rightAnchor.constraint(equalTo: setStatusButton.rightAnchor)
-        ])
+        var cgFloat: CGFloat{ return 16}
+     
+        avatarImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(cgFloat)
+            make.leading.equalToSuperview().inset(cgFloat)
+            make.width.height.equalTo(110)
+        }
+     
+        fullNameLabel.snp.makeConstraints{make in
+            make.top.equalToSuperview().inset(cgFloat)
+            make.leading.equalTo(avatarImageView.snp.trailing).offset(cgFloat)
+           // make.trailing.equalToSuperview().inset(-cgFloat)
+        }
+     
+        statusLabel.snp.makeConstraints{ make in
+            make.top.equalTo(fullNameLabel.snp.bottom).offset(34)
+            make.leading.equalTo(avatarImageView.snp.trailing).offset(cgFloat)
+            make.trailing.equalToSuperview().inset(cgFloat)
+        }
+     
+        statusTextField.snp.makeConstraints { make in
+            make.top.equalTo(statusLabel.snp.bottom).offset(cgFloat)
+            make.leading.equalTo(avatarImageView.snp.trailing).offset(cgFloat)
+            make.trailing.equalToSuperview().inset(cgFloat)
+            make.height.equalTo(40)
+        }
+     
+        setStatusButton.snp.makeConstraints { make in
+            make.top.equalTo(statusTextField.snp.bottom).offset(cgFloat)
+            make.leading.equalToSuperview().inset(cgFloat)
+            make.trailing.equalToSuperview().inset(cgFloat)
+            make.bottom.equalToSuperview().inset(cgFloat)
+            make.height.equalTo(50)
+     
+        }
     }
     
     @objc private func statusTextChanged(_ textField: UITextField) -> String {
