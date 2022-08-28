@@ -69,7 +69,6 @@
 		5CA3BB432864CFB40069B9EA /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		5CA3BB452864F0320069B9EA /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		5CA3BB492864FD6D0069B9EA /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
-		5CCAA29228B56E54005135D7 /* StoragrService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoragrService.h; sourceTree = "<group>"; };
 		5CCAA2A328B683BB005135D7 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CCAA2A528B683BC005135D7 /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
 		5CD4C783285B35E70088240D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -99,7 +98,6 @@
 			isa = PBXGroup;
 			children = (
 				5C101D9A2841078300F5FE5D /* Navigation- */,
-				5CCAA29128B56E54005135D7 /* StoragrService */,
 				5CCAA2A428B683BC005135D7 /* StorageService */,
 				5C101D992841078300F5FE5D /* Products */,
 			);
@@ -145,14 +143,6 @@
 				5C101DB728410A5D00F5FE5D /* InfoViewController.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		5CCAA29128B56E54005135D7 /* StoragrService */ = {
-			isa = PBXGroup;
-			children = (
-				5CCAA29228B56E54005135D7 /* StoragrService.h */,
-			);
-			path = StoragrService;
 			sourceTree = "<group>";
 		};
 		5CCAA2A428B683BC005135D7 /* StorageService */ = {
