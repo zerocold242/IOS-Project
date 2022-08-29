@@ -68,9 +68,7 @@ class PostTableViewCell: UITableViewCell {
         likeLabel.translatesAutoresizingMaskIntoConstraints = false
         return likeLabel
     }()
-    
-    private lazy var viewsLablel: UILabel = {
-        
+
         let viewLabel = UILabel()
         viewLabel.textColor = .black
         viewLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
@@ -86,8 +84,8 @@ class PostTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func setupPostTableViewCell() {
+
+    private func setupPostTableViewCell() {
         contentView.addSubview(authorLablel)
         contentView.addSubview(descriptionLablel)
         contentView.addSubview(imageImageView)
