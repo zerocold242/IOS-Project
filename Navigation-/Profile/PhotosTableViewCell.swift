@@ -10,7 +10,6 @@ import UIKit
 class PhotosTableViewCell: UITableViewCell {
     
     private lazy var photosLabel: UILabel = {
-        
         var label = UILabel()
         label.textColor = .black
         label.text = "Photos"
@@ -20,75 +19,63 @@ class PhotosTableViewCell: UITableViewCell {
     }()
     
     private lazy var arrowIcon: UIImageView = {
-        
         let icon = UIImageView()
         icon.image = UIImage(systemName: "arrow.right")
         icon.translatesAutoresizingMaskIntoConstraints = false
         icon.tintColor = .black
-        
         return icon
     }()
     
     private lazy var photoImageView1: UIImageView = {
-        
         let image = UIImageView()
         image.image = PhotoGallery.myPhotos[0]
         image.translatesAutoresizingMaskIntoConstraints = false
         image.layer.cornerRadius = 6
         image.clipsToBounds = true
-        
         return image
     }()
     
     private lazy var photoImageView2: UIImageView = {
-        
         let image = UIImageView()
         image.image = PhotoGallery.myPhotos[1]
         image.translatesAutoresizingMaskIntoConstraints = false
         image.layer.cornerRadius = 6
         image.clipsToBounds = true
-        
         return image
     }()
     
     private lazy var photoImageView3: UIImageView = {
-        
         let image = UIImageView()
         image.image = PhotoGallery.myPhotos[2]
         image.translatesAutoresizingMaskIntoConstraints = false
         image.layer.cornerRadius = 6
         image.clipsToBounds = true
-        
         return image
     }()
     
     private lazy var photoImageView4: UIImageView = {
-        
         let image = UIImageView()
         image.image = PhotoGallery.myPhotos[3]
         image.translatesAutoresizingMaskIntoConstraints = false
         image.layer.cornerRadius = 6
         image.clipsToBounds = true
-        
         return image
     }()
     
     private lazy var previewStackView: UIStackView = {
-        
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.alignment = .fill
         stackView.spacing = 8
         return stackView
     }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super .init(style: style, reuseIdentifier: reuseIdentifier)
         setupPhotosTableViewCell()
-        
     }
     
     private func setupPhotosTableViewCell() {
-        
         contentView.addSubview(previewStackView)
         contentView.addSubview(photosLabel)
         contentView.addSubview(arrowIcon)
@@ -116,7 +103,8 @@ class PhotosTableViewCell: UITableViewCell {
          arrowIcon.centerYAnchor.constraint(equalTo: photosLabel.centerYAnchor),
          arrowIcon.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
          arrowIcon.heightAnchor.constraint(equalTo: photosLabel.heightAnchor),
-         arrowIcon.widthAnchor.constraint(equalTo: arrowIcon.heightAnchor)]
+         arrowIcon.widthAnchor.constraint(equalTo: arrowIcon.heightAnchor)
+        ]
             .forEach({$0.isActive = true})
     }
     

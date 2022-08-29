@@ -4,7 +4,7 @@
 //
 //  Created by Aleksey Lexx on 27.05.2022.
 //
-
+import StorageService
 import UIKit
 
 class ProfileViewController: UIViewController {
@@ -16,7 +16,6 @@ class ProfileViewController: UIViewController {
     var postsData: [PostStruct] = []
     
     private var backgroundView: UIView = {
-        
         let view = UIView()
         view.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -24,7 +23,6 @@ class ProfileViewController: UIViewController {
     }()
     
     private var closeButton: UIButton = {
-        
         let close = UIButton()
         let img1 = UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
         close.setImage(img1, for: .normal)
@@ -32,7 +30,6 @@ class ProfileViewController: UIViewController {
         close.translatesAutoresizingMaskIntoConstraints = false
         close.alpha = 0
         close.addTarget(self, action: #selector(closeAvatar), for: .touchUpInside)
-        
         return close
     }()
     
@@ -49,7 +46,6 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupBackgroundView() {
-        
         view.addSubview(backgroundView)
         backgroundView.addSubview(profileHeaderView.avatarImageView)
         backgroundView.addSubview(closeButton)
@@ -63,8 +59,8 @@ class ProfileViewController: UIViewController {
             .forEach({$0.isActive = true})
     }
     
-    func setupTableView() {
-        
+
+    private  func setupTableView() {
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostTableViewCell")
         tableView.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: "ProfileHeaderView")
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosTableViewCell")
@@ -80,8 +76,7 @@ class ProfileViewController: UIViewController {
         tableView.delegate = self
     }
     
-    func gesture() {
-        
+    private func gesture() {
         let gesture = UITapGestureRecognizer()
         gesture.cancelsTouchesInView = false
         gesture.addTarget(self, action: #selector(self.gestureAction))
@@ -93,9 +88,8 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func tapProcess() {
-        
+
         let avatar = profileHeaderView.avatarImageView
-        
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut) {
             self.setupBackgroundView()
             
@@ -106,9 +100,9 @@ class ProfileViewController: UIViewController {
                     avatar.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
                     avatar.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
                 ])
-            }
-            else
-            {
+                
+            } else {
+
                 NSLayoutConstraint.activate([
                     avatar.widthAnchor.constraint(equalTo: self.view.heightAnchor),
                     avatar.heightAnchor.constraint(equalTo: self.view.heightAnchor),
@@ -153,8 +147,11 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+#if DEBUG
         view.backgroundColor = .systemGray6
+#else
+        view.backgroundColor = .red
+#endif
         view.addSubview(tableView)
         gesture()
         postsData = posts
@@ -162,14 +159,13 @@ class ProfileViewController: UIViewController {
     }
 }
 
-extension ProfileViewController: UITableViewDataSource {
+extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         switch section {
         case 0:
             return 0
@@ -210,20 +206,21 @@ extension ProfileViewController: UITableViewDataSource {
             navigationController?.pushViewController(photoViewController, animated: true)
         }
     }
-}
-
-extension ProfileViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        //let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "ProfileHeaderView") as! ProfileHeaderView
+        guard (tableView.dequeueReusableHeaderFooterView(withIdentifier: "ProfileHeaderView") as? ProfileHeaderView) != nil
+        else {return UIView()}
+
+
         if section == 0 {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapProcess))
             self.profileHeaderView.avatarImageView.addGestureRecognizer(tapGesture)
             
             return profileHeaderView
-        }
-        else {
+            
+        } else {
+
             return nil
         }
     }
 }
-

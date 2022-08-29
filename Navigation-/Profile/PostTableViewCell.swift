@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StorageService
 
 class PostTableViewCell: UITableViewCell {
     
@@ -20,54 +21,44 @@ class PostTableViewCell: UITableViewCell {
     }
     
     private lazy var  authorLablel: UILabel = {
-        
         let authLabel = UILabel()
         authLabel.textColor = .black
         authLabel.font = UIFont.systemFont(ofSize: 21, weight: .bold)
         authLabel.numberOfLines = 2
         authLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         return authLabel
     }()
     
     private lazy var  descriptionLablel: UILabel = {
-        
         let descLabel = UILabel()
         descLabel.textColor = .systemGray
         descLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         descLabel.numberOfLines = 0
         descLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         return descLabel
     }()
     
     private lazy var imageImageView: UIImageView = {
-        
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
         image.backgroundColor = .black
         image.translatesAutoresizingMaskIntoConstraints = false
-        
         return image
     }()
     
     private lazy var likesLablel: UILabel = {
-        
         let likeLabel = UILabel()
         likeLabel.textColor = .black
         likeLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         likeLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         return likeLabel
     }()
     
-    private lazy var viewsLablel: UILabel = {
-        
+    private lazy var viewsLablel: UILabel = {p
         let viewLabel = UILabel()
         viewLabel.textColor = .black
         viewLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         viewLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         return viewLabel
     }()
     
@@ -79,9 +70,8 @@ class PostTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func setupPostTableViewCell() {
-        
         contentView.addSubview(authorLablel)
         contentView.addSubview(descriptionLablel)
         contentView.addSubview(imageImageView)
@@ -112,11 +102,11 @@ class PostTableViewCell: UITableViewCell {
             descriptionLablel.trailingAnchor.constraint(equalTo: authorLablel.trailingAnchor),
             
             likesLablel.topAnchor.constraint(equalTo: descriptionLablel.bottomAnchor, constant: 16),
-            likesLablel.leftAnchor.constraint(equalTo: authorLablel.leftAnchor),
+            likesLablel.leadingAnchor.constraint(equalTo: authorLablel.leadingAnchor),
             likesLablel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
             
             viewsLablel.topAnchor.constraint(equalTo: descriptionLablel.bottomAnchor, constant: 16),
-            viewsLablel.rightAnchor.constraint(equalTo: authorLablel.rightAnchor),
+            viewsLablel.trailingAnchor.constraint(equalTo: authorLablel.trailingAnchor),
         ] .forEach { $0.isActive = true }
     }
 }

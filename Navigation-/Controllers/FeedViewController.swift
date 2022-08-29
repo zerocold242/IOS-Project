@@ -9,7 +9,7 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    let stackView: UIStackView
+    private let stackView: UIStackView
     
     init (){
         stackView = UIStackView().self

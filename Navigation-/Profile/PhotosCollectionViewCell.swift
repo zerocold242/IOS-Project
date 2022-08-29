@@ -9,16 +9,13 @@ import UIKit
 
 class PhotosCollectionViewCell: UICollectionViewCell {
     
-    var photo: UIImageView = {
-        
+    lazy var photo: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        
         return image
     }()
     
     func setup() {
-        
         contentView.addSubview(photo)
         
         NSLayoutConstraint.activate([
