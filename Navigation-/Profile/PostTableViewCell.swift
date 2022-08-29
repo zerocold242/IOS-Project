@@ -32,7 +32,6 @@ class PostTableViewCell: UITableViewCell {
     }
     
     private lazy var  authorLablel: UILabel = {
-        
         let authLabel = UILabel()
         authLabel.textColor = .black
         authLabel.font = UIFont.systemFont(ofSize: 21, weight: .bold)
@@ -42,7 +41,6 @@ class PostTableViewCell: UITableViewCell {
     }()
     
     private lazy var  descriptionLablel: UILabel = {
-        
         let descLabel = UILabel()
         descLabel.textColor = .systemGray
         descLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
@@ -52,7 +50,6 @@ class PostTableViewCell: UITableViewCell {
     }()
     
     private lazy var imageImageView: UIImageView = {
-        
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
         image.backgroundColor = .black
@@ -61,7 +58,6 @@ class PostTableViewCell: UITableViewCell {
     }()
     
     private lazy var likesLablel: UILabel = {
-        
         let likeLabel = UILabel()
         likeLabel.textColor = .black
         likeLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
@@ -69,6 +65,7 @@ class PostTableViewCell: UITableViewCell {
         return likeLabel
     }()
 
+    private lazy var viewsLabel: UILabel = {
         let viewLabel = UILabel()
         viewLabel.textColor = .black
         viewLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
