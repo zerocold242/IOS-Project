@@ -20,7 +20,7 @@ class PostTableViewCell: UITableViewCell {
             descriptionLablel.text = post.description
             imageImageView.image = UIImage(named: post.image )
             likesLablel.text = "Likes: \(post.likes )"
-            viewsLablel.text = "Views: \(post.views )"
+            viewsLabel.text = "Views: \(post.views )"
             
             if let image = UIImage(named: post.image) {
                 imageProcessor.processImage(sourceImage: image, filter: post.filter) {
@@ -87,12 +87,12 @@ class PostTableViewCell: UITableViewCell {
         contentView.addSubview(descriptionLablel)
         contentView.addSubview(imageImageView)
         contentView.addSubview(likesLablel)
-        contentView.addSubview(viewsLablel)
+        contentView.addSubview(viewsLabel)
         
         authorLablel.setContentHuggingPriority(.required, for: .vertical)
         descriptionLablel.setContentHuggingPriority(.required, for: .vertical)
         likesLablel.setContentHuggingPriority(.required, for: .vertical)
-        viewsLablel.setContentHuggingPriority(.required, for: .vertical)
+        viewsLabel.setContentHuggingPriority(.required, for: .vertical)
         
         
             [authorLablel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
@@ -116,8 +116,8 @@ class PostTableViewCell: UITableViewCell {
             likesLablel.leadingAnchor.constraint(equalTo: authorLablel.leadingAnchor),
             likesLablel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
             
-            viewsLablel.topAnchor.constraint(equalTo: descriptionLablel.bottomAnchor, constant: 16),
-            viewsLablel.trailingAnchor.constraint(equalTo: authorLablel.trailingAnchor),
+            viewsLabel.topAnchor.constraint(equalTo: descriptionLablel.bottomAnchor, constant: 16),
+            viewsLabel.trailingAnchor.constraint(equalTo: authorLablel.trailingAnchor),
         ] .forEach { $0.isActive = true }
     }
 }
