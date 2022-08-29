@@ -16,6 +16,7 @@ class ProfileViewController: UIViewController {
     var postsData: [PostStruct] = []
     
     private var backgroundView: UIView = {
+        
         let view = UIView()
         view.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -30,6 +31,7 @@ class ProfileViewController: UIViewController {
         close.translatesAutoresizingMaskIntoConstraints = false
         close.alpha = 0
         close.addTarget(self, action: #selector(closeAvatar), for: .touchUpInside)
+        
         return close
     }()
     
@@ -90,6 +92,7 @@ class ProfileViewController: UIViewController {
     @objc private func tapProcess() {
 
         let avatar = profileHeaderView.avatarImageView
+        
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut) {
             self.setupBackgroundView()
             
@@ -224,3 +227,5 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
 }
+
+
