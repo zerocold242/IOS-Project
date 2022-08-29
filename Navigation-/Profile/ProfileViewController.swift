@@ -24,7 +24,6 @@ class ProfileViewController: UIViewController {
     }()
     
     private var closeButton: UIButton = {
-        
         let close = UIButton()
         let img1 = UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
         close.setImage(img1, for: .normal)
@@ -49,7 +48,6 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupBackgroundView() {
-        
         view.addSubview(backgroundView)
         backgroundView.addSubview(profileHeaderView.avatarImageView)
         backgroundView.addSubview(closeButton)
@@ -62,17 +60,6 @@ class ProfileViewController: UIViewController {
          closeButton.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15)]
             .forEach({$0.isActive = true})
     }
-    
-   // func setupTableView() {
-   //
-   //     [backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
-   //      backgroundView.leftAnchor.constraint(equalTo: view.leftAnchor),
-   //      backgroundView.rightAnchor.constraint(equalTo: view.rightAnchor),
-   //      backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-   //      closeButton.topAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.topAnchor, constant: 15),
-   //      closeButton.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15)]
-   //         .forEach({$0.isActive = true})
-   // }
     
     private  func setupTableView() {
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostTableViewCell")
