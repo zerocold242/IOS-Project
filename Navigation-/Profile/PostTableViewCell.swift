@@ -118,6 +118,7 @@ class PostTableViewCell: UITableViewCell {
          
          viewsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
          viewsLabel.trailingAnchor.constraint(equalTo: authorLabel.trailingAnchor),
+
         ] .forEach { $0.isActive = true }
     }
 }
