@@ -63,17 +63,6 @@ class ProfileViewController: UIViewController {
             .forEach({$0.isActive = true})
     }
     
-   // func setupTableView() {
-   //
-   //     [backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
-   //      backgroundView.leftAnchor.constraint(equalTo: view.leftAnchor),
-   //      backgroundView.rightAnchor.constraint(equalTo: view.rightAnchor),
-   //      backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-   //      closeButton.topAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.topAnchor, constant: 15),
-   //      closeButton.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15)]
-   //         .forEach({$0.isActive = true})
-   // }
-    
     private  func setupTableView() {
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostTableViewCell")
         tableView.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: "ProfileHeaderView")
@@ -163,9 +152,9 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 #if DEBUG
-        view.backgroundColor = .systemGray6
-#else
         view.backgroundColor = .red
+#else
+        view.backgroundColor = .systemGray6
 #endif
         view.addSubview(tableView)
         gesture()
