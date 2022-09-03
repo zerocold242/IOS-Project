@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol UserServise {
+protocol UserService {
     
     func getLogin(login: String) -> User?
 }
