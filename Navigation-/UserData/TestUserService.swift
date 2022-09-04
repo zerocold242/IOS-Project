@@ -10,7 +10,7 @@ import UIKit
 
 final class TestUserService: UserService {
     
-    var testingUser = User(login: "testLogin", fullName: "testFullName", avatar: UIImage(named: "f16"), userStaus: "testMode")
+    var testingUser = User(login: "testLogin", fullName: "Test Mode", avatar: UIImage(named: "f16"), userStaus: "testMode")
     
     func getLogin(login: String) -> User? {
         
