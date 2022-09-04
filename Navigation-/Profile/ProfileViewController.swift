@@ -9,6 +9,17 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    let user: User
+    
+    init (user: User) {
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private lazy var  tableView = UITableView.init(frame: .zero, style: .grouped)
     
     private lazy var profileHeaderView = ProfileHeaderView()
@@ -24,7 +35,6 @@ class ProfileViewController: UIViewController {
     }()
     
     private var closeButton: UIButton = {
-        
         let close = UIButton()
         let img1 = UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
         close.setImage(img1, for: .normal)
@@ -32,24 +42,20 @@ class ProfileViewController: UIViewController {
         close.translatesAutoresizingMaskIntoConstraints = false
         close.alpha = 0
         close.addTarget(self, action: #selector(closeAvatar), for: .touchUpInside)
-        
         return close
     }()
     
     override func viewWillAppear(_ animated: Bool) {
-        
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     private func setupBackgroundView() {
-        
         view.addSubview(backgroundView)
         backgroundView.addSubview(profileHeaderView.avatarImageView)
         backgroundView.addSubview(closeButton)
@@ -91,12 +97,9 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func tapProcess() {
-        
         let avatar = profileHeaderView.avatarImageView
-        
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut) {
             self.setupBackgroundView()
-            
             if UIDevice.current.orientation.isPortrait{
                 NSLayoutConstraint.activate([
                     avatar.widthAnchor.constraint(equalTo: self.view.widthAnchor),
@@ -127,9 +130,6 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func closeAvatar() {
-        
-        print("closed")
-        
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
             self.closeButton.alpha = 0
             self.profileHeaderView.avatarImageView.layer.cornerRadius = 110/2
@@ -183,14 +183,10 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         var cell: UITableViewCell!
-        
         if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
-            
             cell.post = postsData[indexPath.row]
-            
             return cell
         }
         
@@ -201,9 +197,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         tableView.deselectRow(at: indexPath, animated: true)
-        
         if indexPath.section == 1 {
             let photoViewController = PhotosViewController()
             photoViewController.title = "Photo Gallery"
@@ -217,10 +211,10 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         if section == 0 {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapProcess))
             self.profileHeaderView.avatarImageView.addGestureRecognizer(tapGesture)
-            
             return profileHeaderView
             
         } else {
+            
             return nil
         }
     }
