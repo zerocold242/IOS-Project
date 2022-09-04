@@ -8,6 +8,9 @@ import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
+    let userService = CurrentUserservice()
+    let userServiceTest = TestUserService()
+    
     private lazy var vkLogotype: UIImageView = {
         let logo = UIImageView()
         logo.translatesAutoresizingMaskIntoConstraints = false
@@ -76,7 +79,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         logButton.layer.cornerRadius = 10
         logButton.clipsToBounds = true
         logButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
-        logButton.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
+        logButton.addTarget(self, action: #selector(signIn), for: .touchUpInside)
         return logButton
     }()
     
@@ -141,10 +144,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.view.addGestureRecognizer(gesture)
     }
     
-    @objc func tapButton() {
-        let profileViewController = ProfileViewController()
-        navigationController?.pushViewController(profileViewController, animated: true)
-    }
+  //  @objc func tapButton() {
+  //      let profileViewController = ProfileViewController()
+  //      navigationController?.pushViewController(profileViewController, animated: true)
+  //  }
     
     @objc private func gestureAction() {
         self.view.endEditing(true)
@@ -175,6 +178,37 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
+    @objc func signIn() {
+        if let userName = loginTextfield.text, !userName.isEmpty {
+            #if DEBUG
+            if let user = userServiceTest.getLogin(login: userName) {
+                let profileVC = ProfileViewController(userService: userServiceTest.self, userName: user.login)
+                navigationController?.pushViewController(profileVC, animated: true)
+            } else {
+                showAlert(message: "Пользователь не найден")
+            }
+            #else
+            if userService.getLogin(login: userName) != nil {
+                let profileVC = ProfileViewController(userService: userService.self, userName: userName)
+                navigationController?.pushViewController(profileVC, animated: true)
+            } else {
+                showAlert(message: "Пользователь не найден")
+            }
+            #endif
+        } else {
+            showAlert(message: "Ввидите имя пользователя")
+        }
+    }
+
+
+
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()

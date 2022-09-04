@@ -9,6 +9,19 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    let userService: UserService
+    let userName: String
+    
+    init (userService: UserService, userName: String) {
+        self.userService = userService
+        self.userName = userName
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private lazy var  tableView = UITableView.init(frame: .zero, style: .grouped)
     
     private lazy var profileHeaderView = ProfileHeaderView()
@@ -33,6 +46,14 @@ class ProfileViewController: UIViewController {
         close.addTarget(self, action: #selector(closeAvatar), for: .touchUpInside)
         return close
     }()
+    
+    private func showUser() {
+        if let user = userService.getLogin(login: userName) {
+        profileHeaderView.fullNameLabel.text = user.fullName
+            profileHeaderView.statusLabel.text = user.userStatus
+            profileHeaderView.avatarImageView.image = user.avatar
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

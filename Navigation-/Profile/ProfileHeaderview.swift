@@ -25,7 +25,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return image
     }()
     
-    private lazy var fullNameLabel: UILabel = {
+     lazy var fullNameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.text = "Zero Cold"
         nameLabel.textColor = .black
@@ -35,7 +35,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return nameLabel
     }()
     
-    private lazy var statusLabel: UILabel = {
+     lazy var statusLabel: UILabel = {
         let statusLabel = UILabel()
         statusLabel.text = "Waiting for something..."
         statusLabel.textColor = .gray

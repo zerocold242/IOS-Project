@@ -8,11 +8,11 @@
 import Foundation
 import UIKit
 
-class CurrentUserservice: UserService {
+final class CurrentUserservice: UserService {
     
-    private var user = User(login: "Aleksey",
+     var user = User(login: "Aleksey",
                             fullName: "Zero Cold",
-                            avatar: UIImage(named: "IMG_1566"),
+                     avatar: UIImage(named: "IMG_1566") ?? UIImage.add,
                             userStaus: "make techno!")
     
     func getLogin(login: String) -> User? {
