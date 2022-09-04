@@ -9,17 +9,6 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    let user: User
-    
-    init (user: User) {
-        self.user = user
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     private lazy var  tableView = UITableView.init(frame: .zero, style: .grouped)
     
     private lazy var profileHeaderView = ProfileHeaderView()
