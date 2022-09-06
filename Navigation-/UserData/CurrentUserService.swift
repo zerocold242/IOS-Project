@@ -12,7 +12,7 @@ final class CurrentUserservice: UserService {
     
      var user = User(login: "Aleksey",
                             fullName: "Zero Cold",
-                     avatar: UIImage(named: "IMG_1566") ?? UIImage.add,
+                     avatar: UIImage(named: "IMG_1566")!,
                             userStaus: "make techno!")
     
     func getLogin(login: String) -> User? {

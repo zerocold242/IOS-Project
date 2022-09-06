@@ -9,12 +9,25 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    let userService: UserService
-    let userName: String
+  //  let userService: UserService
+  //  let userName: String
+  //
+  //  init (userService: UserService, userName: String) {
+  //      self.userService = userService
+  //      self.userName = userName
+  //      super.init(nibName: nil, bundle: nil)
+  //  }
+  //
+  //  required init?(coder: NSCoder) {
+  //      fatalError("init(coder:) has not been implemented")
+  //  }
     
-    init (userService: UserService, userName: String) {
-        self.userService = userService
-        self.userName = userName
+    private var currentUser: User
+    
+    init(currentUser: User ) {
+        self.currentUser = currentUser
+       // self.userService = userService
+       // self.userName = userName
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -47,13 +60,13 @@ class ProfileViewController: UIViewController {
         return close
     }()
     
-    private func showUser() {
-        if let user = userService.getLogin(login: userName) {
-        profileHeaderView.fullNameLabel.text = user.fullName
-            profileHeaderView.statusLabel.text = user.userStatus
-            profileHeaderView.avatarImageView.image = user.avatar
-        }
-    }
+ //   private func showUser() {
+ //       if let user = userService.getLogin(login: userName) {
+ //       profileHeaderView.fullNameLabel.text = user.fullName
+ //           profileHeaderView.statusLabel.text = user.userStatus
+ //           profileHeaderView.avatarImageView.image = user.avatar
+ //       }
+ //   }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -170,6 +183,9 @@ class ProfileViewController: UIViewController {
         gesture()
         postsData = posts
         setupTableView()
+        profileHeaderView.showUser(userImageAvatar: currentUser.avatar,
+                                   fullName: currentUser.fullName,
+                                   status: currentUser.userStatus)
     }
 }
 

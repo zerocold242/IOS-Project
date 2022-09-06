@@ -11,6 +11,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     let userService = CurrentUserservice()
     let userServiceTest = TestUserService()
     
+    
     private lazy var vkLogotype: UIImageView = {
         let logo = UIImageView()
         logo.translatesAutoresizingMaskIntoConstraints = false
@@ -182,19 +183,34 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @objc func signIn() {
         if let userName = loginTextfield.text, !userName.isEmpty {
             #if DEBUG
-            if let user = userServiceTest.getLogin(login: userName) {
-                let profileVC = ProfileViewController(userService: userServiceTest.self, userName: user.login)
-                navigationController?.pushViewController(profileVC, animated: true)
-            } else {
-                showAlert(message: "Пользователь не найден")
+            let currentUser = TestUserService()
+            if let login = loginTextfield.text {
+                if let user = currentUser.getLogin(login: login) {
+                    let profileVC = ProfileViewController(currentUser: user)
+                    navigationController?.pushViewController(profileVC, animated: true)
+                } else {
+                    showAlert(message: "Пользователь не найден")
+                    
+                }
             }
+
             #else
-            if userService.getLogin(login: userName) != nil {
-                let profileVC = ProfileViewController(userService: userService.self, userName: userName)
-                navigationController?.pushViewController(profileVC, animated: true)
-            } else {
-                showAlert(message: "Пользователь не найден")
+            let currentUser = CurrentUserservice()
+            if let login = loginTextfield.text {
+                if let user = currentUser.getLogin(login: login) {
+                    let profileVC = ProfileViewController(currentUser: user)
+                    navigationController?.pushViewController(profileVC, animated: true)
+                } else {
+                    showAlert(message: "Пользователь не найден")
+                    
+                }
             }
+          //  if let user userService.getLogin(login: userName)  {
+          //      let profileVC = ProfileViewController(currentUser: user , userService: userService.self, userName: //userName)
+          //      navigationController?.pushViewController(profileVC, animated: true)
+          //  } else {
+          //      showAlert(message: "Пользователь не найден")
+          //  }
             #endif
         } else {
             showAlert(message: "Ввидите имя пользователя")
