@@ -10,13 +10,14 @@ import UIKit
 
 final class CurrentUserservice: UserService {
     
-     var user = User(login: "Aleksey",
-                            fullName: "Zero Cold",
-                     avatar: UIImage(named: "IMG_1566")!,
-                            userStaus: "make techno!")
+    var user = User(password: "12345",
+                    login: "Aleksey",
+                    fullName: "Zero Cold",
+                    avatar: UIImage(named: "IMG_1566")!,
+                    userStaus: "make techno!")
     
-    func getLogin(login: String) -> User? {
-        if login == user.login {
+    func getLogin(password: String, login: String) -> User? {
+        if password == user.password, login == user.login {
             return user
         } else {
             return nil
