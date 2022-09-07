@@ -32,6 +32,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         nameLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         nameLabel.textAlignment = NSTextAlignment.center
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.clipsToBounds = true
         return nameLabel
     }()
     
@@ -41,6 +42,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         statusLabel.textColor = .gray
         statusLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
+        statusLabel.clipsToBounds = true
         return statusLabel
     }()
     
@@ -57,12 +59,8 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         statusTextField.textColor = .black
         statusTextField.textAlignment = .center
         statusTextField.autocorrectionType = UITextAutocorrectionType.no
-        statusTextField.keyboardType = UIKeyboardType.default
-        statusTextField.returnKeyType = UIReturnKeyType.done
         statusTextField.clearButtonMode = UITextField.ViewMode.whileEditing
         statusTextField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
-        statusTextField.isEnabled = true
-        statusTextField.isUserInteractionEnabled = true
         statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         return statusTextField
     }()
