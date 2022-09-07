@@ -59,7 +59,6 @@ class PostTableViewCell: UITableViewCell {
     }()
     
     private lazy var viewsLablel: UILabel = {
-        
         let viewLabel = UILabel()
         viewLabel.textColor = .black
         viewLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
@@ -77,6 +76,7 @@ class PostTableViewCell: UITableViewCell {
     }
     
    private func setupPostTableViewCell() {
+
         contentView.addSubview(authorLablel)
         contentView.addSubview(descriptionLablel)
         contentView.addSubview(imageImageView)
