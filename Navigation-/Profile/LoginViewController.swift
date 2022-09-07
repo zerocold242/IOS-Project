@@ -11,7 +11,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     let userService = CurrentUserservice()
     let userServiceTest = TestUserService()
     
-    
     private lazy var vkLogotype: UIImageView = {
         let logo = UIImageView()
         logo.translatesAutoresizingMaskIntoConstraints = false
@@ -145,10 +144,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.view.addGestureRecognizer(gesture)
     }
     
-  //  @objc func tapButton() {
-  //      let profileViewController = ProfileViewController()
-  //      navigationController?.pushViewController(profileViewController, animated: true)
-  //  }
+    //  @objc func tapButton() {
+    //      let profileViewController = ProfileViewController()
+    //      navigationController?.pushViewController(profileViewController, animated: true)
+    //  }
     
     @objc private func gestureAction() {
         self.view.endEditing(true)
@@ -181,50 +180,41 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func signIn() {
-        if let userName = loginTextfield.text, !userName.isEmpty {
-            #if DEBUG
+        if let userName = loginTextfield.text,
+           let password = passTexfield.text,
+           !userName.isEmpty, !password.isEmpty {
+#if DEBUG
             let currentUser = TestUserService()
-            if let login = loginTextfield.text {
-                if let user = currentUser.getLogin(login: login) {
+            if let password = passTexfield.text, let login =  loginTextfield.text {
+                if let user = currentUser.getLogin(password: password, login: login) {
                     let profileVC = ProfileViewController(currentUser: user)
                     navigationController?.pushViewController(profileVC, animated: true)
                 } else {
-                    showAlert(message: "Пользователь не найден")
-                    
+                    showAlert(message: "Неправильно указан логин или пароль")
                 }
             }
-
-            #else
+#else
             let currentUser = CurrentUserservice()
-            if let login = loginTextfield.text {
-                if let user = currentUser.getLogin(login: login) {
+            if let password = passTexfield.text, let login = loginTextfield.text {
+                if let user = currentUser.getLogin(password: password, login: login) {
                     let profileVC = ProfileViewController(currentUser: user)
                     navigationController?.pushViewController(profileVC, animated: true)
                 } else {
-                    showAlert(message: "Пользователь не найден")
+                    showAlert(message: "Неправильно указан логин или пароль")
                     
                 }
             }
-          //  if let user userService.getLogin(login: userName)  {
-          //      let profileVC = ProfileViewController(currentUser: user , userService: userService.self, userName: //userName)
-          //      navigationController?.pushViewController(profileVC, animated: true)
-          //  } else {
-          //      showAlert(message: "Пользователь не найден")
-          //  }
-            #endif
+#endif
         } else {
-            showAlert(message: "Ввидите имя пользователя")
+            showAlert(message: "Не введен логин или пароль")
         }
     }
-
-
-
+    
     private func showAlert(message: String) {
         let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
