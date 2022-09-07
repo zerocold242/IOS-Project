@@ -9,25 +9,10 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-  //  let userService: UserService
-  //  let userName: String
-  //
-  //  init (userService: UserService, userName: String) {
-  //      self.userService = userService
-  //      self.userName = userName
-  //      super.init(nibName: nil, bundle: nil)
-  //  }
-  //
-  //  required init?(coder: NSCoder) {
-  //      fatalError("init(coder:) has not been implemented")
-  //  }
-    
     private var currentUser: User
     
     init(currentUser: User ) {
         self.currentUser = currentUser
-       // self.userService = userService
-       // self.userName = userName
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -42,7 +27,6 @@ class ProfileViewController: UIViewController {
     var postsData: [PostStruct] = []
     
     private var backgroundView: UIView = {
-        
         let view = UIView()
         view.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -59,14 +43,6 @@ class ProfileViewController: UIViewController {
         close.addTarget(self, action: #selector(closeAvatar), for: .touchUpInside)
         return close
     }()
-    
- //   private func showUser() {
- //       if let user = userService.getLogin(login: userName) {
- //       profileHeaderView.fullNameLabel.text = user.fullName
- //           profileHeaderView.statusLabel.text = user.userStatus
- //           profileHeaderView.avatarImageView.image = user.avatar
- //       }
- //   }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

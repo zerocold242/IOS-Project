@@ -178,7 +178,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-    
+// 3 INT - авторизация пользователя 
     @objc func signIn() {
         if let userName = loginTextfield.text,
            let password = passTexfield.text,
