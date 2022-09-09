@@ -160,8 +160,8 @@ class ProfileViewController: UIViewController {
         postsData = posts
         setupTableView()
         profileHeaderView.showUser(userImageAvatar: currentUser.avatar,
-                                   fullName: currentUser.fullName,
-                                   status: currentUser.userStatus)
+                                   fullName: currentUser.fullName!,
+                                   status: currentUser.userStatus!)
     }
 }
 

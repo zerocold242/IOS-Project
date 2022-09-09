@@ -17,7 +17,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         image.layer.borderWidth = 3
         image.layer.cornerRadius = 110/2
         image.layer.borderColor = UIColor.white.cgColor
-        //image.image = UIImage(named: "IMG_1566")
         image.isUserInteractionEnabled = true
         image.translatesAutoresizingMaskIntoConstraints = false
         image.layer.masksToBounds = false
@@ -27,7 +26,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     
     lazy var fullNameLabel: UILabel = {
         let nameLabel = UILabel()
-        //nameLabel.text = "Zero Cold"
         nameLabel.textColor = .black
         nameLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         nameLabel.textAlignment = NSTextAlignment.center
@@ -38,7 +36,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     
     lazy var statusLabel: UILabel = {
         let statusLabel = UILabel()
-        // statusLabel.text = "Waiting for something..."
         statusLabel.textColor = .gray
         statusLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         statusLabel.translatesAutoresizingMaskIntoConstraints = false

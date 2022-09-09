@@ -9,5 +9,5 @@ import Foundation
 
 protocol UserService {
     
-    func getLogin(password: String, login: String) -> User?
+    func getUser(password: String, login: String) -> User?
 }

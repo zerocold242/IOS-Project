@@ -190,7 +190,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 #if DEBUG
             userService = TestUserService()
             if let password = passTexfield.text, let login =  loginTextfield.text {
-                if let user = userService.getLogin(password: password, login: login) {
+                if let user = userService.getUser(password: password, login: login) {
                     let profileVC = ProfileViewController(currentUser: user)
                     navigationController?.pushViewController(profileVC, animated: true)
                 } else {
@@ -200,7 +200,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 #else
             userService = CurrentUserService()
             if let password = passTexfield.text, let login = loginTextfield.text {
-                if let user = userService.getLogin(password: password, login: login) {
+                if let user = userService.getUser(password: password, login: login) {
                     let profileVC = ProfileViewController(currentUser: user)
                     navigationController?.pushViewController(profileVC, animated: true)
                 } else {

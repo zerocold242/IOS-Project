@@ -16,7 +16,7 @@ final class CurrentUserService: UserService {
                     avatar: UIImage(named: "IMG_1566")!,
                     userStaus: "make techno!")
     
-    func getLogin(password: String, login: String) -> User? {
+    func getUser(password: String, login: String) -> User? {
         if password == user.password, login == user.login {
             return user
         } else {

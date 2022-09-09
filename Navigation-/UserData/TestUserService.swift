@@ -16,7 +16,7 @@ final class TestUserService: UserService {
                            avatar: UIImage(named: "f15")!,
                            userStaus: "testMode")
     
-    func getLogin(password: String, login: String) -> User? {
+    func getUser(password: String, login: String) -> User? {
         
         if password == testingUser.password, login == testingUser.login {
             return testingUser
