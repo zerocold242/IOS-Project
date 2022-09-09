@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class CurrentUserservice: UserService {
+final class CurrentUserService: UserService {
     
     var user = User(password: "12345",
                     login: "Aleksey",

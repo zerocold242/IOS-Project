@@ -8,8 +8,16 @@ import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
-    let userService = CurrentUserservice()
-    let userServiceTest = TestUserService()
+    var userService: UserService
+    
+    init(userService: UserService) {
+        self.userService = userService
+        super .init(nibName: nil, bundle: nil )
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private lazy var vkLogotype: UIImageView = {
         let logo = UIImageView()
@@ -144,11 +152,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.view.addGestureRecognizer(gesture)
     }
     
-    //  @objc func tapButton() {
-    //      let profileViewController = ProfileViewController()
-    //      navigationController?.pushViewController(profileViewController, animated: true)
-    //  }
-    
     @objc private func gestureAction() {
         self.view.endEditing(true)
     }
@@ -178,15 +181,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-// 3 INT - авторизация пользователя 
+    
+    // 3 INT - авторизация пользователя
     @objc func signIn() {
         if let userName = loginTextfield.text,
            let password = passTexfield.text,
            !userName.isEmpty, !password.isEmpty {
 #if DEBUG
-            let currentUser = TestUserService()
+            userService = TestUserService()
             if let password = passTexfield.text, let login =  loginTextfield.text {
-                if let user = currentUser.getLogin(password: password, login: login) {
+                if let user = userService.getLogin(password: password, login: login) {
                     let profileVC = ProfileViewController(currentUser: user)
                     navigationController?.pushViewController(profileVC, animated: true)
                 } else {
@@ -194,9 +198,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 }
             }
 #else
-            let currentUser = CurrentUserservice()
+            userService = CurrentUserService()
             if let password = passTexfield.text, let login = loginTextfield.text {
-                if let user = currentUser.getLogin(password: password, login: login) {
+                if let user = userService.getLogin(password: password, login: login) {
                     let profileVC = ProfileViewController(currentUser: user)
                     navigationController?.pushViewController(profileVC, animated: true)
                 } else {
@@ -206,10 +210,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }
 #endif
         } else {
-            showAlert(message: "Не введен логин или пароль")
+            showAlert(message: "Необходимо заполнить все поля авторизации")
         }
     }
     
+    // всплывашки для метода авторизации
     private func showAlert(message: String) {
         let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: nil))

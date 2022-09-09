@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let feedVC = FeedViewController()
         
-        let logInVC = LoginViewController()
+        let logInVC = LoginViewController(userService: CurrentUserService())
         logInVC.title = "Profile"
         
         let feedNavigationVC = UINavigationController(rootViewController: feedVC)
