@@ -184,41 +184,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // 3 INT - авторизация пользователя
     @objc func signIn() {
-        if let userName = loginTextfield.text,
-           let password = passTexfield.text,
-           !userName.isEmpty, !password.isEmpty {
-#if DEBUG
-            userService = TestUserService()
-            if let password = passTexfield.text, let login =  loginTextfield.text {
-                if let user = userService.getUser(password: password, login: login) {
-                    let profileVC = ProfileViewController(currentUser: user)
-                    navigationController?.pushViewController(profileVC, animated: true)
-                } else {
-                    showAlert(message: "Неправильно указан логин или пароль")
-                }
+        if let password = passTexfield.text, let login =  loginTextfield.text {
+            if let user = userService.getUser(password: password, login: login) {
+                let profileVC = ProfileViewController(currentUser: user)
+                navigationController?.pushViewController(profileVC, animated: true)
+            } else {
+                showAlert(message: "Неправильно указан логин или пароль")
             }
-#else
-            userService = CurrentUserService()
-            if let password = passTexfield.text, let login = loginTextfield.text {
-                if let user = userService.getUser(password: password, login: login) {
-                    let profileVC = ProfileViewController(currentUser: user)
-                    navigationController?.pushViewController(profileVC, animated: true)
-                } else {
-                    showAlert(message: "Неправильно указан логин или пароль")
-                    
-                }
-            }
-#endif
-        } else {
-            showAlert(message: "Необходимо заполнить все поля авторизации")
         }
-    }
-    
-    // всплывашки для метода авторизации
-    private func showAlert(message: String) {
-        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        // всплывашка для метода авторизации
+        func showAlert(message: String) {
+            let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     override func viewDidLoad() {
