@@ -8,6 +8,17 @@ import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
+    var userService: UserService
+    
+    init(userService: UserService) {
+        self.userService = userService
+        super .init(nibName: nil, bundle: nil )
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private lazy var vkLogotype: UIImageView = {
         let logo = UIImageView()
         logo.translatesAutoresizingMaskIntoConstraints = false
@@ -76,7 +87,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         logButton.layer.cornerRadius = 10
         logButton.clipsToBounds = true
         logButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
-        logButton.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
+        logButton.addTarget(self, action: #selector(signIn), for: .touchUpInside)
         return logButton
     }()
     
@@ -141,11 +152,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.view.addGestureRecognizer(gesture)
     }
     
-    @objc func tapButton() {
-        let profileViewController = ProfileViewController()
-        navigationController?.pushViewController(profileViewController, animated: true)
-    }
-    
     @objc private func gestureAction() {
         self.view.endEditing(true)
     }
@@ -174,6 +180,24 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    // 3 INT - авторизация пользователя
+    @objc func signIn() {
+        if let password = passTexfield.text, let login =  loginTextfield.text {
+            if let user = userService.getUser(password: password, login: login) {
+                let profileVC = ProfileViewController(currentUser: user)
+                navigationController?.pushViewController(profileVC, animated: true)
+            } else {
+                showAlert(message: "Неправильно указан логин или пароль")
+            }
+        }
+        // всплывашка для метода авторизации
+        func showAlert(message: String) {
+            let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     override func viewDidLoad() {

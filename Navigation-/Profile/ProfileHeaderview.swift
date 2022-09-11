@@ -12,11 +12,11 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     private lazy var statusText: String = ""
     
     lazy var avatarImageView: UIImageView = {
+        
         let image = UIImageView()
         image.layer.borderWidth = 3
         image.layer.cornerRadius = 110/2
         image.layer.borderColor = UIColor.white.cgColor
-        image.image = UIImage(named: "IMG_1566")
         image.isUserInteractionEnabled = true
         image.translatesAutoresizingMaskIntoConstraints = false
         image.layer.masksToBounds = false
@@ -24,22 +24,22 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return image
     }()
     
-    private lazy var fullNameLabel: UILabel = {
+    lazy var fullNameLabel: UILabel = {
         let nameLabel = UILabel()
-        nameLabel.text = "Zero Cold"
         nameLabel.textColor = .black
         nameLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         nameLabel.textAlignment = NSTextAlignment.center
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.clipsToBounds = true
         return nameLabel
     }()
     
-    private lazy var statusLabel: UILabel = {
+    lazy var statusLabel: UILabel = {
         let statusLabel = UILabel()
-        statusLabel.text = "Waiting for something..."
         statusLabel.textColor = .gray
         statusLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
+        statusLabel.clipsToBounds = true
         return statusLabel
     }()
     
@@ -56,12 +56,8 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         statusTextField.textColor = .black
         statusTextField.textAlignment = .center
         statusTextField.autocorrectionType = UITextAutocorrectionType.no
-        statusTextField.keyboardType = UIKeyboardType.default
-        statusTextField.returnKeyType = UIReturnKeyType.done
         statusTextField.clearButtonMode = UITextField.ViewMode.whileEditing
         statusTextField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
-        statusTextField.isEnabled = true
-        statusTextField.isUserInteractionEnabled = true
         statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         return statusTextField
     }()
@@ -88,6 +84,13 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+// INT 3 - метод задает свойства хэдера 
+    func showUser(userImageAvatar: UIImage, fullName: String, status: String) {
+        avatarImageView.image = userImageAvatar
+        fullNameLabel.text = fullName
+        statusLabel.text = status
     }
 
     private func setupProfileHeaderView() {

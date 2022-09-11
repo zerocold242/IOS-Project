@@ -9,6 +9,17 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    private var currentUser: User
+    
+    init(currentUser: User ) {
+        self.currentUser = currentUser
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private lazy var  tableView = UITableView.init(frame: .zero, style: .grouped)
     
     private lazy var profileHeaderView = ProfileHeaderView()
@@ -92,7 +103,6 @@ class ProfileViewController: UIViewController {
         let avatar = profileHeaderView.avatarImageView
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut) {
             self.setupBackgroundView()
-            
             if UIDevice.current.orientation.isPortrait{
                 NSLayoutConstraint.activate([
                     avatar.widthAnchor.constraint(equalTo: self.view.widthAnchor),
@@ -123,9 +133,6 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func closeAvatar() {
-        
-        print("closed")
-        
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
             self.closeButton.alpha = 0
             self.profileHeaderView.avatarImageView.layer.cornerRadius = 110/2
@@ -148,14 +155,17 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 #if DEBUG
-        view.backgroundColor = .systemGray6
-#else
         view.backgroundColor = .red
+#else
+        view.backgroundColor = .systemGray6
 #endif
         view.addSubview(tableView)
         gesture()
         postsData = posts
         setupTableView()
+        profileHeaderView.showUser(userImageAvatar: currentUser.avatar,
+                                   fullName: currentUser.fullName!,
+                                   status: currentUser.userStatus!)
     }
 }
 
@@ -179,14 +189,10 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         var cell: UITableViewCell!
-        
         if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
-            
             cell.post = postsData[indexPath.row]
-            
             return cell
         }
         
@@ -197,9 +203,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         tableView.deselectRow(at: indexPath, animated: true)
-        
         if indexPath.section == 1 {
             let photoViewController = PhotosViewController()
             photoViewController.title = "Photo Gallery"
@@ -215,12 +219,13 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         if section == 0 {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapProcess))
             self.profileHeaderView.avatarImageView.addGestureRecognizer(tapGesture)
-            
             return profileHeaderView
             
         } else {
-
+        
             return nil
         }
     }
 }
+
+
