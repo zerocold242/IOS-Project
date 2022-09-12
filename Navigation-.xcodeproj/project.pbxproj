@@ -15,6 +15,7 @@
 		5C101DB428410A3F00F5FE5D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C101DB328410A3F00F5FE5D /* ProfileViewController.swift */; };
 		5C101DB628410A4D00F5FE5D /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C101DB528410A4D00F5FE5D /* PostViewController.swift */; };
 		5C101DB828410A5D00F5FE5D /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C101DB728410A5D00F5FE5D /* InfoViewController.swift */; };
+		5C44364428CF8352008DDD46 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C44364328CF8352008DDD46 /* Checker.swift */; };
 		5C824B4728C51AF000DF7726 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C824B4628C51AF000DF7726 /* TestUserService.swift */; };
 		5CA3BB40285FC6020069B9EA /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3BB3F285FC6020069B9EA /* PostTableViewCell.swift */; };
 		5CA3BB422864CDA70069B9EA /* PhotoGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3BB412864CDA70069B9EA /* PhotoGallery.swift */; };
@@ -68,6 +69,7 @@
 		5C101DB528410A4D00F5FE5D /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		5C101DB728410A5D00F5FE5D /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		5C101DB928410A9200F5FE5D /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		5C44364328CF8352008DDD46 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		5C824B4628C51AF000DF7726 /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
 		5CA3BB3F285FC6020069B9EA /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		5CA3BB412864CDA70069B9EA /* PhotoGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGallery.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 		5C101D9A2841078300F5FE5D /* Navigation- */ = {
 			isa = PBXGroup;
 			children = (
+				5C44364228CF8300008DDD46 /* Login */,
 				5CF48DF728C3E3DA009B0C3D /* UserData */,
 				5CEDFD392846AB5C00AA08F3 /* Profile */,
 				5C101DB0284109EA00F5FE5D /* Controllers */,
@@ -152,6 +155,14 @@
 				5C101DB728410A5D00F5FE5D /* InfoViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		5C44364228CF8300008DDD46 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				5C44364328CF8352008DDD46 /* Checker.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		5CCAA2A428B683BC005135D7 /* StorageService */ = {
@@ -307,6 +318,7 @@
 				5C101D9C2841078300F5FE5D /* AppDelegate.swift in Sources */,
 				5CA3BB462864F0330069B9EA /* PhotosCollectionViewCell.swift in Sources */,
 				5CF48DFD28C3E948009B0C3D /* CurrentUserService.swift in Sources */,
+				5C44364428CF8352008DDD46 /* Checker.swift in Sources */,
 				5C101DB228410A2200F5FE5D /* FeedViewController.swift in Sources */,
 				5CF48DF928C3E4EF009B0C3D /* User.swift in Sources */,
 				5C101DB428410A3F00F5FE5D /* ProfileViewController.swift in Sources */,
