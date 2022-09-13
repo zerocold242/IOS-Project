@@ -10,6 +10,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     var userService: UserService
     
+    var delegate: LoginViewControllerDelegate?
+    
     init(userService: UserService) {
         self.userService = userService
         super .init(nibName: nil, bundle: nil )
