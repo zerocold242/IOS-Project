@@ -8,7 +8,7 @@
 import Foundation
 
 class Checker {
-    
+// 3 INT: Singleton
     private let loginChecker: String
     private let passwordChecker: String
     
@@ -16,6 +16,7 @@ class Checker {
         self.loginChecker = "Aleksey"
         self.passwordChecker = "12345"
         
+// 3 INT: верификация логина и пароля
         func check(passwordInput: String, loginInput: String) -> Bool {
             guard loginInput == self.loginChecker &&
                     passwordInput == self.passwordChecker
