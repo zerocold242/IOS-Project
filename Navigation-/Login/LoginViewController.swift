@@ -187,7 +187,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     // 3 INT - авторизация пользователя
     @objc func signIn() {
         if let password = passTexfield.text, let login =  loginTextfield.text {
-            if let user = userService.getUser(password: password, login: login) {
+            //if let user = userService.getUser(password: password, login: login) {
+            if delegate?.isCheckDelegate(loginDelegate: login, passwordDelegate: password ?? "") == true {
                 let profileVC = ProfileViewController(currentUser: user)
                 navigationController?.pushViewController(profileVC, animated: true)
             } else {
