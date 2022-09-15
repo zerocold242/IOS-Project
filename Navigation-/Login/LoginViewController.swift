@@ -184,16 +184,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    // 3 INT - авторизация пользователя
+    // 4 INT - авторизация пользователя
     @objc func signIn() {
         if let password = passTexfield.text, let login =  loginTextfield.text {
-            //if let user = userService.getUser(password: password, login: login) {
-            if delegate?.isCheckDelegate(loginDelegate: login, passwordDelegate: password ?? "") == true {
+            if  let user = userService.getUser(password: password, login: login) {
+            if delegate?.isCheckDelegate(loginDelegate: login, passwordDelegate: password) == true {
                 let profileVC = ProfileViewController(currentUser: user)
                 navigationController?.pushViewController(profileVC, animated: true)
             } else {
                 showAlert(message: "Неправильно указан логин или пароль")
             }
+        
         }
         // всплывашка для метода авторизации
         func showAlert(message: String) {
@@ -201,6 +202,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
+    }
     }
     
     override func viewDidLoad() {
@@ -212,5 +214,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         setupLoginScrollView()
     }
 }
+
 
 

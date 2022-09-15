@@ -17,7 +17,8 @@ final class CurrentUserService: UserService {
                     userStaus: "make techno!")
     
     func getUser(password: String, login: String) -> User? {
-        if password == user.password, login == user.login {
+        if password == user.password,
+           login == user.login {
             return user
         } else {
             return nil

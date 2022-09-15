@@ -15,8 +15,13 @@ class Checker {
     private let passwordChecker: String
     
     private init() {
+        #if DEBUG
+        self.loginChecker = "testLogin"
+        self.passwordChecker = "123"
+        #else
         self.loginChecker = "Aleksey"
         self.passwordChecker = "12345"
+        #endif
     }
     // 3 INT: верификация логина и пароля
     func check(passwordInput: String, loginInput: String) -> Bool {
