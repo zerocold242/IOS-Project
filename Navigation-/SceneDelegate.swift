@@ -27,8 +27,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let logInVC = LoginViewController(userService: CurrentUserService())
 #endif
         logInVC.title = "Profile"
-//INT 4.1: внедрение зависимосьти от LoginInspector
-        logInVC.delegate = LoginInspector()
+        //INT 4.1: внедрение зависимосьти от LoginInspector
+        //logInVC.delegate = LoginInspector()
+        
+        //INT 4.2 фабричный метод создания LoginInspector
+        logInVC.delegate = MyLoginFactory().createLoginInspector()
         
         let feedNavigationVC = UINavigationController(rootViewController: feedVC)
         feedNavigationVC.tabBarItem = UITabBarItem(title: "Feed",
