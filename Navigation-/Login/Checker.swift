@@ -17,6 +17,7 @@ class Checker {
     private let testUserService = TestUserService()
     
     private init() {
+        
 #if DEBUG
         self.loginChecker = testUserService.testingUser.login!
         self.passwordChecker = testUserService.testingUser.password!
@@ -24,7 +25,9 @@ class Checker {
         self.loginChecker = currentUserSevice.user.login!
         self.passwordChecker = currentUserSevice.user.password!
 #endif
+        
     }
+    
     // 3 INT: верификация логина и пароля
     func check(passwordInput: String, loginInput: String) -> Bool {
         guard loginInput == self.loginChecker else {return false}
