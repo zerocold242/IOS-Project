@@ -9,6 +9,7 @@ import Foundation
 
 class LoginInspector: LoginViewControllerDelegate {
     func isCheckDelegate(loginDelegate: String, passwordDelegate: String) -> Bool {
-        return Checker.shared.check(passwordInput: loginDelegate, loginInput: passwordDelegate)
+        print("LoginInspector")
+        return Checker.shared.check(passwordInput: passwordDelegate, loginInput: loginDelegate)
     }
 }

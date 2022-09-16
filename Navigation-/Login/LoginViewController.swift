@@ -153,6 +153,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         gesture.addTarget(self, action: #selector(self.gestureAction))
         self.view.addGestureRecognizer(gesture)
     }
+    //4 INT: Универсальный метод для всплывашек
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     
     @objc private func gestureAction() {
         self.view.endEditing(true)
@@ -186,23 +192,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // 4 INT - авторизация пользователя
     @objc func signIn() {
-        if let password = passTexfield.text, let login =  loginTextfield.text {
-            if  let user = userService.getUser(password: password, login: login) {
-            if delegate?.isCheckDelegate(loginDelegate: login, passwordDelegate: password) == true {
-                let profileVC = ProfileViewController(currentUser: user)
-                navigationController?.pushViewController(profileVC, animated: true)
-            } else {
-                showAlert(message: "Неправильно указан логин или пароль")
-            }
-        
+        if let password = passTexfield.text, !password.isEmpty,
+           let login =  loginTextfield.text, !login.isEmpty {
+            guard delegate?.isCheckDelegate(loginDelegate: login, passwordDelegate: password) == true
+            else {return showAlert(title: "Ошибка", message: "Неправильно введен логин или пароль")}
+            guard  let user = userService.getUser(password: password, login: login)
+            else {return showAlert(title: "Отказ в авторизации", message: "Пользователь не найден")}
+            let profileVC = ProfileViewController(currentUser: user)
+            navigationController?.pushViewController(profileVC, animated: true)
+        } else {
+            showAlert(title: "Внимание", message: "Необходимо заполнить все поля авторизации")
         }
-        // всплывашка для метода авторизации
-        func showAlert(message: String) {
-            let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
     }
     
     override func viewDidLoad() {
