@@ -85,14 +85,16 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 // INT 3 - метод задает свойства хэдера 
     func showUser(userImageAvatar: UIImage, fullName: String, status: String) {
         avatarImageView.image = userImageAvatar
         fullNameLabel.text = fullName
         statusLabel.text = status
     }
-    
+
     private func setupProfileHeaderView() {
+        
         contentView.addSubview(avatarImageView)
         contentView.addSubview(fullNameLabel)
         contentView.addSubview(statusLabel)
