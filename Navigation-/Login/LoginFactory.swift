@@ -13,11 +13,4 @@ protocol LoginFactoryProtocol {
     func createLoginInspector () -> LoginInspector
 }
 
-class MyLoginFactory: LoginFactoryProtocol {
-    
-    func createLoginInspector() -> LoginInspector {
-        let loginInspector = LoginInspector()
-        print("createLoginInspector")
-        return loginInspector
-    }
-}
+

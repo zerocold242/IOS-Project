@@ -15,6 +15,7 @@
 		5C101DB428410A3F00F5FE5D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C101DB328410A3F00F5FE5D /* ProfileViewController.swift */; };
 		5C101DB628410A4D00F5FE5D /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C101DB528410A4D00F5FE5D /* PostViewController.swift */; };
 		5C101DB828410A5D00F5FE5D /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C101DB728410A5D00F5FE5D /* InfoViewController.swift */; };
+		5C44092828D6073D005367BD /* MyLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C44092728D6073D005367BD /* MyLoginFactory.swift */; };
 		5C44364428CF8352008DDD46 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C44364328CF8352008DDD46 /* Checker.swift */; };
 		5C44364628CF87C2008DDD46 /* LoginViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C44364528CF87C2008DDD46 /* LoginViewControllerDelegate.swift */; };
 		5C44364828D11023008DDD46 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C44364728D11023008DDD46 /* LoginInspector.swift */; };
@@ -72,6 +73,7 @@
 		5C101DB528410A4D00F5FE5D /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		5C101DB728410A5D00F5FE5D /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		5C101DB928410A9200F5FE5D /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		5C44092728D6073D005367BD /* MyLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLoginFactory.swift; sourceTree = "<group>"; };
 		5C44364328CF8352008DDD46 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		5C44364528CF87C2008DDD46 /* LoginViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerDelegate.swift; sourceTree = "<group>"; };
 		5C44364728D11023008DDD46 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				5C44364528CF87C2008DDD46 /* LoginViewControllerDelegate.swift */,
 				5CD4C783285B35E70088240D /* LoginViewController.swift */,
 				5CBFF73228D4DC0E002020FF /* LoginFactory.swift */,
+				5C44092728D6073D005367BD /* MyLoginFactory.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				5C44364828D11023008DDD46 /* LoginInspector.swift in Sources */,
 				5CBFF73328D4DC0E002020FF /* LoginFactory.swift in Sources */,
 				5C44364428CF8352008DDD46 /* Checker.swift in Sources */,
+				5C44092828D6073D005367BD /* MyLoginFactory.swift in Sources */,
 				5C101DB228410A2200F5FE5D /* FeedViewController.swift in Sources */,
 				5CF48DF928C3E4EF009B0C3D /* User.swift in Sources */,
 				5C44364628CF87C2008DDD46 /* LoginViewControllerDelegate.swift in Sources */,
