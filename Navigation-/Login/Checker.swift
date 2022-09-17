@@ -13,17 +13,17 @@ class Checker {
     
     private let loginChecker: String
     private let passwordChecker: String
-    private let currentUserSevice = CurrentUserService()
-    private let testUserService = TestUserService()
+    //private let currentUserSevice = CurrentUserService()
+    //private let testUserService = TestUserService()
     
     private init() {
         
 #if DEBUG
-        self.loginChecker = testUserService.testingUser.login!
-        self.passwordChecker = testUserService.testingUser.password!
+        self.loginChecker = "testLogin"//testUserService.testingUser.login!
+        self.passwordChecker = "123" //testUserService.testingUser.password!
 #else
-        self.loginChecker = currentUserSevice.user.login!
-        self.passwordChecker = currentUserSevice.user.password!
+        self.loginChecker = "Aleksey"//currentUserSevice.user.login!
+        self.passwordChecker = "12345"//currentUserSevice.user.password!
 #endif
         
     }
