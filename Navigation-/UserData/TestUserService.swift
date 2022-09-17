@@ -18,10 +18,12 @@ final class TestUserService: UserService {
     
     func getUser(password: String, login: String) -> User? {
         
-        if password == testingUser.password, login == testingUser.login {
+        if password == testingUser.password,
+           login == testingUser.login {
             return testingUser
         } else {
             return nil
         }
     }
 }
+

@@ -9,8 +9,8 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    private var currentUser: User
-    
+    var currentUser: User
+   
     init(currentUser: User ) {
         self.currentUser = currentUser
         super.init(nibName: nil, bundle: nil)
