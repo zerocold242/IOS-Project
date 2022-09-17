@@ -13,6 +13,7 @@ class PhotosViewController: UIViewController {
     var photoGallery: [UIImage] = []
     
     // 5 INT:
+    var publisherFacade = ImagePublisherFacade()
     
     private lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -46,8 +47,12 @@ class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        photoGallery = PhotoGallery.myPhotos
+        //photoGallery = PhotoGallery.myPhotos
         setupCollectionView()
+        // 5 INT: подписка на паблишер для заполнения экрана коллекции через паттерн observer
+        publisherFacade.subscribe(self)
+        // 5 INT: наполнение коллекции с таймером:
+        publisherFacade.addImagesWithTimer(time: 0.7, repeat: 19, userImages: PhotoGallery.myPhotos)
     }
 }
 
