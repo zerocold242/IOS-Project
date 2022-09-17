@@ -54,6 +54,11 @@ class PhotosViewController: UIViewController {
         // 5 INT: наполнение коллекции с таймером:
         publisherFacade.addImagesWithTimer(time: 0.7, repeat: 19, userImages: PhotoGallery.myPhotos)
     }
+    
+    //5 INT: завершение подписки полсе кончания работы
+    override func viewDidDisappear(_ animated: Bool) {
+        publisherFacade.removeSubscription(for: self)
+    }
 }
 
 extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
