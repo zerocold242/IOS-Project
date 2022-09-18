@@ -10,10 +10,10 @@ import UIKit
 class CustomButton: UIButton {
  
 // INT 6.1: замыкание принимающее действие для func buttonTaped
-    private var action: (() -> Void)?
+     var actionTap: (() -> Void)?
     
 // INT 6.1: инициализатор с основными параметрами кнопки
-    init (title: String, titleColor: UIColor, backgroundColor: UIColor) {
+    init (title: String, titleColor: UIColor) {
         super.init(frame: .zero)
         self.setTitle(title, for: .normal)
         self.setTitleColor(titleColor, for: .highlighted)
@@ -30,6 +30,6 @@ class CustomButton: UIButton {
     
 // INT 6.1: функция передающая вызывающая действия из замыкания
     @objc private func buttonTaped(_: UIButton) {
-        action?()
+        actionTap?()
     }
 }

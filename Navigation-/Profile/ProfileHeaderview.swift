@@ -61,35 +61,45 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         return statusTextField
     }()
-    
-    private lazy var setStatusButton: UIButton = {
-        let statusButton = UIButton()
-        statusButton.setTitle("Set status", for: .normal)
+
+// INT 6.1:
+    private lazy var setStatusButton: CustomButton = {
+        let statusButton = CustomButton(title: "Set status", titleColor: .lightGray)
         statusButton.setTitleColor(.lightGray, for: .highlighted)
-        statusButton.backgroundColor = .systemBlue
-        statusButton.layer.cornerRadius = 4
         statusButton.layer.shadowOffset = CGSize(width: 4, height: 4)
         statusButton.layer.shadowRadius = 4
         statusButton.layer.shadowColor = UIColor.black.cgColor
         statusButton.layer.shadowOpacity = 0.7
-        statusButton.translatesAutoresizingMaskIntoConstraints = false
-        statusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         return statusButton
     }()
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         setupProfileHeaderView()
+        buttonPressed()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 // INT 3 - метод задает свойства хэдера 
     func showUser(userImageAvatar: UIImage, fullName: String, status: String) {
         avatarImageView.image = userImageAvatar
         fullNameLabel.text = fullName
         statusLabel.text = status
+    }
+  
+// INT 6.1: функция для кнопки передает действия в CustomButton
+     func buttonPressed() {
+        setStatusButton.actionTap = { [self] in
+        guard statusTextField.text?.isEmpty == false else {
+                statusLabel.text = "Waiting fo somthing..."
+                return
+            }
+            statusLabel.text = statusTextChanged(statusTextField)
+            self.statusTextField.text = ""
+        }
     }
     
     private func setupProfileHeaderView() {
@@ -129,17 +139,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
             statusText = newStatus
         }
         return statusText
-    }
-    
-    @objc private func buttonPressed(sender: UIButton!) {
-        print(statusTextField.text ?? "")
-        guard statusTextField.text?.isEmpty == false else {
-            statusLabel.text = "Waiting fo somthing..."
-            return
-        }
-        
-        statusLabel.text = statusTextChanged(statusTextField)
-        self.statusTextField.text = ""
     }
 }
 
