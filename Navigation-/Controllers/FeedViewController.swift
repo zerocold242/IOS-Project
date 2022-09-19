@@ -54,7 +54,7 @@ class FeedViewController: UIViewController {
         secondButton.addTarget(self, action: #selector(showPost), for: .touchUpInside)
         stackView.addArrangedSubview(secondButton)
 
-        //INT 6.2: кнопка проверки пароля
+        //INT 6.2: поле ввода секретного слова
         let textfield = UITextField()
         textfield.textColor = .black
         textfield.backgroundColor = .white
@@ -75,7 +75,15 @@ class FeedViewController: UIViewController {
         label.layer.borderColor = UIColor.black.cgColor
         stackView.addArrangedSubview(label)
         
-        
+        //INT 6.2INT
+        let checkPass = CustomButton(title: "Check Secret word", titleColor: .lightGray)
+        checkPass.layer.shadowColor = UIColor.black.cgColor
+        checkPass.layer.shadowOffset = CGSize(width: 2, height: 2)
+        checkPass.layer.shadowOpacity = 1
+        checkPass.layer.shadowRadius = 5
+        //checkPass.addTarget(self, action: #selector(showPost), for: .touchUpInside)
+        stackView.addArrangedSubview(checkPass)
+    
         [stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
          stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
          stackView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -10),
