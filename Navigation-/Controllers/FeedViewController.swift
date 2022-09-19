@@ -53,11 +53,33 @@ class FeedViewController: UIViewController {
         secondButton.setTitleColor(.lightGray, for: .highlighted)
         secondButton.addTarget(self, action: #selector(showPost), for: .touchUpInside)
         stackView.addArrangedSubview(secondButton)
+
+        //INT 6.2: кнопка проверки пароля
+        let textfield = UITextField()
+        textfield.textColor = .black
+        textfield.backgroundColor = .white
+        textfield.placeholder = "   Secret word"
+        textfield.clipsToBounds = true
+        textfield.layer.cornerRadius = 10
+        textfield.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        textfield.layer.borderWidth = 1
+        textfield.layer.borderColor = UIColor.black.cgColor
+        stackView.addArrangedSubview(textfield)
+        
+        //INT 6.2: лэйбл индикатор проверки
+        let label = UILabel()
+        label.backgroundColor = .gray
+        label.clipsToBounds = true
+        label.layer.cornerRadius = 10
+        label.layer.borderWidth = 1
+        label.layer.borderColor = UIColor.black.cgColor
+        stackView.addArrangedSubview(label)
+        
         
         [stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
          stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
          stackView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -10),
-         stackView.heightAnchor.constraint(equalToConstant: view.bounds.height / 5)]
+         stackView.heightAnchor.constraint(equalToConstant: view.bounds.height / 2)]
             .forEach({$0.isActive = true})
     }
     
