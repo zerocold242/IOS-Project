@@ -37,6 +37,7 @@
 		5CF48DF928C3E4EF009B0C3D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF48DF828C3E4EE009B0C3D /* User.swift */; };
 		5CF48DFB28C3E796009B0C3D /* UserServise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF48DFA28C3E796009B0C3D /* UserServise.swift */; };
 		5CF48DFD28C3E948009B0C3D /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF48DFC28C3E948009B0C3D /* CurrentUserService.swift */; };
+		5CFDEB8A28D9086A00E48871 /* feedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFDEB8928D9086A00E48871 /* feedModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		5CF48DF828C3E4EE009B0C3D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5CF48DFA28C3E796009B0C3D /* UserServise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServise.swift; sourceTree = "<group>"; };
 		5CF48DFC28C3E948009B0C3D /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
+		5CFDEB8928D9086A00E48871 /* feedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = feedModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				5C73CC1B28D77897007C66A9 /* CustomButton.swift */,
+				5CFDEB8928D9086A00E48871 /* feedModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 				5CA3BB442864CFB40069B9EA /* PhotosViewController.swift in Sources */,
 				5C101DB628410A4D00F5FE5D /* PostViewController.swift in Sources */,
 				5CEDFD3D2846ADDB00AA08F3 /* ProfileHeaderview.swift in Sources */,
+				5CFDEB8A28D9086A00E48871 /* feedModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

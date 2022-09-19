@@ -9,6 +9,8 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
+    var feedModel = 
+    
     private let stackView: UIStackView
     
     init (){
@@ -89,6 +91,20 @@ class FeedViewController: UIViewController {
          stackView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -10),
          stackView.heightAnchor.constraint(equalToConstant: view.bounds.height / 2)]
             .forEach({$0.isActive = true})
+        
+        func checkPasstext() {
+                checkGuessButton.actionTap = { [self] in
+                    if let text = textField.text {
+                        if model.check(word: text) == true {
+                            checkLabel.backgroundColor = .green
+                        }
+                        else {
+                            checkLabel.backgroundColor = .red
+                        }
+                    }
+                }
+            }
+       }
     }
     
     @objc func showPost(){
