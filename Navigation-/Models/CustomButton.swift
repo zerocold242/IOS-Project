@@ -31,5 +31,6 @@ class CustomButton: UIButton {
 // INT 6.1: функция передающая вызывающая действия из замыкания
     @objc private func buttonTaped(_: UIButton) {
         actionTap?()
+        print("buttonTaped")
     }
 }

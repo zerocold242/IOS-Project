@@ -11,6 +11,7 @@ class FeedModel {
     let secretWord = "MVC"
     func check(word: String) -> Bool {
         guard word == secretWord else { return false}
+        print("check")
         return true
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    var feedModel = 
+    var feedModel = FeedModel()
     
     private let stackView: UIStackView
     
@@ -29,6 +29,9 @@ class FeedViewController: UIViewController {
         stackView.distribution = .fillEqually
         stackView.spacing = 10
         stackView.alignment = .fill
+        stackView.addArrangedSubview(checkGuessButton)
+        stackView.addArrangedSubview(checkLabel)
+        stackView.addArrangedSubview(textfield)
         
         let firstButton = UIButton()
         firstButton.translatesAutoresizingMaskIntoConstraints = false
@@ -55,8 +58,16 @@ class FeedViewController: UIViewController {
         secondButton.setTitleColor(.lightGray, for: .highlighted)
         secondButton.addTarget(self, action: #selector(showPost), for: .touchUpInside)
         stackView.addArrangedSubview(secondButton)
-
-        //INT 6.2: поле ввода секретного слова
+        
+        [stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+         stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+         stackView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -10),
+         stackView.heightAnchor.constraint(equalToConstant: view.bounds.height / 2)]
+            .forEach({$0.isActive = true})
+    }
+    
+    //INT 6.2: поле ввода секретного слова
+    let textfield: UITextField = {
         let textfield = UITextField()
         textfield.textColor = .black
         textfield.backgroundColor = .white
@@ -66,45 +77,38 @@ class FeedViewController: UIViewController {
         textfield.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         textfield.layer.borderWidth = 1
         textfield.layer.borderColor = UIColor.black.cgColor
-        stackView.addArrangedSubview(textfield)
-        
-        //INT 6.2: лэйбл индикатор проверки
-        let label = UILabel()
-        label.backgroundColor = .gray
-        label.clipsToBounds = true
-        label.layer.cornerRadius = 10
-        label.layer.borderWidth = 1
-        label.layer.borderColor = UIColor.black.cgColor
-        stackView.addArrangedSubview(label)
-        
-        //INT 6.2INT
-        let checkPass = CustomButton(title: "Check Secret word", titleColor: .lightGray)
-        checkPass.layer.shadowColor = UIColor.black.cgColor
-        checkPass.layer.shadowOffset = CGSize(width: 2, height: 2)
-        checkPass.layer.shadowOpacity = 1
-        checkPass.layer.shadowRadius = 5
-        //checkPass.addTarget(self, action: #selector(showPost), for: .touchUpInside)
-        stackView.addArrangedSubview(checkPass)
+        return textfield
+    }()
     
-        [stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-         stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-         stackView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -10),
-         stackView.heightAnchor.constraint(equalToConstant: view.bounds.height / 2)]
-            .forEach({$0.isActive = true})
-        
-        func checkPasstext() {
-                checkGuessButton.actionTap = { [self] in
-                    if let text = textField.text {
-                        if model.check(word: text) == true {
-                            checkLabel.backgroundColor = .green
-                        }
-                        else {
-                            checkLabel.backgroundColor = .red
-                        }
-                    }
-                }
-            }
-       }
+    //INT 6.2: кнопка проверки
+    let checkGuessButton: CustomButton = {
+        let checkGuessButton = CustomButton(title: "Check Secret word", titleColor: .lightGray)
+        checkGuessButton.layer.shadowColor = UIColor.black.cgColor
+        checkGuessButton.layer.shadowOffset = CGSize(width: 2, height: 2)
+        checkGuessButton.layer.shadowOpacity = 1
+        checkGuessButton.layer.shadowRadius = 5
+        return checkGuessButton
+    }()
+    
+    //INT 6.2: лэйбл индикатор проверки
+    let checkLabel: UILabel = {
+        let checkLabel = UILabel()
+        checkLabel.backgroundColor = .gray
+        checkLabel.clipsToBounds = true
+        checkLabel.layer.cornerRadius = 10
+        checkLabel.layer.borderWidth = 1
+        checkLabel.layer.borderColor = UIColor.black.cgColor
+        return checkLabel
+    }()
+    
+    func checkPasstext() {
+        checkGuessButton.actionTap = { [self] in
+            print("checkPasstext")
+            guard let text = textfield.text else { return }
+            guard feedModel.check(word: text) == true
+            else { return checkLabel.backgroundColor = .red }
+            checkLabel.backgroundColor = .green
+        }
     }
     
     @objc func showPost(){
@@ -114,9 +118,9 @@ class FeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .systemGray4
         view.addSubview(stackView)
         setUpSteckView()
+        checkPasstext()
     }
 }
