@@ -9,6 +9,7 @@ import UIKit
 
 class FeedCoordinator: RootCoordinatorProtocol, FeedCoordinatorDelegate, BackFeedDelegate {
     
+    weak var rootCoordinator: RootCoordinator?
     var childs = [RootCoordinatorProtocol]()
     let navigationController: UINavigationController
     
