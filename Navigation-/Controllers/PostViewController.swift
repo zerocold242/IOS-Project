@@ -7,9 +7,15 @@
 
 import UIKit
 
+protocol PostViewControllerCoordinatorDelegate: AnyObject {
+    func navigateNextPage()
+}
+
 class PostViewController: UIViewController {
     
     var titlePost: String = "Post"
+    
+    weak var coordinator: PostViewControllerCoordinatorDelegate?
     
    private func setupRightBarButton() {
         let rightBarButton = UIBarButtonItem(title: "Info",
