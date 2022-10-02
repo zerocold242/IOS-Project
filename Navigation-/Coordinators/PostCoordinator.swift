@@ -29,5 +29,4 @@ class PostCoordinator: RootCoordinatorProtocol, PostViewControllerCoordinatorDel
     }
     
     func navigateNextPage() {}
-        
 }

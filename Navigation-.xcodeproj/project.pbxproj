@@ -27,6 +27,7 @@
 		5C896D6F28E9D7E900213FD0 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C896D6E28E9D7E900213FD0 /* LoginCoordinator.swift */; };
 		5C896D7128E9DF4300213FD0 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C896D7028E9DF4300213FD0 /* FeedCoordinator.swift */; };
 		5C896D7328EA009A00213FD0 /* PostCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C896D7228EA009A00213FD0 /* PostCoordinator.swift */; };
+		5C896D7528EA041000213FD0 /* InfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C896D7428EA041000213FD0 /* InfoCoordinator.swift */; };
 		5CA3BB40285FC6020069B9EA /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3BB3F285FC6020069B9EA /* PostTableViewCell.swift */; };
 		5CA3BB422864CDA70069B9EA /* PhotoGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3BB412864CDA70069B9EA /* PhotoGallery.swift */; };
 		5CA3BB442864CFB40069B9EA /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3BB432864CFB40069B9EA /* PhotosViewController.swift */; };
@@ -92,6 +93,7 @@
 		5C896D6E28E9D7E900213FD0 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		5C896D7028E9DF4300213FD0 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		5C896D7228EA009A00213FD0 /* PostCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCoordinator.swift; sourceTree = "<group>"; };
+		5C896D7428EA041000213FD0 /* InfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCoordinator.swift; sourceTree = "<group>"; };
 		5CA3BB3F285FC6020069B9EA /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		5CA3BB412864CDA70069B9EA /* PhotoGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGallery.swift; sourceTree = "<group>"; };
 		5CA3BB432864CFB40069B9EA /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				5C896D6E28E9D7E900213FD0 /* LoginCoordinator.swift */,
 				5C896D7028E9DF4300213FD0 /* FeedCoordinator.swift */,
 				5C896D7228EA009A00213FD0 /* PostCoordinator.swift */,
+				5C896D7428EA041000213FD0 /* InfoCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				5CBFF73328D4DC0E002020FF /* LoginFactory.swift in Sources */,
 				5C44364428CF8352008DDD46 /* Checker.swift in Sources */,
 				5C44092828D6073D005367BD /* MyLoginFactory.swift in Sources */,
+				5C896D7528EA041000213FD0 /* InfoCoordinator.swift in Sources */,
 				5C101DB228410A2200F5FE5D /* FeedViewController.swift in Sources */,
 				5CF48DF928C3E4EF009B0C3D /* User.swift in Sources */,
 				5C44364628CF87C2008DDD46 /* LoginViewControllerDelegate.swift in Sources */,
