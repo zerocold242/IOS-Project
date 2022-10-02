@@ -10,8 +10,8 @@ import UIKit
 
 class LoginCoordinator: RootCoordinatorProtocol, LoginCoordinatorDelegate, BackLoginDelegate {
     
+    weak var rootCoordinator: RootCoordinator?
     let navigationController: UINavigationController
-    
     var childs = [RootCoordinatorProtocol]()
     
     required init() {
