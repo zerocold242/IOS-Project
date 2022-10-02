@@ -13,9 +13,7 @@ protocol LoginCoordinatorDelegate: AnyObject {
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
     var coordinator: LoginCoordinatorDelegate?
-    
     var userService: UserService
-    
     var delegate: LoginViewControllerDelegate?
     
     init(userService: UserService) {

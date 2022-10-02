@@ -17,9 +17,15 @@ class LoginCoordinator: RootCoordinatorProtocol, LoginCoordinatorDelegate, BackL
     required init() {
         self.navigationController = .init()
     }
+   
     
     func startLoginViewController() {
-        let loginViewController: LoginViewController = LoginViewController(userService: UserService.self as! UserService)
+#if DEBUG
+        let userService = TestUserService()
+#else
+        let userService = CurrentUserService()
+#endif
+        let loginViewController: LoginViewController = LoginViewController(userService: userService)
         self.navigationController.isNavigationBarHidden = true
         loginViewController.coordinator = self
         loginViewController.delegate = LoginInspector()
@@ -38,4 +44,6 @@ class LoginCoordinator: RootCoordinatorProtocol, LoginCoordinatorDelegate, BackL
         navigationController.popToRootViewController(animated: true)
         childs.removeLast()
     }
+    
 }
+
