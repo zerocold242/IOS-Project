@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol FeedCoordinatorDelegate: AnyObject {
+    func navigateNextPage()
+}
+
 class FeedViewController: UIViewController {
+    
+    var coordinator: FeedCoordinatorDelegate?
     
     var feedModel = FeedModel()
     
