@@ -6,7 +6,13 @@
 //
 import UIKit
 
+protocol LoginCoordinatorDelegate: AnyObject {
+    func navigateToNextPage(userService: UserService)
+}
+
 class LoginViewController: UIViewController, UITextFieldDelegate {
+    
+    var coordinator: LoginCoordinatorDelegate?
     
     var userService: UserService
     

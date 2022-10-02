@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol BackLoginDelegate: AnyObject {
-    func navigatePrevious( newCoordinator: RootCoordinatorProtocol)
+    func navigatePrevious( newCoordinator: ProfileCoorinator)
 }
 
 class ProfileCoorinator: RootCoordinatorProtocol, ProfileVCDelegate {
@@ -19,9 +19,6 @@ class ProfileCoorinator: RootCoordinatorProtocol, ProfileVCDelegate {
     var childs = [RootCoordinatorProtocol]()
     weak var delegate: BackLoginDelegate?
     unowned let navigationController: UINavigationController
-
-    
-    
     
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
