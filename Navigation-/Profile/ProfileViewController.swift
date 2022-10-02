@@ -7,8 +7,13 @@
 import StorageService
 import UIKit
 
+protocol ProfileVCDelegate: AnyObject {
+    func navigateNextPage()
+}
+
 class ProfileViewController: UIViewController {
     
+    var coordinator: ProfileVCDelegate?
     var currentUser: User
    
     init(currentUser: User ) {

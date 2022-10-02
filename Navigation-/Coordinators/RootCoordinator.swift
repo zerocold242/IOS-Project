@@ -10,12 +10,6 @@ import UIKit
 
 // INT 7.1: базовый координатор
 protocol RootCoordinatorProtocol {
-    func startApp() -> UIViewController
-}
-
-class RootCoordinator: RootCoordinatorProtocol {
-    func startApp() -> UIViewController {
-        return UITabBarController()
-    }
+    var childs: [RootCoordinatorProtocol] { get set }
 }
 
