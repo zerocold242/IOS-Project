@@ -8,10 +8,10 @@
 import UIKit
 
 protocol BackFeedDelegate: AnyObject {
-    func navigateToPreviousPage(newOrderCoordinator: PostCoordinator)
+    func navigatePreviousPage(newOrderCoordinator: PostCoordinator)
 }
 
-class PostCoordinator: RootCoordinatorProtocol, PostViewControllerCoordinatorDelegate {
+class PostCoordinator: RootCoordinatorProtocol, PostCoordinatorDelegate, BackPostCoordinatorDelegate {
     
     var childs = [RootCoordinatorProtocol]()
     weak var delegate: BackFeedDelegate?
@@ -28,5 +28,15 @@ class PostCoordinator: RootCoordinatorProtocol, PostViewControllerCoordinatorDel
         self.navigationController.pushViewController(postViewController, animated: true)
     }
     
-    func navigateNextPage() {}
+    func navigateNextPage() {
+        let infoCoordinator: InfoCoordinator = InfoCoordinator(navigationController: navigationController)
+        infoCoordinator.delegate = self
+        childs.append(infoCoordinator)
+        infoCoordinator.openInfoViewController()
+    }
+    
+    func navigatePreviousPage(newCoordinator: InfoCoordinator) {
+        navigationController.popToRootViewController(animated: true)
+        childs.removeLast()
+    }
 }

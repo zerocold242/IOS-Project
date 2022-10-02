@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FeedCoordinator: RootCoordinatorProtocol, FeedCoordinatorDelegate {
+class FeedCoordinator: RootCoordinatorProtocol, FeedCoordinatorDelegate, BackFeedDelegate {
     
     var childs = [RootCoordinatorProtocol]()
     let navigationController: UINavigationController
@@ -23,7 +23,17 @@ class FeedCoordinator: RootCoordinatorProtocol, FeedCoordinatorDelegate {
         self.navigationController.viewControllers = [feedViewController]
     }
     
-    func navigateNextPage() {}
+    func navigateNextPage() {
+        let postCoordinator = PostCoordinator(navigationController: navigationController)
+        postCoordinator.delegate = self
+        childs.append(postCoordinator)
+        postCoordinator.startFeed()
+    }
+    
+    func navigatePreviousPage(newOrderCoordinator: PostCoordinator) {
+        navigationController.popToRootViewController(animated: true)
+        childs.removeLast()
+    }
     
 }
 

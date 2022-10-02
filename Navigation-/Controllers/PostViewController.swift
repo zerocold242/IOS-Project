@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol PostViewControllerCoordinatorDelegate: AnyObject {
+protocol PostCoordinatorDelegate: AnyObject {
     func navigateNextPage()
 }
 
@@ -15,7 +15,7 @@ class PostViewController: UIViewController {
     
     var titlePost: String = "Post"
     
-    weak var coordinator: PostViewControllerCoordinatorDelegate?
+    weak var coordinator: PostCoordinatorDelegate?
     
    private func setupRightBarButton() {
         let rightBarButton = UIBarButtonItem(title: "Info",

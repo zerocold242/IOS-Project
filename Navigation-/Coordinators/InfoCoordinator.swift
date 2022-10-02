@@ -8,7 +8,7 @@
 import UIKit
 
 protocol BackPostCoordinatorDelegate: AnyObject {
-    func navigateToPreviousPage(newOrderCoordinator: InfoCoordinator)
+    func navigatePreviousPage(newCoordinator: InfoCoordinator)
 }
 
 class InfoCoordinator: RootCoordinatorProtocol {
