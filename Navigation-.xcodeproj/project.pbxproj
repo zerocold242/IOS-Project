@@ -233,20 +233,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		5C896D7D28EA1D0100213FD0 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		5C896D7E28EA1D0D00213FD0 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		5CCAA2A428B683BC005135D7 /* StorageService */ = {
 			isa = PBXGroup;
 			children = (
@@ -258,8 +244,6 @@
 		5CEDFD392846AB5C00AA08F3 /* ProfileMVVP */ = {
 			isa = PBXGroup;
 			children = (
-				5C896D7E28EA1D0D00213FD0 /* ViewModels */,
-				5C896D7D28EA1D0100213FD0 /* Views */,
 				5C896D7C28EA1CF300213FD0 /* Models */,
 				5C101DB328410A3F00F5FE5D /* ProfileViewController.swift */,
 				5CEDFD3C2846ADDB00AA08F3 /* ProfileHeaderview.swift */,
