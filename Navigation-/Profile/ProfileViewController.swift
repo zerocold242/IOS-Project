@@ -50,11 +50,13 @@ class ProfileViewController: UIViewController {
     }()
     
     override func viewWillAppear(_ animated: Bool) {
+        
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
@@ -73,6 +75,7 @@ class ProfileViewController: UIViewController {
             .forEach({$0.isActive = true})
     }
     
+
     private  func setupTableView() {
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostTableViewCell")
         tableView.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: "ProfileHeaderView")
@@ -101,6 +104,7 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func tapProcess() {
+
         let avatar = profileHeaderView.avatarImageView
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut) {
             self.setupBackgroundView()
@@ -113,7 +117,7 @@ class ProfileViewController: UIViewController {
                 ])
                 
             } else {
-                
+
                 NSLayoutConstraint.activate([
                     avatar.widthAnchor.constraint(equalTo: self.view.heightAnchor),
                     avatar.heightAnchor.constraint(equalTo: self.view.heightAnchor),
@@ -215,13 +219,15 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard (tableView.dequeueReusableHeaderFooterView(withIdentifier: "ProfileHeaderView") as? ProfileHeaderView) != nil
         else {return UIView()}
+
+
         if section == 0 {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapProcess))
             self.profileHeaderView.avatarImageView.addGestureRecognizer(tapGesture)
             return profileHeaderView
             
         } else {
-            
+        
             return nil
         }
     }
