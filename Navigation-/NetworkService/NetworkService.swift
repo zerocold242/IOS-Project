@@ -11,5 +11,6 @@ struct NetworkService {
     
     static func request() {
         
+        
     }
 }
