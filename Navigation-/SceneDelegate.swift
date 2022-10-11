@@ -20,8 +20,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let feedVC = FeedViewController()
         
-        let url = AppConfiguration.randomUrl()
-        NetworkService.request()
+        let appConfiguration = AppConfiguration.allCases.randomElement()!
+        _ = AppConfiguration.randomUrl()
+        NetworkService.request(for: appConfiguration)
     
               
         
