@@ -21,9 +21,4 @@ enum AppConfiguration: CaseIterable {
             .urlTwo("https://swapi.dev/api/starships/3"),
             .urlThree("https://swapi.dev/api/planets/5")]
     }
-    static func randomUrl() -> String {
-        guard (AppConfiguration.allCases.randomElement() != nil)
-        else { return "URL not found" }
-        
-    }
 }
