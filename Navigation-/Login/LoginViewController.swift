@@ -196,7 +196,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 else {return showAlert(title: "Ошибка", message: "Неправильно введен логин или пароль")}
                 guard  let user = userService.getUser(password: password, login: login)
                 else {return showAlert(title: "Отказ в авторизации", message: "Пользователь не найден")}
-                let profileVC = ProfileViewController(currentUser: user)
+                let pvm = ProfileViewModel(currentUser: user)
+                let profileVC = ProfileViewController(profileViewModel: pvm)
                 navigationController?.pushViewController(profileVC, animated: true)
             } else {
                 showAlert(title: "Внимание", message: "Необходимо заполнить все поля авторизации")

@@ -10,7 +10,7 @@ import StorageService
 
 class PostTableViewCell: UITableViewCell {
     
-    var post: PostStruct? {
+    var post: PostModel? {
         didSet {
             authorLablel.text = post?.author
             descriptionLablel.text = post?.description
