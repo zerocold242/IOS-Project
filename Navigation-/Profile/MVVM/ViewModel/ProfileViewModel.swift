@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 final class ProfileViewModel {
     
@@ -15,15 +16,16 @@ final class ProfileViewModel {
     
     init(currentUser: User ) {
         self.currentUser = currentUser
-        
-        func userSetting() {
-            profileHeaderView.showUser(userImageAvatar: currentUser.avatar,
-                                       fullName: currentUser.fullName!,
-                                       status: currentUser.userStatus!)
-        }
-        
-        func postSetting() {
-            postsData = posts
-        }
+    }
+    
+    func userSetting() {
+        profileHeaderView.showUser(userImageAvatar: currentUser.avatar,
+                                   fullName: currentUser.fullName!,
+                                   status: currentUser.userStatus!)
+    }
+    
+    func postSetting() {
+        postsData = posts
     }
 }
+

@@ -9,10 +9,8 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    //var currentUser: User
     let profileViewModel: ProfileViewModel
     init(profileViewModel: ProfileViewModel ) {
-       // self.currentUser = currentUser
         self.profileViewModel = profileViewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -20,12 +18,8 @@ class ProfileViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     private lazy var  tableView = UITableView.init(frame: .zero, style: .grouped)
-    
-    //private lazy var profileHeaderView = ProfileHeaderView()
-    
-   // var postsData: [PostStruct] = []
     
     private var backgroundView: UIView = {
         let view = UIView()
@@ -160,11 +154,7 @@ class ProfileViewController: UIViewController {
         gesture()
         profileViewModel.userSetting()
         profileViewModel.postSetting()
-       // postsData = posts
         setupTableView()
-       // profileHeaderView.showUser(userImageAvatar: currentUser.avatar,
-       //                            fullName: currentUser.fullName!,
-       //                            status: currentUser.userStatus!)
     }
 }
 
