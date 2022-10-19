@@ -11,13 +11,7 @@ import iOSIntPackage
 class PhotosViewController: UIViewController {
     
     var photoGallery: [UIImage] = []
-    
-    // 8 INT: cвойства для дз 8
-    private let imageProcessor = ImageProcessor()
-    private var threadPhotosArray: [UIImage] = []
-    private var count: Double = 0
-    private var timer: Timer?
-    
+
     private lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 8
@@ -37,32 +31,22 @@ class PhotosViewController: UIViewController {
         return collection
     }()
     
-    // 8 INT: универсальный метод для всплывашек
-    private func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     // 8 INT метод обрабатывает фильтром и передает массив исходных изображений в processImagesOnThread + таймер
     private func onThread() {
-        imageProcessor.processImagesOnThread(sourceImages: photoGallery,
-                                             filter: .colorInvert,
-                                             qos: .userInteractive) { [self] completion in
-            for myPhoto in completion {
-                if let photo = myPhoto {
-                    threadPhotosArray.append(UIImage(cgImage: photo))
-                    photoGallery = threadPhotosArray
+        let startDate = Date()
+                ImageProcessor().processImagesOnThread(sourceImages: photoGallery,
+                                                       filter: .posterize,
+                                                       qos: .default) { [weak self] images in
+                    guard let self = self else { return }
+                    self.photoGallery = images
+                        .compactMap { $0 }
+                        .map { UIImage(cgImage: $0) }
                     DispatchQueue.main.async {
-                        collectionView.reloadData()
+                        self.collectionView.reloadData()
                     }
+                    
+                    print("Process time:  \(Date().timeIntervalSince(startDate)) seconds")
                 }
-            }
-        }
-        timer = Timer.scheduledTimer(timeInterval: 0.01,
-                                     target: self,
-                                     selector: #selector(updateTimer),
-                                     userInfo: nil, repeats: true)
     }
     
     private func setupCollectionView() {
@@ -73,16 +57,6 @@ class PhotosViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
-    }
-    
-    // 8 INT: метод выводит текущие значения в алерт и принт
-    @objc func updateTimer() {
-        count += 0.01
-        if threadPhotosArray.count > 0 {
-            showAlert(title: "время использования метода processImagesOnThread при текущем qos: ", message: "\(self.count) секунд")
-            print("\(self.count) секунд")
-            timer!.invalidate()
-        }
     }
     
     override func viewDidLoad() {
