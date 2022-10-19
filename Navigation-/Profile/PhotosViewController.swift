@@ -11,10 +11,7 @@ import iOSIntPackage
 class PhotosViewController: UIViewController {
     
     var photoGallery: [UIImage] = []
-    
-    // 5 INT:
-    var publisherFacade = ImagePublisherFacade()
-    
+
     private lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 8
@@ -34,6 +31,24 @@ class PhotosViewController: UIViewController {
         return collection
     }()
     
+    // 8 INT метод обрабатывает фильтром и передает массив исходных изображений в processImagesOnThread + таймер
+    private func onThread() {
+        let startDate = Date()
+                ImageProcessor().processImagesOnThread(sourceImages: photoGallery,
+                                                       filter: .posterize,
+                                                       qos: .default) { [weak self] images in
+                    guard let self = self else { return }
+                    self.photoGallery = images
+                        .compactMap { $0 }
+                        .map { UIImage(cgImage: $0) }
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                    }
+                    
+                    print("Process time:  \(Date().timeIntervalSince(startDate)) seconds")
+                }
+    }
+    
     private func setupCollectionView() {
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([
@@ -47,17 +62,9 @@ class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        //photoGallery = PhotoGallery.myPhotos
+        photoGallery = PhotoGallery.myPhotos
         setupCollectionView()
-        // 5 INT: подписка на паблишер для заполнения экрана коллекции через паттерн observer
-        publisherFacade.subscribe(self)
-        // 5 INT: наполнение коллекции с таймером:
-        publisherFacade.addImagesWithTimer(time: 0.7, repeat: 19, userImages: PhotoGallery.myPhotos)
-    }
-    
-    //5 INT: завершение подписки полсе кончания работы
-    override func viewDidDisappear(_ animated: Bool) {
-        publisherFacade.removeSubscription(for: self)
+        onThread()
     }
 }
 
@@ -79,14 +86,3 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
         return CGSize(width: x, height: x)
     }
 }
-
-// 5 INT: реализация метода протокола ImageLibrarySubscriber
-extension PhotosViewController: ImageLibrarySubscriber {
-    
-    func receive(images: [UIImage]) {
-       photoGallery = images
-        collectionView.reloadData()
-    }
-}
-
-
