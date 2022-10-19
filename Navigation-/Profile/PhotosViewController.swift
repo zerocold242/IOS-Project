@@ -12,13 +12,11 @@ class PhotosViewController: UIViewController {
     
     var photoGallery: [UIImage] = []
     
-    
-    // 5 INT:
-    //var publisherFacade = ImagePublisherFacade()
-    
-    // 8 INT:
+    // 8 INT: cвойства для дз 8
     private let imageProcessor = ImageProcessor()
-    var threadPhotosArray: [UIImage] = []
+    private var threadPhotosArray: [UIImage] = []
+    private var count: Double = 0
+    private var timer: Timer?
     
     private lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -39,7 +37,14 @@ class PhotosViewController: UIViewController {
         return collection
     }()
     
-    // 8 INT метод обрабатывает фильтром и передает массив исходных изображений в processImagesOnThread
+    // 8 INT: универсальный метод для всплывашек
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    // 8 INT метод обрабатывает фильтром и передает массив исходных изображений в processImagesOnThread + таймер
     private func onThread() {
         imageProcessor.processImagesOnThread(sourceImages: photoGallery,
                                              filter: .colorInvert,
@@ -54,6 +59,10 @@ class PhotosViewController: UIViewController {
                 }
             }
         }
+        timer = Timer.scheduledTimer(timeInterval: 0.01,
+                                     target: self,
+                                     selector: #selector(updateTimer),
+                                     userInfo: nil, repeats: true)
     }
     
     private func setupCollectionView() {
@@ -66,23 +75,23 @@ class PhotosViewController: UIViewController {
         ])
     }
     
+    // 8 INT: метод выводит текущие значения в алерт и принт
+    @objc func updateTimer() {
+        count += 0.01
+        if threadPhotosArray.count > 0 {
+            showAlert(title: "время использования метода processImagesOnThread при текущем qos: ", message: "\(self.count) секунд")
+            print("\(self.count) секунд")
+            timer!.invalidate()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         photoGallery = PhotoGallery.myPhotos
         setupCollectionView()
         onThread()
-        
-        //5 INT: подписка на паблишер для заполнения экрана коллекции через паттерн observer
-        //publisherFacade.subscribe(self)
-        // 5 INT: наполнение коллекции с таймером:
-        // publisherFacade.addImagesWithTimer(time: 0.7, repeat: 19, userImages: PhotoGallery.myPhotos)
     }
-    
-    //5 INT: завершение подписки полсе кончания работы
-    //override func viewDidDisappear(_ animated: Bool) {
-    //    publisherFacade.removeSubscription(for: self)
-    //}
 }
 
 extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
@@ -103,14 +112,3 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
         return CGSize(width: x, height: x)
     }
 }
-
-// 5 INT: реализация метода протокола ImageLibrarySubscriber
-//extension PhotosViewController: ImageLibrarySubscriber {
-//
-//    func receive(images: [UIImage]) {
-//       photoGallery = images
-//        collectionView.reloadData()
-//    }
-//}
-
-
