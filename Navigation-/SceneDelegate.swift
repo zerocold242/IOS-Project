@@ -20,6 +20,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let feedVC = FeedViewController()
         
+        //iosDT-1.1
+        let appConfiguration = AppConfiguration.allCases.randomElement()!
+        if let url = URL(string: appConfiguration.rawValue) {
+            NetworkService.urlParser(url)
+        }
+    
+              
+        
         
 #if DEBUG
         let logInVC = LoginViewController(userService: TestUserService())
