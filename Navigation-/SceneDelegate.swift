@@ -22,7 +22,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         //iosDT-1.1
         let appConfiguration = AppConfiguration.allCases.randomElement()!
-        NetworkService.request(for: appConfiguration)
+        if let url = URL(string: appConfiguration.rawValue) {
+            NetworkService.urlParser(url)
+        }
     
               
         
