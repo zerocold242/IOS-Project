@@ -110,7 +110,7 @@ class InfoViewController: UIViewController {
        
                     let model = try JSONDecoder().decode(PlanetModel.self, from: data)
                     DispatchQueue.main.async { [self] in
-                        taskTwoLabel.text = "Tatooin's rotation period \(model.name) = \(model.orbitalPeriod)"
+                        taskTwoLabel.text = " \(model.name)' rotation period = \(model.orbitalPeriod)"
                     }
                
                 } catch let error as NSError {
