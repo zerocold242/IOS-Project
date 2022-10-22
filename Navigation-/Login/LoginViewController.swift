@@ -21,6 +21,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+  // 9 INT: нкопка для подбора пароля
+    private lazy var crackPassword: CustomButton = {
+        let crackPassword = CustomButton(title: "Crack password", titleColor: .lightGray)
+        crackPassword.titleLabel?.textColor = UIColor.white
+        crackPassword.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
+        return crackPassword
+    }()
+    
     private lazy var vkLogotype: UIImageView = {
         let logo = UIImageView()
         logo.translatesAutoresizingMaskIntoConstraints = false
@@ -113,6 +121,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         loginStackView.addArrangedSubview(loginTextfield)
         loginStackView.addArrangedSubview(passTexfield)
         loginScrollView.addSubview(contentView)
+        loginScrollView.addSubview(crackPassword)
         
         [ loginScrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
           loginScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -139,7 +148,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
           loginButton.heightAnchor.constraint(equalToConstant: 50),
           loginButton.leadingAnchor.constraint(equalTo: loginStackView.leadingAnchor),
           loginButton.trailingAnchor.constraint(equalTo: loginStackView.trailingAnchor),
-          loginButton.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor)]
+          loginButton.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor),
+        
+          crackPassword.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
+          crackPassword.leadingAnchor.constraint(equalTo: loginStackView.leadingAnchor),
+          crackPassword.trailingAnchor.constraint(equalTo: loginStackView.trailingAnchor),
+          crackPassword.heightAnchor.constraint(equalToConstant: 50)
+        ]
             .forEach({$0.isActive = true})
     }
     
