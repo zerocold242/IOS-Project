@@ -142,7 +142,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         indicatorActivity.stopAnimating()
                         indicatorActivity.isHidden = true
                         crackPasswordButton.isEnabled = true
-                        passTexfield.placeholder = "password has been cracked"
                         //loginButton.actionTap?()
                     }
                 })
