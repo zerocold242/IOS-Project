@@ -135,16 +135,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 #endif
             DispatchQueue.global().async {
                 self.bruteForce.bruteForce(passwordToUnlock: crackingPassword, completion: {
-                    print("global")
                     DispatchQueue.main.async {
+                        loginTextfield.isSecureTextEntry = false
                         passTexfield.text = crackingPassword
                         loginTextfield.text = login
                         indicatorActivity.stopAnimating()
                         indicatorActivity.isHidden = true
                         crackPasswordButton.isEnabled = true
                         passTexfield.placeholder = "password has been cracked"
-                        print("async")
-                        loginButton.actionTap?()
+                        //loginButton.actionTap?()
                     }
                 })
             }
