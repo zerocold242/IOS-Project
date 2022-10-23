@@ -10,7 +10,7 @@ import Foundation
 class BruteForce {
     
     // 9 INT: методы подбора пароля
-    func bruteForce(passwordToUnlock: String) {
+    func bruteForce(passwordToUnlock: String, completion: @escaping()->()) {
         let ALLOWED_CHARACTERS:   [String] = String().printable.map { String($0) }
 
         var password: String = ""
@@ -22,8 +22,8 @@ class BruteForce {
 //            print(password)
             // Your stuff here
         }
-        
-        print(password)
+        completion()
+        print("Пароль\(password)")
     }
 }
 
