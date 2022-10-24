@@ -125,7 +125,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             crackPasswordButton.isEnabled = false
             self.indicatorActivity.startAnimating()
             passTexfield.placeholder = "Cracking the password"
-            passTexfield.leftView?.addSubview(indicatorActivity)
+            loginTextfield.text = ""
+            passTexfield.text = ""
 #if DEBUG
             let crackingPassword = testUserService.testingUser.password!
             let login = testUserService.testingUser.login!
@@ -136,13 +137,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             DispatchQueue.global().async {
                 self.bruteForce.bruteForce(passwordToUnlock: crackingPassword, completion: {
                     DispatchQueue.main.async {
-                        loginTextfield.isSecureTextEntry = false
+                        passTexfield.isSecureTextEntry = false
                         passTexfield.text = crackingPassword
                         loginTextfield.text = login
                         indicatorActivity.stopAnimating()
                         indicatorActivity.isHidden = true
                         crackPasswordButton.isEnabled = true
-                        //loginButton.actionTap?()
+                        loginButton.actionTap?()
                     }
                 })
             }
@@ -156,6 +157,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         contentView.addSubview(loginButton)
         contentView.addSubview(loginStackView)
         contentView.addSubview(vkLogotype)
+        contentView.addSubview(indicatorActivity)
         loginStackView.addArrangedSubview(loginTextfield)
         loginStackView.addArrangedSubview(passTexfield)
         loginScrollView.addSubview(contentView)
@@ -176,6 +178,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
           vkLogotype.widthAnchor.constraint(equalToConstant: 100),
           vkLogotype.heightAnchor.constraint(equalToConstant: 100),
           vkLogotype.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+          
+          indicatorActivity.topAnchor.constraint(equalTo: vkLogotype.bottomAnchor, constant: 60),
+          indicatorActivity.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
           
           loginStackView.topAnchor.constraint(equalTo: vkLogotype.bottomAnchor, constant: 120),
           loginStackView.heightAnchor.constraint(equalToConstant: 100),
