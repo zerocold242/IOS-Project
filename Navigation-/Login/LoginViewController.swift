@@ -7,10 +7,11 @@
 import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
-    
+    private let currentUserSevice = CurrentUserService()
+    private let testUserService = TestUserService()
     var userService: UserService
-    
     var delegate: LoginViewControllerDelegate?
+    var bruteForce = BruteForce()
     
     init(userService: UserService) {
         self.userService = userService
@@ -20,6 +21,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // 9 INT: нкопка для подбора пароля
+    private lazy var crackPasswordButton: CustomButton = {
+        let crackPasswordButton = CustomButton(title: "Crack password", titleColor: .lightGray)
+        crackPasswordButton.titleLabel?.textColor = UIColor.white
+        crackPasswordButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
+        return crackPasswordButton
+        
+    }()
+    
+    private lazy var indicatorActivity: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
     
     private lazy var vkLogotype: UIImageView = {
         let logo = UIImageView()
@@ -103,6 +119,37 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
     }()
     
+    // 9 INT: метод подбора пароля(передает действия в CustomButton )
+    private func crackPassword() {
+        crackPasswordButton.actionTap = { [self] in
+            crackPasswordButton.isEnabled = false
+            self.indicatorActivity.startAnimating()
+            passTexfield.placeholder = "Cracking the password"
+            loginTextfield.text = ""
+            passTexfield.text = ""
+#if DEBUG
+            let crackingPassword = testUserService.testingUser.password!
+            let login = testUserService.testingUser.login!
+#else
+            let crackingPassword = currentUserSevice.user.password!
+            let login = currentUserSevice.user.login!
+#endif
+            DispatchQueue.global().async {
+                self.bruteForce.bruteForce(passwordToUnlock: crackingPassword, completion: {
+                    DispatchQueue.main.async {
+                        passTexfield.isSecureTextEntry = false
+                        passTexfield.text = crackingPassword
+                        loginTextfield.text = login
+                        indicatorActivity.stopAnimating()
+                        indicatorActivity.isHidden = true
+                        crackPasswordButton.isEnabled = true
+                        loginButton.actionTap?()
+                    }
+                })
+            }
+        }
+    }
+    
     private func setupLoginScrollView() {
         
         loginScrollView.addSubview(contentView)
@@ -110,9 +157,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         contentView.addSubview(loginButton)
         contentView.addSubview(loginStackView)
         contentView.addSubview(vkLogotype)
+        contentView.addSubview(indicatorActivity)
         loginStackView.addArrangedSubview(loginTextfield)
         loginStackView.addArrangedSubview(passTexfield)
         loginScrollView.addSubview(contentView)
+        loginScrollView.addSubview(crackPasswordButton)
         
         [ loginScrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
           loginScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -130,6 +179,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
           vkLogotype.heightAnchor.constraint(equalToConstant: 100),
           vkLogotype.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
           
+          indicatorActivity.topAnchor.constraint(equalTo: vkLogotype.bottomAnchor, constant: 60),
+          indicatorActivity.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+          
           loginStackView.topAnchor.constraint(equalTo: vkLogotype.bottomAnchor, constant: 120),
           loginStackView.heightAnchor.constraint(equalToConstant: 100),
           loginStackView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
@@ -139,7 +191,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
           loginButton.heightAnchor.constraint(equalToConstant: 50),
           loginButton.leadingAnchor.constraint(equalTo: loginStackView.leadingAnchor),
           loginButton.trailingAnchor.constraint(equalTo: loginStackView.trailingAnchor),
-          loginButton.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor)]
+          loginButton.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor),
+          
+          crackPasswordButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
+          crackPasswordButton.leadingAnchor.constraint(equalTo: loginStackView.leadingAnchor),
+          crackPasswordButton.trailingAnchor.constraint(equalTo: loginStackView.trailingAnchor),
+          crackPasswordButton.heightAnchor.constraint(equalToConstant: 50)
+        ]
             .forEach({$0.isActive = true})
     }
     
@@ -212,6 +270,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(loginScrollView)
         setupLoginScrollView()
         signIn()
+        crackPassword()
     }
 }
 

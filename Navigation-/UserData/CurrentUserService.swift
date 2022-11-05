@@ -10,7 +10,7 @@ import UIKit
 
 final class CurrentUserService: UserService {
     
-    var user = User(password: "12345",
+    var user = User(password: "5678",
                     login: "Aleksey",
                     fullName: "Zero Cold",
                     avatar: UIImage(named: "IMG_1566")!,
