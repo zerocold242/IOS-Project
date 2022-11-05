@@ -10,6 +10,5 @@ import Foundation
 protocol LoginViewControllerDelegate {
     
     func isCheckDelegate(loginDelegate: String, passwordDelegate: String) -> Bool 
-   
-    
+
 }

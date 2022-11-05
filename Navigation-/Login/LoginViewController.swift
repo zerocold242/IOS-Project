@@ -11,7 +11,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     private let testUserService = TestUserService()
     var userService: UserService
     var delegate: LoginViewControllerDelegate?
-    var bruteForce = BruteForce()
+    var user = CurrentUserService.shared.user
+    //var bruteForce = BruteForce()
     
     init(userService: UserService) {
         self.userService = userService
@@ -22,13 +23,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+  //  private lazy var signUpButton: CustomButton = {
+  //      let signUpBut = CustomButton(title: "Sign Up", titleColor: .lightGray)
+  //      signUpBut.titleLabel?.textColor = UIColor.white
+  //      signUpBut.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
+  //      return signUpBut
+  //  }()
+    
     // 9 INT: нкопка для подбора пароля
     private lazy var crackPasswordButton: CustomButton = {
         let crackPasswordButton = CustomButton(title: "Crack password", titleColor: .lightGray)
         crackPasswordButton.titleLabel?.textColor = UIColor.white
         crackPasswordButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         return crackPasswordButton
-        
     }()
     
     private lazy var indicatorActivity: UIActivityIndicatorView = {
@@ -120,48 +127,49 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }()
     
     // 9 INT: метод подбора пароля(передает действия в CustomButton )
-    private func crackPassword() {
-        crackPasswordButton.actionTap = { [self] in
-            crackPasswordButton.isEnabled = false
-            self.indicatorActivity.startAnimating()
-            passTexfield.placeholder = "Cracking the password"
-            loginTextfield.text = ""
-            passTexfield.text = ""
-#if DEBUG
-            let crackingPassword = testUserService.testingUser.password!
-            let login = testUserService.testingUser.login!
-#else
-            let crackingPassword = currentUserSevice.user.password!
-            let login = currentUserSevice.user.login!
-#endif
-            DispatchQueue.global().async {
-                self.bruteForce.bruteForce(passwordToUnlock: crackingPassword, completion: {
-                    DispatchQueue.main.async {
-                        passTexfield.isSecureTextEntry = false
-                        passTexfield.text = crackingPassword
-                        loginTextfield.text = login
-                        indicatorActivity.stopAnimating()
-                        indicatorActivity.isHidden = true
-                        crackPasswordButton.isEnabled = true
-                        loginButton.actionTap?()
-                    }
-                })
-            }
-        }
-    }
+//    private func crackPassword() {
+//        crackPasswordButton.actionTap = { [self] in
+//            crackPasswordButton.isEnabled = false
+//            self.indicatorActivity.startAnimating()
+//            passTexfield.placeholder = "Cracking the password"
+//            loginTextfield.text = ""
+//            passTexfield.text = ""
+//#if DEBUG
+//            let crackingPassword = testUserService.testingUser.password!
+//            let login = testUserService.testingUser.login!
+//#else
+//            let crackingPassword = currentUserSevice.user.password!
+//            let login = currentUserSevice.user.login!
+//#endif
+//            DispatchQueue.global().async {
+//                self.bruteForce.bruteForce(passwordToUnlock: crackingPassword, completion: {
+//                    DispatchQueue.main.async {
+//                        passTexfield.isSecureTextEntry = false
+//                        passTexfield.text = crackingPassword
+//                        loginTextfield.text = login
+//                        indicatorActivity.stopAnimating()
+//                        indicatorActivity.isHidden = true
+//                        crackPasswordButton.isEnabled = true
+//                        loginButton.actionTap?()
+//                    }
+//                })
+//            }
+//        }
+//    }
     
     private func setupLoginScrollView() {
         
         loginScrollView.addSubview(contentView)
         loginScrollView.keyboardDismissMode = .onDrag
-        contentView.addSubview(loginButton)
+        loginScrollView.addSubview(loginButton)
         contentView.addSubview(loginStackView)
         contentView.addSubview(vkLogotype)
         contentView.addSubview(indicatorActivity)
         loginStackView.addArrangedSubview(loginTextfield)
         loginStackView.addArrangedSubview(passTexfield)
-        loginScrollView.addSubview(contentView)
+        //loginScrollView.addSubview(contentView)
         loginScrollView.addSubview(crackPasswordButton)
+       // contentView.addSubview(signUpButton)
         
         [ loginScrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
           loginScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -196,7 +204,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
           crackPasswordButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
           crackPasswordButton.leadingAnchor.constraint(equalTo: loginStackView.leadingAnchor),
           crackPasswordButton.trailingAnchor.constraint(equalTo: loginStackView.trailingAnchor),
-          crackPasswordButton.heightAnchor.constraint(equalToConstant: 50)
+          crackPasswordButton.heightAnchor.constraint(equalToConstant: 50),
+          
+         // signUpButton.topAnchor.constraint(equalTo: loginStackView.bottomAnchor, constant: 16),
+         // signUpButton.leadingAnchor.constraint(equalTo: loginStackView.leadingAnchor),
+         // signUpButton.trailingAnchor.constraint(equalTo: loginStackView.trailingAnchor),
+         // signUpButton.heightAnchor.constraint(equalToConstant: 50)
+          
+          
         ]
             .forEach({$0.isActive = true})
     }
@@ -253,7 +268,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 guard delegate?.isCheckDelegate(loginDelegate: login, passwordDelegate: password) == true
                 else {return showAlert(title: "Ошибка", message: "Неправильно введен логин или пароль")}
                 guard  let user = userService.getUser(password: password, login: login)
-                else {return showAlert(title: "Отказ в авторизации", message: "Пользователь не найден")}
+               else {return showAlert(title: "Отказ в авторизации", message: "Пользователь не найден")}
+                //let user = CurrentUserService.shared.user
                 let profileVC = ProfileViewController(currentUser: user)
                 navigationController?.pushViewController(profileVC, animated: true)
             } else {
@@ -261,6 +277,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
+    
+ //   func signUp() {
+ //       signUpButton.actionTap = {[self] in
+ //           if let password = passTexfield.text, !password.isEmpty,
+ //              let login =  loginTextfield.text, !login.isEmpty {
+ //               guard delegate?.isCheckDelegate(loginDelegate: login, passwordDelegate: password) == false
+ //               else {return}
+ //       }
+ //   }
+ //   }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -270,7 +296,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(loginScrollView)
         setupLoginScrollView()
         signIn()
-        crackPassword()
+       // crackPassword()
     }
 }
 
