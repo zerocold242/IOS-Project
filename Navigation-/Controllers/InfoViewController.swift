@@ -89,6 +89,7 @@ class InfoViewController: UIViewController {
     }
     
     // 1.2 DT: метод отображает период обращения Татуина 
+
   //  func dataPlanet() {
   //          let session = URLSession.shared
   //          guard let url = URL(string: "https://swapi.dev/api/planets/1") else {return}
@@ -119,6 +120,7 @@ class InfoViewController: UIViewController {
   //          }
   //          task.resume()
   //      }
+
     
     private func setupView() {
         view.addSubview(taskOneLabel)
