@@ -7,30 +7,35 @@
 
 import Foundation
 import UIKit
-//class SharedAlert: NSObject {
-//static let sharedAlert = SharedAlert()
-//
-//    //Show alert
-//    func alert(view: UIViewController, title: String, message: String) {
-//        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-//        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: { action in
-//        })
-//        alert.addAction(defaultAction)
-//        DispatchQueue.main.async(execute: {
-//            view.present(alert, animated: true)
-//        })
-//    }
-//
-//    private override init() {
-//    }
-//}
 
-extension UIAlertController {
-    class func alert(title:String, msg:String, target: UIViewController) {
-        let alert = UIAlertController(title: title, message: msg, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) {
-        (result: UIAlertAction) -> Void in
-        })
-        target.present(alert, animated: true, completion: nil)
+
+//Универсальный Алерт
+extension UIApplication {
+    class func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let navigationController = controller as? UINavigationController {
+            return topViewController(controller: navigationController.visibleViewController)
+        }
+        if let tabController = controller as? UITabBarController {
+            if let selected = tabController.selectedViewController {
+                return topViewController(controller: selected)
+            }
+        }
+        if let presented = controller?.presentedViewController {
+            return topViewController(controller: presented)
+        }
+        return controller
     }
 }
+
+class SharedAlert {
+    
+    static let shared = SharedAlert()
+    
+    func showAlert(alertTitle: String, alertMessage: String) {
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        let actionOne = UIAlertAction(title: "OK", style: .cancel)
+        alert.addAction(actionOne)
+        UIApplication.topViewController()!.present(alert, animated: true, completion: nil)
+    }
+}
+

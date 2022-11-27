@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -21,18 +23,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let feedVC = FeedViewController()
         
         //iosDT-1.1
-        let appConfiguration = AppConfiguration.allCases.randomElement()!
-        if let url = URL(string: appConfiguration.rawValue) {
-            NetworkService.urlParser(url)
-        }
-    
-              
+      // let appConfiguration = AppConfiguration.allCases.randomElement()!
+      // if let url = URL(string: appConfiguration.rawValue) {
+      //     NetworkService.urlParser(url)
+      // }
+        
+        
         
         
 #if DEBUG
-        let logInVC = LoginViewController(userService: TestUserService())
+        let logInVC = LoginViewController(/*userService: TestUserService()*/)
 #else
-        let logInVC = LoginViewController(userService: CurrentUserService())
+        let logInVC = LoginViewController(/*userService: CurrentUserService()*/)
 #endif
         logInVC.title = "Profile"
         //INT 4.1: внедрение зависимосьти от LoginInspector
@@ -62,6 +64,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
+    }
+    
+    func sceneDidDisconnect(_ scene: UIScene) {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print("Sign out error")
+        }
     }
 }
 
