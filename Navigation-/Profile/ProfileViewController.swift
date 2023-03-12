@@ -40,7 +40,7 @@ class ProfileViewController: UIViewController {
         close.tintColor = .white
         close.translatesAutoresizingMaskIntoConstraints = false
         close.alpha = 0
-        close.addTarget(self, action: #selector(closeAvatar), for: .touchUpInside)
+        close.addTarget(ProfileViewController.self, action: #selector(closeAvatar), for: .touchUpInside)
         return close
     }()
     
