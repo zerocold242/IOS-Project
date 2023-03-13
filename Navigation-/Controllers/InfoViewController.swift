@@ -89,36 +89,38 @@ class InfoViewController: UIViewController {
     }
     
     // 1.2 DT: метод отображает период обращения Татуина 
-    func dataPlanet() {
-            let session = URLSession.shared
-            guard let url = URL(string: "https://swapi.dev/api/planets/1") else {return}
-            let task = session.dataTask(with: url) { [self]data, responce, error in
-                if let error = error {
-                    print(error.localizedDescription)
-                    return
-                }
-                
-                if (responce as? HTTPURLResponse)?.statusCode != 200 {
-                    print("StatusCode = \((responce as? HTTPURLResponse)?.statusCode ?? 0)")
-                    return
-                }
-                guard let data = data  else {
-                    print("Data = nil")
-                    return
-                }
-                do {
-       
-                    let model = try JSONDecoder().decode(PlanetModel.self, from: data)
-                    DispatchQueue.main.async { [self] in
-                        taskTwoLabel.text = " \(model.name)' rotation period = \(model.orbitalPeriod)"
-                    }
-               
-                } catch let error as NSError {
-                        print("error: \(error.localizedDescription)")
-                }
-            }
-            task.resume()
-        }
+
+  //  func dataPlanet() {
+  //          let session = URLSession.shared
+  //          guard let url = URL(string: "https://swapi.dev/api/planets/1") else {return}
+  //          let task = session.dataTask(with: url) { [self]data, responce, error in
+  //              if let error = error {
+  //                  print(error.localizedDescription)
+  //                  return
+  //              }
+  //
+  //              if (responce as? HTTPURLResponse)?.statusCode != 200 {
+  //                  print("StatusCode = \((responce as? HTTPURLResponse)?.statusCode ?? 0)")
+  //                  return
+  //              }
+  //              guard let data = data  else {
+  //                  print("Data = nil")
+  //                  return
+  //              }
+  //              do {
+  //
+  //                  let model = try JSONDecoder().decode(PlanetModel.self, from: data)
+  //                  DispatchQueue.main.async { [self] in
+  //                      taskTwoLabel.text = "Tatooin's rotation period \(model.name) = \(model.orbitalPeriod)"
+  //                  }
+  //
+  //              } catch let error as NSError {
+  //                      print("error: \(error.localizedDescription)")
+  //              }
+  //          }
+  //          task.resume()
+  //      }
+
     
     private func setupView() {
         view.addSubview(taskOneLabel)
@@ -161,6 +163,6 @@ class InfoViewController: UIViewController {
         setupButton()
         setupView()
         urlSession()
-        dataPlanet()
+       // dataPlanet()
     }
 }

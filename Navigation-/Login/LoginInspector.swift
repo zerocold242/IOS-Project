@@ -8,8 +8,21 @@
 import Foundation
 
 class LoginInspector: LoginViewControllerDelegate {
+    
+    func signUpdelegate(loginDelegate: String, passwordDelegate: String) {
+        CheckerService.shared.signUp(withEmail: loginDelegate, password: passwordDelegate)
+        print("LoginInspector signUp")
+    }
+    
     func isCheckDelegate(loginDelegate: String, passwordDelegate: String) -> Bool {
-        print("LoginInspector")
-        return Checker.shared.check(passwordInput: passwordDelegate, loginInput: loginDelegate)
+        CheckerService.shared.checkCredentials(withEmail: loginDelegate, password: passwordDelegate)
+        if CheckerService.shared.isSignIn == true {
+            print("LoginInspector SignIn")
+            return true
+        } else {
+            return false
+        }
     }
 }
+
+

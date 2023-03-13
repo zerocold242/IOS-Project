@@ -10,6 +10,8 @@ import UIKit
 
 final class CurrentUserService: UserService {
     
+    static let shared = CurrentUserService()
+    
     var user = User(password: "5678",
                     login: "Aleksey",
                     fullName: "Zero Cold",
@@ -21,6 +23,7 @@ final class CurrentUserService: UserService {
            login == user.login {
             return user
         } else {
+            print("не правильный логин или пароль")
             return nil
         }
     }
