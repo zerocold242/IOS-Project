@@ -5,38 +5,20 @@
 //  Created by Aleksey Lexx on 16.06.2022.
 //
 import UIKit
+import RealmSwift
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     private let currentUserSevice = CurrentUserService()
     private let testUserService = TestUserService()
-    // var userService: UserService
     var delegate: LoginViewControllerDelegate?
     var user = CurrentUserService.shared.user
-    //var bruteForce = BruteForce()
-    
-    // init(userService: UserService) {
-    //     self.userService = userService
-    //     super .init(nibName: nil, bundle: nil )
-    // }
-    //
-    // required init?(coder: NSCoder) {
-    //     fatalError("init(coder:) has not been implemented")
-    // }
     
     private lazy var signUpButton: CustomButton = {
-        let signUpBut = CustomButton(title: "Sign Up", titleColor: .lightGray)
+        let signUpBut = CustomButton(title: "Create user", titleColor: .lightGray)
         signUpBut.titleLabel?.textColor = UIColor.white
         signUpBut.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         return signUpBut
     }()
-    
-    // 9 INT: нкопка для подбора пароля
-    // private lazy var crackPasswordButton: CustomButton = {
-    //     let crackPasswordButton = CustomButton(title: "Crack password", titleColor: .lightGray)
-    //     crackPasswordButton.titleLabel?.textColor = UIColor.white
-    //     crackPasswordButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
-    //     return crackPasswordButton
-    // }()
     
     private lazy var indicatorActivity: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .medium)
@@ -108,6 +90,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let logButton = CustomButton(title: "Log In", titleColor: .lightGray)
         logButton.titleLabel?.textColor = UIColor.white
         logButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
+        logButton.isHidden = true
         return logButton
     }()
     
@@ -125,37 +108,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         return contentView
         
     }()
-    
-    // 9 INT: метод подбора пароля(передает действия в CustomButton )
-    //    private func crackPassword() {
-    //        crackPasswordButton.actionTap = { [self] in
-    //            crackPasswordButton.isEnabled = false
-    //            self.indicatorActivity.startAnimating()
-    //            passTexfield.placeholder = "Cracking the password"
-    //            loginTextfield.text = ""
-    //            passTexfield.text = ""
-    //#if DEBUG
-    //            let crackingPassword = testUserService.testingUser.password!
-    //            let login = testUserService.testingUser.login!
-    //#else
-    //            let crackingPassword = currentUserSevice.user.password!
-    //            let login = currentUserSevice.user.login!
-    //#endif
-    //            DispatchQueue.global().async {
-    //                self.bruteForce.bruteForce(passwordToUnlock: crackingPassword, completion: {
-    //                    DispatchQueue.main.async {
-    //                        passTexfield.isSecureTextEntry = false
-    //                        passTexfield.text = crackingPassword
-    //                        loginTextfield.text = login
-    //                        indicatorActivity.stopAnimating()
-    //                        indicatorActivity.isHidden = true
-    //                        crackPasswordButton.isEnabled = true
-    //                        loginButton.actionTap?()
-    //                    }
-    //                })
-    //            }
-    //        }
-    //    }
     
     private func setupLoginScrollView() {
         
@@ -199,16 +151,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
           loginButton.trailingAnchor.constraint(equalTo: loginStackView.trailingAnchor),
           loginButton.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor),
           
-          // crackPasswordButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
-          // crackPasswordButton.leadingAnchor.constraint(equalTo: loginStackView.leadingAnchor),
-          // crackPasswordButton.trailingAnchor.constraint(equalTo: loginStackView.trailingAnchor),
-          // crackPasswordButton.heightAnchor.constraint(equalToConstant: 50),
-          
           signUpButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
           signUpButton.leadingAnchor.constraint(equalTo: loginStackView.leadingAnchor),
           signUpButton.trailingAnchor.constraint(equalTo: loginStackView.trailingAnchor),
           signUpButton.heightAnchor.constraint(equalToConstant: 50)
-          
           
         ]
             .forEach({$0.isActive = true})
@@ -257,31 +203,27 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    //6.1 INT: функция для кнопки передает действия в CustomButton
-    // 4 INT: авторизация пользователя
-    // 1.3 DT: метод авторизации пользователя
-    func signIn() {
-        loginButton.actionTap = { [self] in
-            if let password = passTexfield.text, !password.isEmpty,
-               let login =  loginTextfield.text, !login.isEmpty {
-                guard delegate?.isCheckDelegate(loginDelegate: login, passwordDelegate: password) == true
-                else {return}
-                let user = CurrentUserService.shared.user
-                let profileVC = ProfileViewController(currentUser: user)
-                navigationController?.pushViewController(profileVC, animated: true)
-            } else {
-                
-                SharedAlert.shared.showAlert(alertTitle: "Ошибка", alertMessage: "Необходимо заполнить все текстовые поля")
-            }
+    //DT 2.4: метод сквозной авторизации пользователя
+    private func signIn() {
+        
+        let realm = try! Realm()
+        if realm.objects(RealmLoginModel.self).count >= 1 {
+            let user = CurrentUserService.shared.user
+            let profileVC = ProfileViewController(currentUser: user)
+            navigationController?.pushViewController(profileVC, animated: true)
         }
     }
     
-    //1.3 DT метод регистрации пользователя
+    //2.4 DT метод регистрации пользователя
     func signUp() {
         signUpButton.actionTap = { [self] in
             if let password = passTexfield.text, !password.isEmpty,
                let login =  loginTextfield.text, !login.isEmpty {
                 delegate?.signUpdelegate(loginDelegate: login, passwordDelegate: password)
+                let user = CurrentUserService.shared.user
+                let profileVC = ProfileViewController(currentUser: user)
+                navigationController?.pushViewController(profileVC, animated: true)
+                SharedAlert.shared.showAlert(alertTitle: "Логин и пароль сохранены в Realm", alertMessage: "Добро пожаловать в мое кривое приложение")
             } else {
                 SharedAlert.shared.showAlert(alertTitle: "Ошибка", alertMessage: "Необходимо заполнить все поля авторизации")
             }
@@ -297,9 +239,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         setupLoginScrollView()
         signIn()
         signUp()
-        // crackPassword()
     }
 }
+
+
 
 
 

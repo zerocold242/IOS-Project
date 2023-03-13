@@ -12,19 +12,27 @@ final class CurrentUserService: UserService {
     
     static let shared = CurrentUserService()
     
-    var user = User(password: "5678",
-                    login: "Aleksey",
-                    fullName: "Zero Cold",
-                    avatar: UIImage(named: "IMG_1566")!,
-                    userStaus: "make techno!")
+    var user = User(/*password: "5678",
+                     login: "Aleksey",*/
+        fullName: "Zero Cold",
+        avatar: UIImage(named: "IMG_1566")!,
+        userStaus: "make techno!")
     
-    func getUser(password: String, login: String) -> User? {
-        if password == user.password,
-           login == user.login {
-            return user
-        } else {
-            print("не правильный логин или пароль")
-            return nil
-        }
+    func createUser(user: User) -> User? {
+        self.user
     }
+    
+    func readUser() -> User? {
+        self.user
+    }
+    
+    // func createUser (password: String, login: String) -> User? {
+    //     if password == user.password,
+    //        login == user.login {
+    //         return user
+    //     } else {
+    //         print("не правильный логин или пароль")
+    //         return nil
+    //     }
+    // }
 }

@@ -30,6 +30,8 @@
 		5C824B4728C51AF000DF7726 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C824B4628C51AF000DF7726 /* TestUserService.swift */; };
 		5C896DAD28F4634400213FD0 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C896DAC28F4634400213FD0 /* NetworkService.swift */; };
 		5C896DAF28F4650F00213FD0 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C896DAE28F4650F00213FD0 /* AppConfiguration.swift */; };
+		5C9F66DE29BE4F4E002B3F93 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 5C9F66DD29BE4F4E002B3F93 /* Realm */; };
+		5C9F66E029BE4F4E002B3F93 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5C9F66DF29BE4F4E002B3F93 /* RealmSwift */; };
 		5CA3BB40285FC6020069B9EA /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3BB3F285FC6020069B9EA /* PostTableViewCell.swift */; };
 		5CA3BB422864CDA70069B9EA /* PhotoGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3BB412864CDA70069B9EA /* PhotoGallery.swift */; };
 		5CA3BB442864CFB40069B9EA /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3BB432864CFB40069B9EA /* PhotosViewController.swift */; };
@@ -120,6 +122,8 @@
 			files = (
 				5CCAA2A928B683BC005135D7 /* StorageService.framework in Frameworks */,
 				5C26A13F290F07D700856BC3 /* FirebaseAuth in Frameworks */,
+				5C9F66DE29BE4F4E002B3F93 /* Realm in Frameworks */,
+				5C9F66E029BE4F4E002B3F93 /* RealmSwift in Frameworks */,
 				5C73CC1928D6121D007C66A9 /* iOSIntPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,6 +294,8 @@
 			packageProductDependencies = (
 				5C73CC1828D6121D007C66A9 /* iOSIntPackage */,
 				5C26A13E290F07D700856BC3 /* FirebaseAuth */,
+				5C9F66DD29BE4F4E002B3F93 /* Realm */,
+				5C9F66DF29BE4F4E002B3F93 /* RealmSwift */,
 			);
 			productName = "Navigation-";
 			productReference = 5C101D982841078300F5FE5D /* Navigation-.app */;
@@ -343,6 +349,7 @@
 			packageReferences = (
 				5C73CC1728D6121D007C66A9 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
 				5C26A13D290F07D700856BC3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				5C9F66DC29BE4F4E002B3F93 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 5C101D992841078300F5FE5D /* Products */;
 			projectDirPath = "";
@@ -729,6 +736,14 @@
 				kind = branch;
 			};
 		};
+		5C9F66DC29BE4F4E002B3F93 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -741,6 +756,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5C73CC1728D6121D007C66A9 /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
 			productName = iOSIntPackage;
+		};
+		5C9F66DD29BE4F4E002B3F93 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5C9F66DC29BE4F4E002B3F93 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		5C9F66DF29BE4F4E002B3F93 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5C9F66DC29BE4F4E002B3F93 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

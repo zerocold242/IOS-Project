@@ -14,15 +14,15 @@ class LoginInspector: LoginViewControllerDelegate {
         print("LoginInspector signUp")
     }
     
-    func isCheckDelegate(loginDelegate: String, passwordDelegate: String) -> Bool {
-        CheckerService.shared.checkCredentials(withEmail: loginDelegate, password: passwordDelegate)
-        if CheckerService.shared.isSignIn == true {
-            print("LoginInspector SignIn")
-            return true
-        } else {
-            return false
-        }
-    }
+//    func isCheckDelegate(loginDelegate: String, passwordDelegate: String) -> Bool {
+//        CheckerService.shared.checkCredentials(withEmail: loginDelegate, password: passwordDelegate)
+//        if CheckerService.shared.isSignIn == true {
+//            print("LoginInspector SignIn")
+//            return true
+//        } else {
+//            return false
+//        }
+//    }
 }
 
 
