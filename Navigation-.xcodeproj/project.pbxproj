@@ -136,8 +136,10 @@
 			files = (
 				5CCAA2A928B683BC005135D7 /* StorageService.framework in Frameworks */,
 				5C26A13F290F07D700856BC3 /* FirebaseAuth in Frameworks */,
+ feature/iosDT-2.4
 				5C9F66DE29BE4F4E002B3F93 /* Realm in Frameworks */,
 				5C9F66E029BE4F4E002B3F93 /* RealmSwift in Frameworks */,
+
 				5C73CC1928D6121D007C66A9 /* iOSIntPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -315,8 +317,10 @@
 			packageProductDependencies = (
 				5C73CC1828D6121D007C66A9 /* iOSIntPackage */,
 				5C26A13E290F07D700856BC3 /* FirebaseAuth */,
+
 				5C9F66DD29BE4F4E002B3F93 /* Realm */,
 				5C9F66DF29BE4F4E002B3F93 /* RealmSwift */,
+
 			);
 			productName = "Navigation-";
 			productReference = 5C101D982841078300F5FE5D /* Navigation-.app */;
@@ -370,7 +374,9 @@
 			packageReferences = (
 				5C73CC1728D6121D007C66A9 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
 				5C26A13D290F07D700856BC3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+ feature/iosDT-2.4
 				5C9F66DC29BE4F4E002B3F93 /* XCRemoteSwiftPackageReference "realm-swift" */,
+
 			);
 			productRefGroup = 5C101D992841078300F5FE5D /* Products */;
 			projectDirPath = "";
