@@ -7,10 +7,13 @@
 
 import Foundation
 
-protocol LoginViewControllerDelegate {
+protocol LoginViewControllerDelegate: AnyObject {
     
-    func isCheckDelegate(loginDelegate: String, passwordDelegate: String) -> Bool
+
+    //func isCheckDelegate(loginDelegate: String, passwordDelegate: String) -> Bool
     
     func signUpdelegate(loginDelegate: String, passwordDelegate: String)
+
+
 }
 
