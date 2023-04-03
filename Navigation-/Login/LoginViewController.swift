@@ -223,7 +223,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 let user = CurrentUserService.shared.user
                 let profileVC = ProfileViewController(currentUser: user)
                 navigationController?.pushViewController(profileVC, animated: true)
-                SharedAlert.shared.showAlert(alertTitle: "Логин и пароль сохранены в Realm", alertMessage: "Добро пожаловать в мое кривое приложение")
+                SharedAlert.shared.showAlert(alertTitle: "Логин и пароль сохранены в Realm", alertMessage: "Вы успешно авторизовались")
             } else {
                 SharedAlert.shared.showAlert(alertTitle: "Ошибка", alertMessage: "Необходимо заполнить все поля авторизации")
             }

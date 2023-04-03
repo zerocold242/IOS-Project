@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import StorageService
 
 
 //Универсальный Алерт
@@ -38,4 +39,19 @@ class SharedAlert {
         UIApplication.topViewController()!.present(alert, animated: true, completion: nil)
     }
 }
+
+//class SavedPostAlert {
+//
+//    static let shared = SavedPostAlert()
+//
+//    //let post = PostStruct.self
+//
+//    func saveAlert(alertTitle: String, alertMassage: String) {
+//        let alert = UIAlertController(title: alertTitle, message: alertMassage, preferredStyle: .alert)
+//        let alertOK = UIAlertAction(title: "OK", style: .default, handler:  { action in
+//            //let post = PostStruct.self
+//            //CoreDataManager.shared.createNewLikedPost(post: post )
+//        })
+//    }
+//}
 

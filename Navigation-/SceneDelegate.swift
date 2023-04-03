@@ -6,8 +6,8 @@
 //
 
 import UIKit
-import FirebaseCore
-import FirebaseAuth
+//import FirebaseCore
+//import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -23,13 +23,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let feedVC = FeedViewController()
         
         //iosDT-1.1
-      // let appConfiguration = AppConfiguration.allCases.randomElement()!
-      // if let url = URL(string: appConfiguration.rawValue) {
-      //     NetworkService.urlParser(url)
-      // }
-        
-        
-        
+        // let appConfiguration = AppConfiguration.allCases.randomElement()!
+        // if let url = URL(string: appConfiguration.rawValue) {
+        //     NetworkService.urlParser(url)
+        // }
         
 #if DEBUG
         let logInVC = LoginViewController(/*userService: TestUserService()*/)
@@ -54,7 +51,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                                     image: UIImage(systemName: "person.circle"),
                                                     tag: 1)
         
-        tabBarController.viewControllers = [feedNavigationVC, logInNavigationVC]
+        let postVC = LikedPostsController() //PostViewController()
+        let postNavigationVC = UINavigationController(rootViewController: postVC)
+        postNavigationVC.isNavigationBarHidden = false
+        postNavigationVC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "suit.heart"), tag: 2)
+        
+        
+        tabBarController.viewControllers = [feedNavigationVC, logInNavigationVC, postNavigationVC]
         UITabBar.appearance().backgroundColor = .systemGray5
         
         let photosViewController = PhotosViewController()
@@ -64,14 +67,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
-    }
-    
-    func sceneDidDisconnect(_ scene: UIScene) {
-        do {
-            try Auth.auth().signOut()
-        } catch {
-            print("Sign out error")
-        }
     }
 }
 

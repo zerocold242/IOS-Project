@@ -7,11 +7,20 @@
 import Foundation
 
 public struct PostStruct {
+    
     public var author: String
     public var description: String
     public var image: String
-    public var likes: Int
-    public var views: Int
+    public var likes: Int16
+    public var views: Int16
+    
+    public init(author: String, description: String, image: String, likes: Int16, views: Int16) {
+        self.author = author
+        self.description = description
+        self.image = image
+        self.likes = likes
+        self.views = views
+    }
 }
 
 public let posts = [

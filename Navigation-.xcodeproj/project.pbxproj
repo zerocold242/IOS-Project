@@ -25,6 +25,7 @@
 		5C44364428CF8352008DDD46 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C44364328CF8352008DDD46 /* Checker.swift */; };
 		5C44364628CF87C2008DDD46 /* LoginViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C44364528CF87C2008DDD46 /* LoginViewControllerDelegate.swift */; };
 		5C44364828D11023008DDD46 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C44364728D11023008DDD46 /* LoginInspector.swift */; };
+		5C6B6E7A29C4C7C50006DD1F /* LikedPostsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6B6E7929C4C7C50006DD1F /* LikedPostsController.swift */; };
 		5C73CC1928D6121D007C66A9 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 5C73CC1828D6121D007C66A9 /* iOSIntPackage */; };
 		5C73CC1C28D77897007C66A9 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C73CC1B28D77897007C66A9 /* CustomButton.swift */; };
 		5C824B4728C51AF000DF7726 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C824B4628C51AF000DF7726 /* TestUserService.swift */; };
@@ -32,6 +33,8 @@
 		5C896DAF28F4650F00213FD0 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C896DAE28F4650F00213FD0 /* AppConfiguration.swift */; };
 		5C9F66DE29BE4F4E002B3F93 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 5C9F66DD29BE4F4E002B3F93 /* Realm */; };
 		5C9F66E029BE4F4E002B3F93 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5C9F66DF29BE4F4E002B3F93 /* RealmSwift */; };
+		5C9F66E429C47EF2002B3F93 /* LikedPostModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5C9F66E229C47EF2002B3F93 /* LikedPostModel.xcdatamodeld */; };
+		5C9F66E629C4AB56002B3F93 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9F66E529C4AB56002B3F93 /* CoreDataManager.swift */; };
 		5CA3BB40285FC6020069B9EA /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3BB3F285FC6020069B9EA /* PostTableViewCell.swift */; };
 		5CA3BB422864CDA70069B9EA /* PhotoGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3BB412864CDA70069B9EA /* PhotoGallery.swift */; };
 		5CA3BB442864CFB40069B9EA /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3BB432864CFB40069B9EA /* PhotosViewController.swift */; };
@@ -95,10 +98,13 @@
 		5C44364328CF8352008DDD46 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		5C44364528CF87C2008DDD46 /* LoginViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerDelegate.swift; sourceTree = "<group>"; };
 		5C44364728D11023008DDD46 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
+		5C6B6E7929C4C7C50006DD1F /* LikedPostsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedPostsController.swift; sourceTree = "<group>"; };
 		5C73CC1B28D77897007C66A9 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		5C824B4628C51AF000DF7726 /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
 		5C896DAC28F4634400213FD0 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		5C896DAE28F4650F00213FD0 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		5C9F66E329C47EF2002B3F93 /* LikedPostModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LikedPostModel.xcdatamodel; sourceTree = "<group>"; };
+		5C9F66E529C4AB56002B3F93 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		5CA3BB3F285FC6020069B9EA /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		5CA3BB412864CDA70069B9EA /* PhotoGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGallery.swift; sourceTree = "<group>"; };
 		5CA3BB432864CFB40069B9EA /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
@@ -159,6 +165,7 @@
 		5C101D9A2841078300F5FE5D /* Navigation- */ = {
 			isa = PBXGroup;
 			children = (
+				5C9F66E129C47E9E002B3F93 /* LikedPosts */,
 				5C896DAB28F4629B00213FD0 /* NetworkService */,
 				5C73CC1A28D77868007C66A9 /* Models */,
 				5C44364228CF8300008DDD46 /* Login */,
@@ -227,6 +234,16 @@
 				5C42AA9229029EDE00778059 /* Models.swift */,
 			);
 			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		5C9F66E129C47E9E002B3F93 /* LikedPosts */ = {
+			isa = PBXGroup;
+			children = (
+				5C9F66E229C47EF2002B3F93 /* LikedPostModel.xcdatamodeld */,
+				5C9F66E529C4AB56002B3F93 /* CoreDataManager.swift */,
+				5C6B6E7929C4C7C50006DD1F /* LikedPostsController.swift */,
+			);
+			path = LikedPosts;
 			sourceTree = "<group>";
 		};
 		5CCAA2A428B683BC005135D7 /* StorageService */ = {
@@ -400,11 +417,14 @@
 				5C44364828D11023008DDD46 /* LoginInspector.swift in Sources */,
 				5CBFF73328D4DC0E002020FF /* LoginFactory.swift in Sources */,
 				5C44364428CF8352008DDD46 /* Checker.swift in Sources */,
+				5C9F66E629C4AB56002B3F93 /* CoreDataManager.swift in Sources */,
 				5C44092828D6073D005367BD /* MyLoginFactory.swift in Sources */,
 				5C101DB228410A2200F5FE5D /* FeedViewController.swift in Sources */,
 				5CF48DF928C3E4EF009B0C3D /* User.swift in Sources */,
 				5C44364628CF87C2008DDD46 /* LoginViewControllerDelegate.swift in Sources */,
+				5C9F66E429C47EF2002B3F93 /* LikedPostModel.xcdatamodeld in Sources */,
 				5C101DB428410A3F00F5FE5D /* ProfileViewController.swift in Sources */,
+				5C6B6E7A29C4C7C50006DD1F /* LikedPostsController.swift in Sources */,
 				5C896DAF28F4650F00213FD0 /* AppConfiguration.swift in Sources */,
 				5C101D9E2841078300F5FE5D /* SceneDelegate.swift in Sources */,
 				5CA3BB4A2864FD6D0069B9EA /* PhotosTableViewCell.swift in Sources */,
@@ -768,6 +788,19 @@
 			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		5C9F66E229C47EF2002B3F93 /* LikedPostModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5C9F66E329C47EF2002B3F93 /* LikedPostModel.xcdatamodel */,
+			);
+			currentVersion = 5C9F66E329C47EF2002B3F93 /* LikedPostModel.xcdatamodel */;
+			path = LikedPostModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5C101D902841078300F5FE5D /* Project object */;
 }

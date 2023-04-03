@@ -9,13 +9,15 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-   var currentUser: User
-  
-   init(currentUser: User ) {
-       self.currentUser = currentUser
-       super.init(nibName: nil, bundle: nil)
-   }
-  
+    private var doubleTapped: (() -> Void)?
+    
+    var currentUser: User
+    
+    init(currentUser: User ) {
+        self.currentUser = currentUser
+        super.init(nibName: nil, bundle: nil)
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -167,6 +169,11 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
+    private func savePost(post: PostStruct) {
+        CoreDataManager.shared.createNewLikedPost(post: post)
+        print("Post is saved to CoreData")
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
@@ -188,10 +195,20 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         var cell: UITableViewCell!
         if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
-            cell.post = postsData[indexPath.row]
+            let post = posts[indexPath.row]
+            cell.post = post
+            cell.doubleTap = { [weak self] post in
+                let alert = UIAlertController(title: "", message: "Добавить публикацию избранное?", preferredStyle: .alert)
+                let alertOK = UIAlertAction(title: "OK", style: .default, handler:  { action in
+                    self?.savePost(post: post)
+                })
+                let alertCancel = UIAlertAction(title: "Cancel", style: .cancel)
+                alert.addAction(alertOK)
+                alert.addAction(alertCancel)
+                self?.present(alert, animated: true)
+            }
             return cell
         }
-        
         if indexPath.section == 1 {
             cell = tableView.dequeueReusableCell(withIdentifier: "PhotosTableViewCell", for: indexPath) as! PhotosTableViewCell
         }
