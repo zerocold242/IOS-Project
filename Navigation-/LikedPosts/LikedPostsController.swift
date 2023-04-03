@@ -61,7 +61,6 @@ class LikedPostsController: UIViewController, UITableViewDataSource, UITableView
                 // cell.post = post
                 CoreDataManager.shared.remove(likedPost: post)
                 tableView.reloadData()
-                
             }
         }
     }
