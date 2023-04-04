@@ -23,7 +23,7 @@ class PostTableViewCell: UITableViewCell {
         }
     }
     
-    private lazy var  authorLablel: UILabel = {
+     lazy var  authorLablel: UILabel = {
         
         let authLabel = UILabel()
         authLabel.textColor = .black
@@ -33,7 +33,7 @@ class PostTableViewCell: UITableViewCell {
         return authLabel
     }()
     
-    private lazy var  descriptionLablel: UILabel = {
+     lazy var  descriptionLablel: UILabel = {
         
         let descLabel = UILabel()
         descLabel.textColor = .systemGray
@@ -43,7 +43,7 @@ class PostTableViewCell: UITableViewCell {
         return descLabel
     }()
     
-    private lazy var imageImageView: UIImageView = {
+     lazy var imageImageView: UIImageView = {
         
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
@@ -52,7 +52,7 @@ class PostTableViewCell: UITableViewCell {
         return image
     }()
     
-    private lazy var likesLablel: UILabel = {
+     lazy var likesLablel: UILabel = {
         
         let likeLabel = UILabel()
         likeLabel.textColor = .black
@@ -61,7 +61,7 @@ class PostTableViewCell: UITableViewCell {
         return likeLabel
     }()
     
-    private lazy var viewsLablel: UILabel = {
+     lazy var viewsLablel: UILabel = {
         
         let viewLabel = UILabel()
         viewLabel.textColor = .black

@@ -35,59 +35,23 @@ class LikedPostsController: UIViewController, UITableViewDataSource, UITableView
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
-        
     }
-    
-    private func setUpGestureRecognizer() {
-        let doubleTapOnCell = UITapGestureRecognizer(target: self, action: #selector(doubleTapRemove))
-        doubleTapOnCell.numberOfTapsRequired = 2
-        tableView.addGestureRecognizer(doubleTapOnCell)
-    }
-    
-    //  @objc private func postTapped() {
-    //      if let doubleTapped = self.doubleTap,
-    //         let post = post {
-    //          doubleTapped(post)
-    //          print("double tapped, post created")
-    //      }
-    //  }
-    
-    @objc private func doubleTapRemove(_ tapGesture: UITapGestureRecognizer) {
-        if tapGesture.state == .ended {
-            let location = tapGesture.location(in: self.tableView)
-            if let indexPath = tableView.indexPathForRow(at: location),
-               let _ = tableView.cellForRow(at: indexPath) as? PostTableViewCell {
-                let post = CoreDataManager.shared.likedPosts[indexPath.row]
-                // cell.post = post
-                CoreDataManager.shared.remove(likedPost: post)
-                tableView.reloadData()
-            }
-        }
-    }
-    
-    //  @objc private func doubleTapRemove(_ tapGesture: UITapGestureRecognizer) {
-    //         if tapGesture.state == .ended {
-    //             let location = tapGesture.location(in: self.tableView)
-    //             if let indexPath = tableView.indexPathForRow(at: location),
-    //                let cell = tableView.cellForRow(at: indexPath) as? PostTableViewCell,
-    //                let post = cell.post {
-    //                 CoreDataManager.shared.remove(likedPost: post)
-    //                 tableView.reloadData()
-    //                 print("Post removed")
-    //             }
-    //         }
-    //     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
-        setUpGestureRecognizer()
+        // setUpGestureRecognizer()
         self.title = "Liked Posts"
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: reuseID)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.tableView.reloadData()
+    }
+    
+    func removePost(post: LikedPost) {
+        CoreDataManager.shared.remove(likedPost: post)
+        print("remove is done")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -104,7 +68,22 @@ class LikedPostsController: UIViewController, UITableViewDataSource, UITableView
                               image: likedPost.image ?? "",
                               likes: likedPost.likes,
                               views: likedPost.views)
+        cell.authorLablel.text = post.author
+        cell.descriptionLablel.text = post.description
+       
+        
         cell.post = post
+        cell.doubleTap = { [weak self] post in
+            let alert = UIAlertController(title: "", message: "Удалить публикацию из избранного?", preferredStyle: .alert)
+            let alertOK = UIAlertAction(title: "OK", style: .default, handler:  { action in
+                self?.removePost(post: likedPost)
+                tableView.reloadData()
+            })
+            let alertCancel = UIAlertAction(title: "Cancel", style: .cancel)
+            alert.addAction(alertOK)
+            alert.addAction(alertCancel)
+            self?.present(alert, animated: true)
+        }
         return cell
     }
     
