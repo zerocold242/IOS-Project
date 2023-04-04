@@ -11,6 +11,7 @@ import UIKit
 final class CurrentUserService: UserService {
     
     static let shared = CurrentUserService()
+
     
     var user = User(/*password: "5678",
                      login: "Aleksey",*/
@@ -24,6 +25,7 @@ final class CurrentUserService: UserService {
     
     func readUser() -> User? {
         self.user
+
     }
     
     // func createUser (password: String, login: String) -> User? {
