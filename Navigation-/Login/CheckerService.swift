@@ -15,11 +15,11 @@ class CheckerService {
     static let shared = CheckerService()
     
     func signUp( withEmail: String, password: String) {
-        let realm = try! Realm()
+        let realm = try? Realm()
         do {
-            try realm.write({
+            try realm?.write({
                 let login = RealmLoginModel(password: password, login: withEmail)
-                realm.add(login)
+                realm?.add(login)
             })
         } catch let signedUpError as NSError {
             print("Error signed Up: %@", signedUpError)

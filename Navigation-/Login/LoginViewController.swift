@@ -185,9 +185,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func keyboardHiden(notification: NSNotification) {
-        loginScrollView.contentInset = .zero
-        loginScrollView.verticalScrollIndicatorInsets = .zero
+        loginScrollView.contentOffset = CGPoint(x: 0, y: 0)
     }
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

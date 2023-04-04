@@ -40,18 +40,5 @@ class SharedAlert {
     }
 }
 
-//class SavedPostAlert {
-//
-//    static let shared = SavedPostAlert()
-//
-//    //let post = PostStruct.self
-//
-//    func saveAlert(alertTitle: String, alertMassage: String) {
-//        let alert = UIAlertController(title: alertTitle, message: alertMassage, preferredStyle: .alert)
-//        let alertOK = UIAlertAction(title: "OK", style: .default, handler:  { action in
-//            //let post = PostStruct.self
-//            //CoreDataManager.shared.createNewLikedPost(post: post )
-//        })
-//    }
-//}
+
 
