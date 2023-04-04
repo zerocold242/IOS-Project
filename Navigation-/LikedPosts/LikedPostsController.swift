@@ -40,9 +40,8 @@ class LikedPostsController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
-        // setUpGestureRecognizer()
         self.title = "Liked Posts"
-        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: reuseID)
+        //tableView.register(PostTableViewCell.self, forCellReuseIdentifier: reuseID)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,7 +50,7 @@ class LikedPostsController: UIViewController, UITableViewDataSource, UITableView
     
     func removePost(post: LikedPost) {
         CoreDataManager.shared.remove(likedPost: post)
-        print("remove is done")
+        print("Post is removed")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -68,10 +67,7 @@ class LikedPostsController: UIViewController, UITableViewDataSource, UITableView
                               image: likedPost.image ?? "",
                               likes: likedPost.likes,
                               views: likedPost.views)
-        cell.authorLablel.text = post.author
-        cell.descriptionLablel.text = post.description
-       
-        
+
         cell.post = post
         cell.doubleTap = { [weak self] post in
             let alert = UIAlertController(title: "", message: "Удалить публикацию из избранного?", preferredStyle: .alert)
