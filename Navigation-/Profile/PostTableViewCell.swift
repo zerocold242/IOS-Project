@@ -62,7 +62,6 @@ class PostTableViewCell: UITableViewCell {
     }()
     
      lazy var viewsLablel: UILabel = {
-        
         let viewLabel = UILabel()
         viewLabel.textColor = .black
         viewLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
