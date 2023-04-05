@@ -41,7 +41,6 @@ class LikedPostsController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         setUpView()
         self.title = "Liked Posts"
-        //tableView.register(PostTableViewCell.self, forCellReuseIdentifier: reuseID)
     }
     
     override func viewWillAppear(_ animated: Bool) {
