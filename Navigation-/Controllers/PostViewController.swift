@@ -9,7 +9,7 @@ import UIKit
 
 class PostViewController: UIViewController {
     
-    var titlePost: String = "Post"
+    //var titlePost: String = "Post"
     
    private func setupRightBarButton() {
         let rightBarButton = UIBarButtonItem(title: "Info",
@@ -26,7 +26,7 @@ class PostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemGreen
-        self.navigationItem.title = titlePost
+        self.navigationItem.title = "Liked Post"
         setupRightBarButton()
     }
 }

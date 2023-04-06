@@ -57,36 +57,36 @@ class InfoViewController: UIViewController {
     }
     
     // 1.2 DT: метод парсит json и отображает title taskOneLabel
-    func urlSession() {
-        let session = URLSession.shared
-        guard let url = URL(string: url) else {return}
-        let task = session.dataTask(with: url) { data , responce, error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            
-            if (responce as? HTTPURLResponse)?.statusCode != 200 {
-                print("StatusCode = \((responce as? HTTPURLResponse)?.statusCode ?? 0)")
-                return
-            }
-            guard let data = data  else {
-                print("Data = nil")
-                return
-            }
-            do {
-                if let jsonData = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
-                    guard let title = jsonData["title"] as? String else {return}
-                    DispatchQueue.main.async {
-                        self.taskOneLabel.text = title
-                    }
-                }
-            } catch {
-                print(error)
-            }
-        }
-        task.resume()
-    }
+//    func urlSession() {
+//        let session = URLSession.shared
+//        guard let url = URL(string: url) else {return}
+//        let task = session.dataTask(with: url) { data , responce, error in
+//            if let error = error {
+//                print(error.localizedDescription)
+//                return
+//            }
+//
+//            if (responce as? HTTPURLResponse)?.statusCode != 200 {
+//                print("StatusCode = \((responce as? HTTPURLResponse)?.statusCode ?? 0)")
+//                return
+//            }
+//            guard let data = data  else {
+//                print("Data = nil")
+//                return
+//            }
+//            do {
+//                if let jsonData = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
+//                    guard let title = jsonData["title"] as? String else {return}
+//                    DispatchQueue.main.async {
+//                        self.taskOneLabel.text = title
+//                    }
+//                }
+//            } catch {
+//                print(error)
+//            }
+//        }
+//        task.resume()
+//    }
     
     // 1.2 DT: метод отображает период обращения Татуина 
   //  func dataPlanet() {
@@ -160,7 +160,7 @@ class InfoViewController: UIViewController {
         view.backgroundColor = .systemTeal
         setupButton()
         setupView()
-        urlSession()
+      //  urlSession()
        // dataPlanet()
     }
 }

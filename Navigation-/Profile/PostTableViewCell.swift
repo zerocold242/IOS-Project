@@ -10,6 +10,9 @@ import StorageService
 
 class PostTableViewCell: UITableViewCell {
     
+    //двойной клик на ячейку поста
+    var doubleTap: ((_ post: PostStruct) -> Void)?
+    
     var post: PostStruct? {
         didSet {
             authorLablel.text = post?.author
@@ -20,7 +23,7 @@ class PostTableViewCell: UITableViewCell {
         }
     }
     
-    private lazy var  authorLablel: UILabel = {
+     lazy var  authorLablel: UILabel = {
         
         let authLabel = UILabel()
         authLabel.textColor = .black
@@ -30,7 +33,7 @@ class PostTableViewCell: UITableViewCell {
         return authLabel
     }()
     
-    private lazy var  descriptionLablel: UILabel = {
+     lazy var  descriptionLablel: UILabel = {
         
         let descLabel = UILabel()
         descLabel.textColor = .systemGray
@@ -40,7 +43,7 @@ class PostTableViewCell: UITableViewCell {
         return descLabel
     }()
     
-    private lazy var imageImageView: UIImageView = {
+     lazy var imageImageView: UIImageView = {
         
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
@@ -49,7 +52,7 @@ class PostTableViewCell: UITableViewCell {
         return image
     }()
     
-    private lazy var likesLablel: UILabel = {
+     lazy var likesLablel: UILabel = {
         
         let likeLabel = UILabel()
         likeLabel.textColor = .black
@@ -58,7 +61,7 @@ class PostTableViewCell: UITableViewCell {
         return likeLabel
     }()
     
-    private lazy var viewsLablel: UILabel = {
+     lazy var viewsLablel: UILabel = {
         
         let viewLabel = UILabel()
         viewLabel.textColor = .black
@@ -69,6 +72,9 @@ class PostTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super .init(style: style, reuseIdentifier: reuseIdentifier)
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(postTapped))
+        tapGestureRecognizer.numberOfTapsRequired = 2
+        contentView.addGestureRecognizer(tapGestureRecognizer)
         setupPostTableViewCell()
     }
     
@@ -76,7 +82,15 @@ class PostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-   private func setupPostTableViewCell() {
+    @objc private func postTapped() {
+        if let doubleTapped = self.doubleTap,
+           let post = post {
+            doubleTapped(post)
+            print("double tapped, post created")
+        }
+    }
+    
+    private func setupPostTableViewCell() {
         contentView.addSubview(authorLablel)
         contentView.addSubview(descriptionLablel)
         contentView.addSubview(imageImageView)
@@ -89,29 +103,29 @@ class PostTableViewCell: UITableViewCell {
         viewsLablel.setContentHuggingPriority(.required, for: .vertical)
         
         
-            [authorLablel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            authorLablel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            authorLablel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            authorLablel.heightAnchor.constraint(equalToConstant: 16),
-            
-            imageImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-            imageImageView.heightAnchor.constraint(equalTo: contentView.widthAnchor),
-            imageImageView.topAnchor.constraint(equalTo: authorLablel.bottomAnchor, constant: 16),
-            
-            imageImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imageImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            
-            descriptionLablel.topAnchor.constraint(equalTo: imageImageView.bottomAnchor, constant: 16),
-            descriptionLablel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -48),
-            descriptionLablel.leadingAnchor.constraint(equalTo: authorLablel.leadingAnchor),
-            descriptionLablel.trailingAnchor.constraint(equalTo: authorLablel.trailingAnchor),
-            
-            likesLablel.topAnchor.constraint(equalTo: descriptionLablel.bottomAnchor, constant: 16),
-            likesLablel.leadingAnchor.constraint(equalTo: authorLablel.leadingAnchor),
-            likesLablel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
-            
-            viewsLablel.topAnchor.constraint(equalTo: descriptionLablel.bottomAnchor, constant: 16),
-            viewsLablel.trailingAnchor.constraint(equalTo: authorLablel.trailingAnchor),
+        [authorLablel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+         authorLablel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+         authorLablel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+         authorLablel.heightAnchor.constraint(equalToConstant: 16),
+         
+         imageImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+         imageImageView.heightAnchor.constraint(equalTo: contentView.widthAnchor),
+         imageImageView.topAnchor.constraint(equalTo: authorLablel.bottomAnchor, constant: 16),
+         
+         imageImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+         imageImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+         
+         descriptionLablel.topAnchor.constraint(equalTo: imageImageView.bottomAnchor, constant: 16),
+         descriptionLablel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -48),
+         descriptionLablel.leadingAnchor.constraint(equalTo: authorLablel.leadingAnchor),
+         descriptionLablel.trailingAnchor.constraint(equalTo: authorLablel.trailingAnchor),
+         
+         likesLablel.topAnchor.constraint(equalTo: descriptionLablel.bottomAnchor, constant: 16),
+         likesLablel.leadingAnchor.constraint(equalTo: authorLablel.leadingAnchor),
+         likesLablel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+         
+         viewsLablel.topAnchor.constraint(equalTo: descriptionLablel.bottomAnchor, constant: 16),
+         viewsLablel.trailingAnchor.constraint(equalTo: authorLablel.trailingAnchor),
         ] .forEach { $0.isActive = true }
     }
 }

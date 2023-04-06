@@ -117,6 +117,10 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
             
             fullNameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             fullNameLabel.centerYAnchor.constraint(equalTo: contentView.topAnchor, constant: 27),
+            fullNameLabel.topAnchor.constraint(equalTo: avatarImageView.topAnchor),
+            fullNameLabel.widthAnchor.constraint(equalToConstant: 110),
+           
+            
             
             setStatusButton.topAnchor .constraint(equalTo: avatarImageView.bottomAnchor, constant: 32),
             setStatusButton.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
