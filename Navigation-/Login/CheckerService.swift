@@ -33,7 +33,7 @@ class CheckerService {
         //      realm.delete(user)
         //  })
         // }
-        
+        //
         
     }
 }
