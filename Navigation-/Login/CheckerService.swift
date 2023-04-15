@@ -8,6 +8,7 @@
 import Foundation
 //import FirebaseAuth
 import UIKit
+
 import RealmSwift
 
 class CheckerService {
@@ -35,6 +36,7 @@ class CheckerService {
         // }
         //
         
+
     }
 }
 

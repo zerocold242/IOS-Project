@@ -10,6 +10,7 @@ import RealmSwift
 class LoginViewController: UIViewController, UITextFieldDelegate {
     private let currentUserSevice = CurrentUserService()
     private let testUserService = TestUserService()
+
     var delegate: LoginViewControllerDelegate?
     var user = CurrentUserService.shared.user
     
@@ -19,6 +20,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         signUpBut.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         return signUpBut
     }()
+
     
     private lazy var indicatorActivity: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .medium)
@@ -109,6 +111,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
     }()
     
+
     private func setupLoginScrollView() {
         
         loginScrollView.addSubview(contentView)
@@ -156,6 +159,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
           signUpButton.trailingAnchor.constraint(equalTo: loginStackView.trailingAnchor),
           signUpButton.heightAnchor.constraint(equalToConstant: 50)
           
+
         ]
             .forEach({$0.isActive = true})
     }
@@ -204,6 +208,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+
     //DT 2.4: метод сквозной авторизации пользователя
     private func signIn() {
         
@@ -221,11 +226,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             if let password = passTexfield.text, !password.isEmpty,
                let login =  loginTextfield.text, !login.isEmpty {
                 delegate?.signUpdelegate(loginDelegate: login, passwordDelegate: password)
+
                 let user = CurrentUserService.shared.user
                 let profileVC = ProfileViewController(currentUser: user)
                 navigationController?.pushViewController(profileVC, animated: true)
                 SharedAlert.shared.showAlert(alertTitle: "Логин и пароль сохранены в Realm", alertMessage: "Вы успешно авторизовались")
             } else {
+
                 SharedAlert.shared.showAlert(alertTitle: "Ошибка", alertMessage: "Необходимо заполнить все поля авторизации")
             }
         }
@@ -239,6 +246,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(loginScrollView)
         setupLoginScrollView()
         signUp()
+
     }
 }
 

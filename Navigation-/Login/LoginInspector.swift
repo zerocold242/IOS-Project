@@ -12,6 +12,9 @@ class LoginInspector: LoginViewControllerDelegate {
     func signUpdelegate(loginDelegate: String, passwordDelegate: String) {
         CheckerService.shared.signUp(withEmail: loginDelegate, password: passwordDelegate)
         print("LoginInspector signUp")
+
+    }
+
     }
     
 //    func isCheckDelegate(loginDelegate: String, passwordDelegate: String) -> Bool {
