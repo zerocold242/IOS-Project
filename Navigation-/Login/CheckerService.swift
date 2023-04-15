@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import FirebaseAuth
+//import FirebaseAuth
 import UIKit
 import RealmSwift
 
