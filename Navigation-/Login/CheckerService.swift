@@ -25,7 +25,6 @@ class CheckerService {
             print("Error signed Up: %@", signedUpError)
         }
         
-        
         // func signOut() {
         //let realm = try! Realm()
         //  let user = realm.objects(User.self)[0]
@@ -33,7 +32,6 @@ class CheckerService {
         //      realm.delete(user)
         //  })
         // }
-        
         
     }
 }
