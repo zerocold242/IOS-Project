@@ -191,6 +191,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        signIn()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHiden), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -206,8 +207,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     //DT 2.4: метод сквозной авторизации пользователя
     private func signIn() {
         
-        let realm = try! Realm()
-        if realm.objects(RealmLoginModel.self).count >= 1 {
+        let realm = try? Realm()
+        if realm?.objects(RealmLoginModel.self).count ?? 0 >= 1 {
             let user = CurrentUserService.shared.user
             let profileVC = ProfileViewController(currentUser: user)
             navigationController?.pushViewController(profileVC, animated: true)
@@ -237,7 +238,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         gesture()
         view.addSubview(loginScrollView)
         setupLoginScrollView()
-        signIn()
         signUp()
     }
 }

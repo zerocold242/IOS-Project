@@ -8,10 +8,15 @@
 import UIKit
 import StorageService
 
-class LikedPostsController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class LikedPostsController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        CoreDataManager.shared.likedPosts = CoreDataManager.shared.searchLikedPosts(searchString: searchController.searchBar.text)
+        tableView.reloadData()
+    }
     
     private let reuseID = String(describing: PostTableViewCell.self)
     var doubleTap: ((_ post: PostStruct) -> Void)?
+    let searchController = UISearchController(searchResultsController: nil)
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -41,6 +46,9 @@ class LikedPostsController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         setUpView()
         self.title = "Liked Posts"
+        navigationItem.searchController = searchController
+        navigationItem.largeTitleDisplayMode = .never
+        searchController.searchResultsUpdater = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,7 +74,7 @@ class LikedPostsController: UIViewController, UITableViewDataSource, UITableView
                               image: likedPost.image ?? "",
                               likes: likedPost.likes,
                               views: likedPost.views)
-
+        
         cell.post = post
         cell.doubleTap = { [weak self] post in
             let alert = UIAlertController(title: "", message: "Удалить публикацию из избранного?", preferredStyle: .alert)
@@ -86,4 +94,16 @@ class LikedPostsController: UIViewController, UITableViewDataSource, UITableView
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
+            let likedPost = CoreDataManager.shared.likedPosts[indexPath.row]
+            
+            self.removePost(post: likedPost)
+            tableView.reloadData()
+            completionHandler(true)
+        }
+        
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        return configuration
+    }
 }

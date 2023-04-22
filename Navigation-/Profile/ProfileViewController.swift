@@ -170,7 +170,8 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     private func savePost(post: PostStruct) {
-        CoreDataManager.shared.createNewLikedPost(post: post)
+        CoreDataManager.shared.createPostIntoBackground(post: post, completion: nil)
+        tableView.reloadData()
         print("Post is saved to CoreData")
     }
     
