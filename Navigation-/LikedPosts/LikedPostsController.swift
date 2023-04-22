@@ -70,7 +70,7 @@ class LikedPostsController: UIViewController, UITableViewDataSource, UITableView
         
         let likedPost = CoreDataManager.shared.likedPosts[indexPath.row]
         let post = PostStruct(author: likedPost.author ?? "",
-                              description: likedPost.description,
+                              description: likedPost.postDescription ?? "",
                               image: likedPost.image ?? "",
                               likes: likedPost.likes,
                               views: likedPost.views)
