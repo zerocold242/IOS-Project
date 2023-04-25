@@ -25,6 +25,8 @@ class CoreDataManager {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+        /* этот ключ необходим для того чтобы fetchResultController следил за изменениями в базе и автоматически отрабатывал через делегата когда произошли изменения */
+        container.viewContext.automaticallyMergesChangesFromParent = true
         return container
     }()
     
@@ -32,31 +34,23 @@ class CoreDataManager {
         return persistentContainer.viewContext
     }
     
-    var backgroundViewContext: NSManagedObjectContext {
-        return persistentContainer.newBackgroundContext()
-    }
-    
-    func newBackgroundContext() -> NSManagedObjectContext {
-        return persistentContainer.newBackgroundContext()
-    }
-    
     //4. Запрос постов из контекста/перезагрузка контекста
     var likedPosts: [LikedPost] = []
     
-    func fetchLikedPosts(searchString: String? = nil) {
+    func fetchLikedPosts() {
         let request = LikedPost.fetchRequest()
         likedPosts = (try? viewContext.fetch(request)) ?? []
     }
     
     //запрос постов из контекста с предикатом для поискового запроса
-    func searchLikedPosts(searchString: String? = nil) -> [LikedPost] {
-        let request = LikedPost.fetchRequest()
-        if let searchString, searchString != "" {
-            request.predicate = NSPredicate(format: "author contains[c] %@",  searchString)
-        }
-        print("context reloaded")
-        return (try? viewContext.fetch(request)) ?? []
-    }
+    // func searchLikedPosts(searchString: String? = nil) -> [LikedPost] {
+    //     let request = LikedPost.fetchRequest()
+    //     if let searchString, searchString != "" {
+    //         request.predicate = NSPredicate(format: "author contains[c] %@",  searchString)
+    //     }
+    //     print("context reloaded")
+    //     return (try? viewContext.fetch(request)) ?? []
+    // }
     
     //перезагрузка/отображение контекста с предикатом для проверки на дубли в сохраненных постах
     func getPost(by description: String, context: NSManagedObjectContext) -> LikedPost? {
@@ -89,8 +83,8 @@ class CoreDataManager {
     // Сохранение  поста в backgroundContext
     func createPostIntoBackground(post: PostStruct, completion: (()->())?) {
         persistentContainer.performBackgroundTask {  contextBackground in
+            
             if self.getPost(by: post.description, context: contextBackground) == nil {
-                
                 let newLikedPost = LikedPost(context: contextBackground)
                 newLikedPost.author = post.author
                 newLikedPost.postDescription = post.description
