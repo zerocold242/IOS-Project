@@ -24,7 +24,7 @@ class CheckerService {
         } catch let signedUpError as NSError {
             print("Error signed Up: %@", signedUpError)
         }
-        
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // func signOut() {
         //let realm = try! Realm()
         //  let user = realm.objects(User.self)[0]
