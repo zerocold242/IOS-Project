@@ -11,6 +11,9 @@ import CoreLocation
 
 class MapViewController: UIViewController, MKMapViewDelegate {
     
+    //переключатель для выбора вида карты
+    private lazy var segmentedControl = UISegmentedControl(items: ["Standard", "Satellite", "Hybrid"])
+
     private lazy var locationManager: CLLocationManager = {
         let locationManager = CLLocationManager()
         return locationManager
@@ -62,11 +65,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         locationManager.delegate = self
     }
     
+    //добавление пина на карту по длинному нажатию
     private func longPress() {
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(addAnnotation(gesture:)))
         mapView.addGestureRecognizer(longPressGesture)
     }
     
+    //добавление пина на карту
     @objc private func addAnnotation(gesture: UILongPressGestureRecognizer) {
         
         let annotation = MKPointAnnotation()
@@ -85,8 +90,29 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         mapView.removeAnnotations(mapView.annotations)
     }
     
+    //добавление переключателя вида карт
+    private func setUpMapTypeChange() {
+        segmentedControl.addTarget(self, action: #selector(mapTypeChanged), for: .valueChanged)
+           segmentedControl.selectedSegmentIndex = 0
+           navigationItem.titleView = segmentedControl
+    }
+    
+    @objc private func mapTypeChanged(_ sender: UISegmentedControl) {
+           switch sender.selectedSegmentIndex {
+           case 0:
+               mapView.mapType = .standard
+           case 1:
+               mapView.mapType = .satellite
+           case 2:
+               mapView.mapType = .hybrid
+           default:
+               break
+           }
+       }
+
+    
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        // Get selected annotation
+      
         guard let annotation = view.annotation else { return }
         
         let alertController = UIAlertController(title: "Navigate", message: "Do you want to navigate to this location?", preferredStyle: .alert)
@@ -142,6 +168,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         setUpDeletePinsButton()
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
+        setUpMapTypeChange()
     }
 }
 
