@@ -78,7 +78,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         if gesture.state == .ended {
             let point = gesture.location(in: mapView)
             let coordinate = mapView.convert(point, toCoordinateFrom: mapView)
-            let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
             mapView.addAnnotation(annotation)
             annotation.title = "New Point"
