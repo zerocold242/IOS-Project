@@ -40,6 +40,8 @@
 		5CA3BB442864CFB40069B9EA /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3BB432864CFB40069B9EA /* PhotosViewController.swift */; };
 		5CA3BB462864F0330069B9EA /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3BB452864F0320069B9EA /* PhotosCollectionViewCell.swift */; };
 		5CA3BB4A2864FD6D0069B9EA /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3BB492864FD6D0069B9EA /* PhotosTableViewCell.swift */; };
+		5CA9FBBF2A0161B70077B269 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA9FBBE2A0161B70077B269 /* MapViewController.swift */; };
+		5CA9FBCA2A0C2D630077B269 /* DismissAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA9FBC92A0C2D630077B269 /* DismissAlert.swift */; };
 		5CBFF73328D4DC0E002020FF /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBFF73228D4DC0E002020FF /* LoginFactory.swift */; };
 		5CCAA2A628B683BC005135D7 /* StorageService.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CCAA2A528B683BC005135D7 /* StorageService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CCAA2A928B683BC005135D7 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CCAA2A328B683BB005135D7 /* StorageService.framework */; };
@@ -110,6 +112,8 @@
 		5CA3BB432864CFB40069B9EA /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		5CA3BB452864F0320069B9EA /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		5CA3BB492864FD6D0069B9EA /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
+		5CA9FBBE2A0161B70077B269 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		5CA9FBC92A0C2D630077B269 /* DismissAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAlert.swift; sourceTree = "<group>"; };
 		5CBFF73228D4DC0E002020FF /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		5CCAA2A328B683BB005135D7 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CCAA2A528B683BC005135D7 /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
@@ -165,6 +169,8 @@
 		5C101D9A2841078300F5FE5D /* Navigation- */ = {
 			isa = PBXGroup;
 			children = (
+				5CA9FBC42A0C236E0077B269 /* Helpers */,
+				5CA9FBBD2A0161880077B269 /* Maps */,
 				5C9F66E129C47E9E002B3F93 /* LikedPosts */,
 				5C896DAB28F4629B00213FD0 /* NetworkService */,
 				5C73CC1A28D77868007C66A9 /* Models */,
@@ -212,7 +218,6 @@
 				5C44092728D6073D005367BD /* MyLoginFactory.swift */,
 				5C42AA962904799E00778059 /* BruteForce.swift */,
 				5C26A142290F0DB600856BC3 /* CheckerService.swift */,
-				5C26A1442910618C00856BC3 /* SharedAlert.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -244,6 +249,23 @@
 				5C6B6E7929C4C7C50006DD1F /* LikedPostsController.swift */,
 			);
 			path = LikedPosts;
+			sourceTree = "<group>";
+		};
+		5CA9FBBD2A0161880077B269 /* Maps */ = {
+			isa = PBXGroup;
+			children = (
+				5CA9FBBE2A0161B70077B269 /* MapViewController.swift */,
+			);
+			path = Maps;
+			sourceTree = "<group>";
+		};
+		5CA9FBC42A0C236E0077B269 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				5C26A1442910618C00856BC3 /* SharedAlert.swift */,
+				5CA9FBC92A0C2D630077B269 /* DismissAlert.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		5CCAA2A428B683BC005135D7 /* StorageService */ = {
@@ -421,6 +443,7 @@
 				5C44092828D6073D005367BD /* MyLoginFactory.swift in Sources */,
 				5C101DB228410A2200F5FE5D /* FeedViewController.swift in Sources */,
 				5CF48DF928C3E4EF009B0C3D /* User.swift in Sources */,
+				5CA9FBCA2A0C2D630077B269 /* DismissAlert.swift in Sources */,
 				5C44364628CF87C2008DDD46 /* LoginViewControllerDelegate.swift in Sources */,
 				5C9F66E429C47EF2002B3F93 /* LikedPostModel.xcdatamodeld in Sources */,
 				5C101DB428410A3F00F5FE5D /* ProfileViewController.swift in Sources */,
@@ -436,6 +459,7 @@
 				5C42AA9329029EDE00778059 /* Models.swift in Sources */,
 				5CEDFD3D2846ADDB00AA08F3 /* ProfileHeaderview.swift in Sources */,
 				5CFDEB8A28D9086A00E48871 /* feedModel.swift in Sources */,
+				5CA9FBBF2A0161B70077B269 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -597,6 +621,10 @@
 				DEVELOPMENT_TEAM = 5FNBM392QS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Navigation-/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Используем геопозицию для улучшения работы приложения";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Используем геопозицию для улучшения работы приложения";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Используем геопозицию для улучшения работы приложения";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -627,6 +655,10 @@
 				DEVELOPMENT_TEAM = 5FNBM392QS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Navigation-/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Используем геопозицию для улучшения работы приложения";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Используем геопозицию для улучшения работы приложения";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Используем геопозицию для улучшения работы приложения";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

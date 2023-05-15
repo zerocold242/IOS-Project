@@ -56,8 +56,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         postNavigationVC.isNavigationBarHidden = false
         postNavigationVC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "suit.heart"), tag: 2)
         
+        let mapVC = MapViewController()
+        let mapNavigationVC = UINavigationController(rootViewController: mapVC)
+        mapNavigationVC.isNavigationBarHidden = false
+        mapNavigationVC.tabBarItem = UITabBarItem(title: "Maps", image: UIImage(systemName: "location.circle"), tag: 3)
         
-        tabBarController.viewControllers = [feedNavigationVC, logInNavigationVC, postNavigationVC]
+        
+        tabBarController.viewControllers = [feedNavigationVC, logInNavigationVC, postNavigationVC, mapNavigationVC]
         UITabBar.appearance().backgroundColor = .systemGray5
         
         let photosViewController = PhotosViewController()
