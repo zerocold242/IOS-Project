@@ -47,7 +47,7 @@ class InfoViewController: UIViewController {
                                                  y: self.view.bounds.height / 2 - 25,
                                                  width: 200,
                                                  height: 50))
-        alertButton.setTitle("Alert", for: .normal)
+        alertButton.setTitle(~LocalizedKeys.infoAlertButton.rawValue, for: .normal)
         alertButton.setTitleColor(.lightGray, for: .highlighted)
         alertButton.backgroundColor = .blue
         alertButton.layer.cornerRadius = 12
@@ -137,16 +137,16 @@ class InfoViewController: UIViewController {
     }
     
     @objc private func setupAlert() {
-        let title = "Warning!"
-        let message = "Была нажата кнопка Alert в InfoViewController"
+        let title = ~LocalizedKeys.infoAlertTitle.rawValue
+        let message = ~LocalizedKeys.infoAlertMessage.rawValue
         let alert = UIAlertController(title: title,
                                       message: message,
                                       preferredStyle: .alert)
-        let actionCancel = UIAlertAction(title: "Cancel", style: .destructive) { _ in
+        let actionCancel = UIAlertAction(title: ~LocalizedKeys.infoActionCancel.rawValue, style: .destructive) { _ in
             print("Нажата кнопка Cancel")
         }
         
-        let actionOk = UIAlertAction(title: "Ok", style: .default) { _ in
+        let actionOk = UIAlertAction(title: ~LocalizedKeys.infoActionOk.rawValue, style: .default) { _ in
             print("Нажата кнопка Ок")
         }
         

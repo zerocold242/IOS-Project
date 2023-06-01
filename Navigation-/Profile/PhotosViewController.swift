@@ -64,7 +64,7 @@ class PhotosViewController: UIViewController {
         self.view.backgroundColor = .white
         photoGallery = PhotoGallery.myPhotos
         setupCollectionView()
-        onThread()
+        //onThread()
     }
 }
 

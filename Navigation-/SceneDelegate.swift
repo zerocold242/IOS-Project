@@ -41,26 +41,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //logInVC.delegate = MyLoginFactory().createLoginInspector()
         
         let feedNavigationVC = UINavigationController(rootViewController: feedVC)
-        feedNavigationVC.tabBarItem = UITabBarItem(title: "Feed",
+        feedNavigationVC.tabBarItem = UITabBarItem(title: ~LocalizedKeys.feed.rawValue,
                                                    image: UIImage(systemName: "doc.richtext"),
                                                    tag: 0)
         
         let logInNavigationVC = UINavigationController(rootViewController: logInVC)
         logInNavigationVC.isNavigationBarHidden = true
-        logInNavigationVC.tabBarItem = UITabBarItem(title: "Profile",
+        logInNavigationVC.tabBarItem = UITabBarItem(title: ~LocalizedKeys.profile.rawValue,
                                                     image: UIImage(systemName: "person.circle"),
                                                     tag: 1)
         
         let postVC = LikedPostsController() //PostViewController()
         let postNavigationVC = UINavigationController(rootViewController: postVC)
         postNavigationVC.isNavigationBarHidden = false
-        postNavigationVC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "suit.heart"), tag: 2)
+        postNavigationVC.tabBarItem = UITabBarItem(title: ~LocalizedKeys.favorites.rawValue, image: UIImage(systemName: "suit.heart"), tag: 2)
         
         let mapVC = MapViewController()
         let mapNavigationVC = UINavigationController(rootViewController: mapVC)
         mapNavigationVC.isNavigationBarHidden = false
-        mapNavigationVC.tabBarItem = UITabBarItem(title: "Maps", image: UIImage(systemName: "location.circle"), tag: 3)
-        
+        mapNavigationVC.tabBarItem = UITabBarItem(title: ~LocalizedKeys.mapse.rawValue, image: UIImage(systemName: "location.circle"), tag: 3)
         
         tabBarController.viewControllers = [feedNavigationVC, logInNavigationVC, postNavigationVC, mapNavigationVC]
         UITabBar.appearance().backgroundColor = .systemGray5

@@ -41,7 +41,7 @@ class FeedViewController: UIViewController {
         firstButton.layer.shadowOffset = CGSize(width: 2, height: 2)
         firstButton.layer.shadowOpacity = 1
         firstButton.layer.shadowRadius = 5
-        firstButton.setTitle("Go to the PostViewController", for: .normal)
+        firstButton.setTitle(~LocalizedKeys.firstButton.rawValue, for: .normal)
         firstButton.setTitleColor(.lightGray, for: .highlighted)
         firstButton.addTarget(self, action: #selector(showPost), for: .touchUpInside)
         stackView.addArrangedSubview(firstButton)
@@ -54,7 +54,7 @@ class FeedViewController: UIViewController {
         secondButton.layer.shadowOffset = CGSize(width: 2, height: 2)
         secondButton.layer.shadowOpacity = 1
         secondButton.layer.shadowRadius = 5
-        secondButton.setTitle("Go to the PostViewController", for: .normal)
+        secondButton.setTitle(~LocalizedKeys.secondButton.rawValue, for: .normal)
         secondButton.setTitleColor(.lightGray, for: .highlighted)
         secondButton.addTarget(self, action: #selector(showPost), for: .touchUpInside)
         stackView.addArrangedSubview(secondButton)
@@ -71,7 +71,7 @@ class FeedViewController: UIViewController {
         let textfield = UITextField()
         textfield.textColor = .black
         textfield.backgroundColor = .white
-        textfield.placeholder = "   Secret word"
+        textfield.placeholder = ~LocalizedKeys.secretTextField.rawValue
         textfield.clipsToBounds = true
         textfield.layer.cornerRadius = 10
         textfield.font = UIFont.systemFont(ofSize: 20, weight: .regular)
@@ -82,7 +82,7 @@ class FeedViewController: UIViewController {
     
     //INT 6.2: кнопка проверки
     let checkGuessButton: CustomButton = {
-        let checkGuessButton = CustomButton(title: "Check Secret word", titleColor: .lightGray)
+        let checkGuessButton = CustomButton(title: ~LocalizedKeys.checkButton.rawValue, titleColor: .lightGray)
         checkGuessButton.layer.shadowColor = UIColor.black.cgColor
         checkGuessButton.layer.shadowOffset = CGSize(width: 2, height: 2)
         checkGuessButton.layer.shadowOpacity = 1

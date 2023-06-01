@@ -14,7 +14,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     var user = CurrentUserService.shared.user
     
     private lazy var signUpButton: CustomButton = {
-        let signUpBut = CustomButton(title: "Create user", titleColor: .lightGray)
+        //let signUpBut = CustomButton(title: "Create user", titleColor: .lightGray)
+        let signUpBut = CustomButton(title: ~LocalizedKeys.signUpBut.rawValue, titleColor: .lightGray)
         signUpBut.titleLabel?.textColor = UIColor.white
         signUpBut.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         return signUpBut
@@ -57,7 +58,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         logTextfield.backgroundColor = .systemGray6
         logTextfield.layer.borderWidth = 0.5
         logTextfield.layer.borderColor = UIColor.lightGray.cgColor
-        logTextfield.placeholder = "E-mail or phone"
+        //logTextfield.placeholder = "E-mail or phone"
+        logTextfield.placeholder = ~LocalizedKeys.logTextfield.rawValue
         logTextfield.textColor = .black
         logTextfield.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         logTextfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: logTextfield.frame.height))
@@ -77,7 +79,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         password.autocapitalizationType = .none
         password.isSecureTextEntry = true
         password.textColor = .black
-        password.placeholder = "Password"
+        //password.placeholder = "Password"
+        password.placeholder = ~LocalizedKeys.passTextField.rawValue
         password.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         password.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: password.frame.height))
         password.leftViewMode = .always
@@ -87,7 +90,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     //INT 6.1:
     private lazy var loginButton: CustomButton = {
-        let logButton = CustomButton(title: "Log In", titleColor: .lightGray)
+        //let logButton = CustomButton(title: "Log In", titleColor: .lightGray)
+        let logButton = CustomButton(title: ~LocalizedKeys.logButton.rawValue, titleColor: .lightGray)
         logButton.titleLabel?.textColor = UIColor.white
         logButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         logButton.isHidden = true
@@ -224,9 +228,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 let user = CurrentUserService.shared.user
                 let profileVC = ProfileViewController(currentUser: user)
                 navigationController?.pushViewController(profileVC, animated: true)
-                SharedAlert.shared.showAlert(alertTitle: "Логин и пароль сохранены в Realm", alertMessage: "Вы успешно авторизовались")
+                //SharedAlert.shared.showAlert(alertTitle: "Логин и пароль сохранены в Realm", alertMessage: "Вы успешно авторизовались")
+                SharedAlert.shared.showAlert(alertTitle: ~LocalizedKeys.loginAlert.rawValue, alertMessage: ~LocalizedKeys.loginAlertTitle.rawValue)
+                
             } else {
-                SharedAlert.shared.showAlert(alertTitle: "Ошибка", alertMessage: "Необходимо заполнить все поля авторизации")
+                SharedAlert.shared.showAlert(alertTitle: ~LocalizedKeys.errorAlert.rawValue, alertMessage: ~LocalizedKeys.errorAlertTitle.rawValue)
             }
         }
     }

@@ -10,16 +10,19 @@ import StorageService
 
 class PostTableViewCell: UITableViewCell {
     
+    let formattedString = NSLocalizedString("likes", comment: "")
+    
     //двойной клик на ячейку поста
     var doubleTap: ((_ post: PostStruct) -> Void)?
     
     var post: PostStruct? {
         didSet {
+            let string = String(format: formattedString,  post?.likes ?? 0 )
             authorLablel.text = post?.author
             descriptionLablel.text = post?.description
             imageImageView.image = UIImage(named: post?.image ?? "logo.png")
-            likesLablel.text = "Likes: \(post?.likes ?? 0)"
-            viewsLablel.text = "Views: \(post?.views ?? 0)"
+            likesLablel.text = string//String(format: "Likes".localized,  post?.likes ?? 0 )
+            viewsLablel.text = " \(post?.views ?? 0) \(~LocalizedKeys.profilePostViews.rawValue)"
         }
     }
     

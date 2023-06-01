@@ -51,7 +51,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         statusTextField.layer.borderWidth = 1
         statusTextField.layer.borderColor = UIColor.black.cgColor
         statusTextField.backgroundColor = .white
-        statusTextField.placeholder = "Enter your status..."
+        statusTextField.placeholder = ~LocalizedKeys.profileStatusTextField.rawValue
         statusTextField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         statusTextField.textColor = .black
         statusTextField.textAlignment = .center
@@ -64,7 +64,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
 
 // INT 6.1:
     private lazy var setStatusButton: CustomButton = {
-        let statusButton = CustomButton(title: "Set status", titleColor: .lightGray)
+        let statusButton = CustomButton(title: ~LocalizedKeys.profileStatusButton.rawValue, titleColor: .lightGray)
         statusButton.setTitleColor(.lightGray, for: .highlighted)
         statusButton.layer.shadowOffset = CGSize(width: 4, height: 4)
         statusButton.layer.shadowRadius = 4

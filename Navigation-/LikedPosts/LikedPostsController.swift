@@ -68,13 +68,13 @@ class LikedPostsController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
-        self.title = "Liked Posts"
+        self.title = ~LocalizedKeys.LPNavTitle.rawValue
         navigationItem.searchController = searchController
         navigationItem.largeTitleDisplayMode = .never
         searchController.searchResultsUpdater = self
         try? fetchResultController.performFetch()
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search post"
+        searchController.searchBar.placeholder = ~LocalizedKeys.LPSearchTitle.rawValue
         definesPresentationContext = true
         
     }
@@ -105,12 +105,12 @@ class LikedPostsController: UIViewController, UITableViewDataSource, UITableView
         
         cell.post = post
         cell.doubleTap = { [weak self] post in
-            let alert = UIAlertController(title: "", message: "Удалить публикацию из избранного?", preferredStyle: .alert)
-            let alertOK = UIAlertAction(title: "OK", style: .default, handler:  { action in
+            let alert = UIAlertController(title: "", message: ~LocalizedKeys.LPRemoveAlertTitle.rawValue, preferredStyle: .alert)
+            let alertOK = UIAlertAction(title: ~LocalizedKeys.infoActionOk.rawValue, style: .default, handler:  { action in
                 self?.removePost(post: likedPost)
                 tableView.reloadData()
             })
-            let alertCancel = UIAlertAction(title: "Cancel", style: .cancel)
+            let alertCancel = UIAlertAction(title: ~LocalizedKeys.infoActionCancel.rawValue, style: .cancel)
             alert.addAction(alertOK)
             alert.addAction(alertCancel)
             self?.present(alert, animated: true)
@@ -141,7 +141,7 @@ class LikedPostsController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
+        let deleteAction = UIContextualAction(style: .destructive, title: ~LocalizedKeys.LPDeleteSwipe.rawValue) { (action, view, completionHandler) in
             
             let likedPost = self.fetchResultController.object(at: indexPath)
             self.removePost(post: likedPost)

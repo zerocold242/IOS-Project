@@ -93,8 +93,8 @@ class CoreDataManager {
                 newLikedPost.views = Int16(post.views)
             } else {
                 DispatchQueue.main.async {
-                    SharedAlert.shared.showAlert(alertTitle: "Внимание!",
-                                                 alertMessage: "Вы уже добавляли эту публикацию в избранное")
+                    SharedAlert.shared.showAlert(alertTitle: ~LocalizedKeys.infoAlertTitle.rawValue,
+                                                 alertMessage: ~LocalizedKeys.LPSaveAlert.rawValue)
                 }
             }
             try? contextBackground.save()

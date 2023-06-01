@@ -12,7 +12,9 @@ import CoreLocation
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     //переключатель для выбора вида карты
-    private lazy var segmentedControl = UISegmentedControl(items: ["Standard", "Satellite", "Hybrid"])
+    private lazy var segmentedControl = UISegmentedControl(items: [~LocalizedKeys.mapsStandart.rawValue,
+                                                                    ~LocalizedKeys.mapsSatellite.rawValue,
+                                                                    ~LocalizedKeys.mapsHybride.rawValue])
 
     private lazy var locationManager: CLLocationManager = {
         let locationManager = CLLocationManager()
@@ -54,7 +56,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     private func setUpDeletePinsButton() {
         // Создаем кнопку в навигационном баре
-        let deleteButton = UIBarButtonItem(title: "Delete All Pins",
+        let deleteButton = UIBarButtonItem(title: ~LocalizedKeys.mapsDeletePins.rawValue,
                                            style: .plain, target: self,
                                            action: #selector(deleteAllPins))
         self.navigationItem.rightBarButtonItem = deleteButton
@@ -80,7 +82,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             let coordinate = mapView.convert(point, toCoordinateFrom: mapView)
             annotation.coordinate = coordinate
             mapView.addAnnotation(annotation)
-            annotation.title = "New Point"
+            annotation.title = ~LocalizedKeys.mapsNewPoiont.rawValue
         }
     }
     
@@ -114,9 +116,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
       
         guard let annotation = view.annotation else { return }
         
-        let alertController = UIAlertController(title: "Navigate", message: "Do you want to navigate to this location?", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let navigateAction = UIAlertAction(title: "Navigate", style: .default) { (action) in
+        let alertController = UIAlertController(title: ~LocalizedKeys.mapsNavigateTitle.rawValue,
+                                                message: ~LocalizedKeys.mapsNavigateMessage.rawValue,
+                                                preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: ~LocalizedKeys.infoActionCancel.rawValue, style: .cancel, handler: nil)
+        let navigateAction = UIAlertAction(title: ~LocalizedKeys.mapsNavAction.rawValue, style: .default) { (action) in
             //переход в навигатор для прокладки маршрута
             let destination = MKMapItem(placemark: MKPlacemark(coordinate: annotation.coordinate))
             destination.name = annotation.title ?? "Destination"
@@ -179,9 +183,11 @@ extension  MapViewController: CLLocationManagerDelegate {
         case .authorizedAlways, .authorizedWhenInUse: //разрешено при использовании приложения и в фоновом режиме/ при использовании приложения
             manager .requestLocation()//сам запрос геолокации. после него вызывается метод locationManager
         case .denied, .restricted:  //запрещено пользователеем / запрещено удаленно, например родительский контроль, корпоративный контроль
-            SharedAlert.shared.showAlert(alertTitle: "Внимарие!", alertMessage: "Определение геолокации невозможно или запрещено пользоватилем. Проверьте настройки")
+            SharedAlert.shared.showAlert(alertTitle: ~LocalizedKeys.infoAlertTitle.rawValue,
+                                         alertMessage: ~LocalizedKeys.mapsGeo1Mess.rawValue)
         case .notDetermined: //пользователь еще не осуществил выбор способа определения геолокации
-            SharedAlert.shared.showAlert(alertTitle: "Внимание!", alertMessage: "Определение геолокации не запрошено. Выберите и разрешите в настройках подходящий  способ определения геолокации")
+            SharedAlert.shared.showAlert(alertTitle: ~LocalizedKeys.infoAlertTitle.rawValue,
+                                         alertMessage: ~LocalizedKeys.mapsGeo2Mess.rawValue)
         @unknown default:
             fatalError()
         }
@@ -197,7 +203,7 @@ extension  MapViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         DismissAlert.shared.dismissAlert(viewController: self,
-                                         titles: "Warning",
-                                         message: "Failed to get user's location")
+                                         titles: ~LocalizedKeys.infoAlertTitle.rawValue,
+                                         message: ~LocalizedKeys.mapsFailedGeoMess.rawValue)
     }
 }

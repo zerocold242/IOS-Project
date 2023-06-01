@@ -1,0 +1,72 @@
+/* 
+  Localizable.strings
+  Navigation-
+
+  Created by Aleksey Lexx on 23.05.2023.
+  
+*/
+
+//LoginScreen
+"signUpBut" = "Зарегистрироваться";
+"logTextfield" = "электронная почта";
+"passTextField" = "пароль";
+"logButton" = "Войти";
+
+//LoginScreenAlerts
+"loginAlert" = "Логин и пароль сохранены в Realm";
+"loginAlertTitle" = "Вы успешно авторизовались";
+"errorAlert" = "Ошибка";
+"errorAlertTitle" = "Необходимо заполнить все поля авторизации";
+
+//TabBarItems
+"feed" = "Новости";
+"profile" = "Профиль";
+"favorites" = "Избранное";
+"maps" = "Карты";
+
+//FeedViewController
+"firstButton" = "Перейти в PostViewController";
+ "secondButton" = "Перейти в PostViewController";
+"secretTextFielt" = "   Секретное слово";
+"checkButtton" = "Проверить секретное слово";
+
+//PostScreen
+"rightBarButton" = "Информация";
+"PostNavigationItem" = "Публикации";
+
+//InfoScreen
+"infoAlertButton" = "Алерт";
+//InfoScreenAlert
+"infoAlertTitle" = "Внимание!";
+"infoAlertMessage" = "Была нажата кнопка Alert в InfoViewController";
+"infoActionCancel" = "Отмена";
+"infoActionOk" = "Ok";
+
+//ProfileScreen
+"profileStatusTextField" = "Введите ваш статус...";
+"profileStatusButton" = "Установить статус";
+"profilePhotosLabel" = "Фото";
+"profilePostLikes" = "Лайков";
+"profilePostViews" = "Просмотров";
+
+//LikedPostScreen
+"LPNavTitle" = "Избранное";
+ "LPSearchTitle" = "Искать публикацию по автору";
+//LikedPostScreenAlerts
+"LPRemoveAlertTitle" = "Удалить пост из избранного?";
+"LPDeleteSwipe" = "Удалить";
+"LPSaveAlert" = "Вы уже сохраняли эту публикацию в избранное";
+
+//MapsScreen
+"mapsStandart" = "Стандарт";
+"mapsSatellite" = "Спутник";
+"mapsHybride" = "Гибрид";
+"mapsDeletePins" = "Удалить все пины";
+"mapsNewPoiont" = "Новый пин";
+//MapsAlerts
+"mapsNavigateTitle" = "Навигация";
+"mapsNavigateMessage" = "Хотите проложить маршрут к этой локации?";
+"mapsNavAction" = "Маршрут";
+"mapsGeo1Mess" = "Определение геолокации невозможно или запрещено пользоватилем. Проверьте настройки";
+"mapsGeo2Mess" = "Определение геолокации не запрошено. Выберите и разрешите в настройках подходящий  способ определения геолокации";
+"mapsFailedGeoMes" = "Невозможно определить местоположение пользователя";
